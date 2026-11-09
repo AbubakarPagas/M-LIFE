@@ -1,0 +1,2218 @@
+﻿{
+  "appName": "القرآن الكريم - مكتبة الحكمة",
+  "@appName": {
+    "description": "appName",
+    "type": "text",
+    "placeholders": {}
+  },
+  "search_hint": "البحث في آيات القرآن الكريم",
+  "@search_hint": {
+    "description": "search_hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "menu": "القائمة",
+  "@menu": {
+    "description": "menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notes": "الملاحظات",
+  "@notes": {
+    "description": "notes",
+    "type": "text",
+    "placeholders": {}
+  },
+  "note_title": "العنوان",
+  "@note_title": {
+    "description": "note_title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "add_new_note": "اضافة ملاحظة جديدة",
+  "@add_new_note": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "note_details": "تفاصيل الملاحظة",
+  "@note_details": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookmarks": "الفواصل المحفوظة",
+  "@bookmarks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookmark_title": "إسم الفاصلة",
+  "@bookmark_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "add_new_bookmark": "إضافة فاصلة",
+  "@add_new_bookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "save": "حفظ",
+  "@save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "edit": "تعديل",
+  "@edit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "azkar": "الأذكار",
+  "@azkar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "qibla": "إتجاه القبلة",
+  "@qibla": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "salat": "أوقات الصلاة",
+  "@salat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aya_count": "عدد الآيات",
+  "@aya_count": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quran_sorah": "السور",
+  "@quran_sorah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_us": "عن التطبيق",
+  "@about_us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "stop_title": "وقف القرآن الكريم - مكتبة الحكمة",
+  "@stop_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app": "تطبيق \"القرآن الكريم - مكتبة الحكمة\" هو تطبيق متكامل يقدم مجموعة واسعة من المزايا لتعزيز تجربة قراءة وتعلم القرآن الكريم، ومن هذه المميزات:",
+  "@about_app": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app2": "من اهم مميزات البرنامج :",
+  "@about_app2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about_app3": "۞ واجهة جديدة وسهلة الاستخدام: تم تصميم التطبيق بواجهة مستخدم عصرية وبديهية تسهل على المستخدمين التنقل والوصول إلى المزايا المختلفة.\n۞ اعتماد طبعة مجمع الملك فهد: يستخدم التطبيق طبعة مجمع الملك فهد لطباعة المصحف الشريف، المعروفة بموثوقيتها وإتقانها، مما يضمن صحة النص ودقته.\n۞ قراءة تفاعلية ومتكاملة: يوفر التطبيق إمكانية القراءة التفاعلية مع نص المصحف الإلكتروني، بالإضافة إلى الاستماع للتلاوات، ودراسة وحفظ القرآن الكريم بسهولة.\n۞ قراءة مرنة: يمكن للمستخدمين قراءة القرآن كما لو كانوا يقرؤون المصحف الورقي أو اختيار وضع الآية المنفردة لتركيز أكبر.\n۞ خاصية البحث النصي: يحتوي التطبيق على ميزة البحث الفوري في آيات القرآن، مع إمكانية الانتقال مباشرة إلى الصفحة أو السورة المطلوبة.\n۞ إضافة شارات مرجعية: تسمح هذه الميزة بحفظ الصفحات أو الآيات للرجوع إليها بسهولة في أي وقت.\n۞ الاستماع للآيات: يوفر التطبيق إمكانية الاستماع لكل آية بصوت عدد من القراء المشهورين.\n۞ تفسير وترجمة الآيات: يمكن للمستخدمين الوصول إلى التفسير أو الترجمة لكل آية، والتغيير بين التفاسير بحسب الرغبة.\n۞ التنقل السهل بين السور: يتيح التطبيق التنقل بين السور بطريقة سلسة وسريعة.\n۞ قراءة علامات الوقف: تساعد هذه الميزة على فهم أماكن الوقف المناسبة أثناء القراءة.\n۞ أذكار حصن المسلم: يمكن قراءة أذكار حصن المسلم كاملًا والتنقل بين الأقسام بسهولة، مع إمكانية إضافة أذكار إلى المفضلة.\n۞ تغيير أنماط الألوان: يدعم التطبيق تغيير أنماط الألوان، بما في ذلك النمط الداكن، لتحسين تجربة القراءة.\n۞الاستماع والتحميل: يمكن الاستماع إلى السور أو تحميلها للاستماع في وقت لاحق دون الحاجة إلى الإنترنت.\n\nهذه المميزات تجعل تطبيق \"القرآن الكريم - مكتبة الحكمة\" أداة شاملة لكل من يرغب في قراءة، تعلم، وتدبر القرآن الكريم بطريقة ميسرة وفعالة.",
+  "@about_app3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "email": "تواصل معنا",
+  "@email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select_player": "إختر القارئ",
+  "@select_player": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "حذف",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "page": "صفحة",
+  "@page": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search_word": "ابحث عن آية",
+  "@search_word": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search_description": "يمكنك البحث عن جميع آيات القرآن الكريم، فقط قم بكتابة كلمة من الآية.",
+  "@search_description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fontSize": "تغيير حجم الخط",
+  "@fontSize": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "waqfName": "علامات الوقف",
+  "@waqfName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardTitle1": "واجهة سهلة",
+  "@onboardTitle1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardDesc1": "- سهولة البحث عن آية.\n- تغيير اللغة.\n- الإستماع للصفحة.\n- تغيير القارء.",
+  "@onboardDesc1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardTitle2": "إظهار التفسير",
+  "@onboardTitle2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardDesc2": "يمكن قراءة التفسير لكل آية عن طريق سحب القائمة إلى الأعلى.",
+  "@onboardDesc2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardTitle3": "خيارات النقر",
+  "@onboardTitle3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "onboardDesc3": "1- عند النقر مرتين يتم تكبير الصفحة.\n2- عند النقر المطول يظهر لك خيار حفظ الصفحة.\n3- عند الضغط مرة واحدة تظهر لك القوائم.",
+  "@onboardDesc3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "green": "المظهر الأخظر",
+  "@green": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "brown": "المظهر البني",
+  "@brown": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dark": "المظهر الداكن",
+  "@dark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "azkarfav": "الأذكار المفضلة",
+  "@azkarfav": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "themeTitle": "أختر المظهر",
+  "@themeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sorah": "سورة",
+  "@sorah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "part": "جزء",
+  "@part": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "langChange": "تغيير اللغة",
+  "@langChange": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafChange": "إختر التفسير",
+  "@tafChange": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafIbnkatheerN": "تفسير ابن كثير",
+  "@tafIbnkatheerN": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafBaghawyN": "تفسير البغوي",
+  "@tafBaghawyN": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafQurtubiN": "تفسير القرطبي",
+  "@tafQurtubiN": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafSaadiN": "تفسير السعدي",
+  "@tafSaadiN": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafTabariN": "تفسير الطبري",
+  "@tafTabariN": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafIbnkatheerD": "تفسير القرآن العظيم",
+  "@tafIbnkatheerD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafBaghawyD": "معالم التنزيل",
+  "@tafBaghawyD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafQurtubiD": "الجامع لأحكام القرآن",
+  "@tafQurtubiD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafSaadiD": "تيسير الكريم الرحمن في تفسير كلام المنان",
+  "@tafSaadiD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafTabariD": "جامع البيان في تفسير القرآن",
+  "@tafTabariD": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appLang": "لغة التطبيق",
+  "@appLang": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "الإعدادات",
+  "@setting": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader1": "عبد الباسط",
+  "@reader1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader2": "محمد المنشاوي",
+  "@reader2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader3": "محمود الحصري",
+  "@reader3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader4": "أحمد العجمي",
+  "@reader4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader5": "ماهر المعيقلي",
+  "@reader5": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader6": "سعود الشريم",
+  "@reader6": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader7": "سعد الغامدي",
+  "@reader7": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader8": "مصطفى العزاوي",
+  "@reader8": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader9": "ناصر القطامي",
+  "@reader9": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader10": "قادر الكردي",
+  "@reader10": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader11": "شيرزاد طاهر",
+  "@reader11": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader12": "عبدالرحمن العوسي",
+  "@reader12": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader13": "وديع اليمني",
+  "@reader13": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader14": "ياسر الدوسري",
+  "@reader14": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader15": "عبد الله الجهني",
+  "@reader15": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader16": "فارس عباد",
+  "@reader16": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader17": "محمد أيوب",
+  "@reader17": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader18": "ماهر المعيقلي - مُجود",
+  "@reader18": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader19": "أحمد النفيس - مُجود",
+  "@reader19": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reader20": "ياسر الدوسري - مُجود",
+  "@reader20": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "alheekmahlib": "مكتبة الحكمة",
+  "@alheekmahlib": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "backTo": "رجوع للـ",
+  "@backTo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "next": "التالي",
+  "@next": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "أبدأ",
+  "@start": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quranPages": "القرآن (صفحات)",
+  "@quranPages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quranText": "القرآن (آيات)",
+  "@quranText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafseer": "التفسير",
+  "@tafseer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allJuz": "الأجزاء",
+  "@allJuz": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAzkarText": "تم نسخ الذكر",
+  "@copyAzkarText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addBookmark": "تم إضافة الفاصلة",
+  "@addBookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deletedBookmark": "تم حذف الفاصلة!",
+  "@deletedBookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deletedReminder": "تم حذف التذكير!",
+  "@deletedReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fillAllFields": "يرجى ملء جميع الخانات!",
+  "@fillAllFields": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "version": "الإصدار",
+  "@version": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "share": "شارك التطبيق",
+  "@share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "facebook": "تابعنا على فيسبوك",
+  "@facebook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addZekrBookmark": "تم إضافة الذكر إلى المفضلة",
+  "@addZekrBookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deletedZekrBookmark": "تم حذف الذكر من المفضلة!",
+  "@deletedZekrBookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pageNo": "رقم الصفحة",
+  "@pageNo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastRead": "آخر قراءة",
+  "@lastRead": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyAyah": "تم نسخ الآية",
+  "@copyAyah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyTafseer": "تم نسخ التفسير",
+  "@copyTafseer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "online": "اونلاين",
+  "@online": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "download": "تحميل",
+  "@download": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noInternet": "الجهاز غير متصل بالانترنت!",
+  "@noInternet": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mobileDataAyat": "تنويه: أنت تستخدم البيانات الخلوية في تحميل الايآت!",
+  "@mobileDataAyat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mobileDataSurahs": "تنويه: أنت تستخدم البيانات الخلوية في تحميل السور!",
+  "@mobileDataSurahs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mobileDataListen": "تنويه: أنت تستخدم البيانات الخلوية للإستماع للسور!",
+  "@mobileDataListen": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "choiceAyah": "يرجى اختيار الآية أولًا!",
+  "@choiceAyah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "stopSigns": "علامات الوقف",
+  "@stopSigns": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutApp": "عن التطبيق",
+  "@aboutApp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readMore": "أقرأ المزيد",
+  "@readMore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "readLess": "أقرأ أقل",
+  "@readLess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "موافق",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchToSurah": "إبحث عن السورة",
+  "@searchToSurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addReminder": "إضافة تذكير",
+  "@addReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastListen": "آخر إستماع",
+  "@lastListen": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hizb": "الحزب",
+  "@hizb": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareText": "كنص",
+  "@shareText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareImage": "كصورة",
+  "@shareImage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareImageWTrans": "كصورة مع محتوى إضافي",
+  "@shareImageWTrans": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareTrans": "تنويه: مشاركة التفسير في صورة يدعم فقط تفسير السعدي، بسبب إن التفسير ليس مطول.",
+  "@shareTrans": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "translation": "الترجمة",
+  "@translation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "بحث",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "surahsList": "قائمة السور",
+  "@surahsList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookmarksList": "قائمة الفواصل",
+  "@bookmarksList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copy": "نسخ",
+  "@copy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareTafseer": "مشاركة",
+  "@shareTafseer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addToBookmark": "إضافة إلى الفاصلة",
+  "@addToBookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "repeatSurah": "تكرار السورة",
+  "@repeatSurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pauseSurah": "إيقاف السورة",
+  "@pauseSurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "replaySurah": "إعادة السورة",
+  "@replaySurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "skipToPrevious": "السورة السابقة",
+  "@skipToPrevious": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deletedPlayList": "تم حذف قائمة التشغيل",
+  "@deletedPlayList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createPlayList": "أنشئ قائمة التشغيل",
+  "@createPlayList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playList": "قوائم التشغيل",
+  "@playList": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "playListName": "اكتب إسم القائمة",
+  "@playListName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "from": "من",
+  "@from": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "to": "إلى",
+  "@to": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quran": "القرآن الكريم",
+  "@quran": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "quranAudio": "الإستماع للقرآن",
+  "@quranAudio": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "startScreen": "شاشة البداية",
+  "@startScreen": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectScreen": "أختر شاشة البداية",
+  "@selectScreen": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dailyZeker": "دعاء اليوم",
+  "@dailyZeker": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang": "العربية",
+  "@lang": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "juz": "الجزء",
+  "@juz": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sajda": "سجدة",
+  "@sajda": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pages": "صفحات",
+  "@pages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ayahs": "آيات",
+  "@ayahs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "eidGreetingContent": "تقبل الله منا ومنكم الصيام والقيام وصالح الأعمال.",
+  "@eidGreetingContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "eidGreetingContent2": "كل عام وأنتم إلى الله أقرب.",
+  "@eidGreetingContent2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "eidGreetingTitle": "Eid Mubarak",
+  "@eidGreetingTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ramadhanMubarak": "Ramadhan Mubarak",
+  "@ramadhanMubarak": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "تخطي",
+  "@skip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "What's New": "ما الجديد",
+  "@What's New": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ourApps": "تطبيقاتنا",
+  "@ourApps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "choseQuran": "اختر طريقة القراءة",
+  "@choseQuran": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "blueMode": "أزرق",
+  "@blueMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "brownMode": "بني",
+  "@brownMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "oldMode": "القديم",
+  "@oldMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkMode": "الداكن",
+  "@darkMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sunday": "الأحد",
+  "@Sunday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Monday": "الأثنين",
+  "@Monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Tuesday": "الثلاثاء",
+  "@Tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Wednesday": "الأربعاء",
+  "@Wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Thursday": "الخميس",
+  "@Thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Friday": "الجمعة",
+  "@Friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Saturday": "السبت",
+  "@Saturday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "RemainsUntilTheEndOf": "تبقى على إنتهاء",
+  "@RemainsUntilTheEndOf": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Muharram": "محرم",
+  "@Muharram": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Safar": "صفر",
+  "@Safar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Rabi' Al-Awwal": "ربيع الاول",
+  "@Rabi' Al-Awwal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Rabi' Al-Thani": "ربيع الثاني",
+  "@Rabi' Al-Thani": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Jumada Al-Awwal": "جمادى الاول",
+  "@Jumada Al-Awwal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Jumada Al-Thani": "جمادى الآخرة",
+  "@Jumada Al-Thani": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Rajab": "رجب",
+  "@Rajab": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sha'aban": "شعبان",
+  "@Sha'aban": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Ramadan": "رمضان",
+  "@Ramadan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Shawwal": "شوال",
+  "@Shawwal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Dhu Al-Qi'dah": "ذو القعدة",
+  "@Dhu Al-Qi'dah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Dhu Al-Hijjah": "ذوالحجة",
+  "@Dhu Al-Hijjah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Day": "يوم",
+  "@Day": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Days": "أيام",
+  "@Days": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hijriNote": "تنويه: يرجى العلم بأنه قد يحدث اختلاف طفيف في الأوقات المحددة نظرًا لأن التقويم الهجري يستند إلى الرؤية المباشرة للهلال. نحن نبذل قصارى جهدنا لضمان دقة التواريخ المعلنة، مع الأخذ في الاعتبار انه سيتم تصحيح التقويم في حال رؤية الهلال.",
+  "@hijriNote": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "AH": "للهجرة",
+  "@AH": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Fajr": "الفجر",
+  "@Fajr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Dhuhr": "الظهر",
+  "@Dhuhr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Asr": "العصر",
+  "@Asr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Maghrib": "المغرب",
+  "@Maghrib": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Isha": "العشاء",
+  "@Isha": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Last Third": "الثلث الأخير",
+  "@Last Third": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Middle of the Night": "منتصف الليل",
+  "@Middle of the Night": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sunrise": "الشروق",
+  "@Sunrise": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tafsirLibrary": "مكتبة التفسير",
+  "@tafsirLibrary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allBooks": "كل الكتب",
+  "@allBooks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myLibrary": "مكتبتي",
+  "@myLibrary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookmark": "الفواصل",
+  "@bookmark": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chapterBook": "أبواب الكتاب",
+  "@chapterBook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutBook": "عن الكتاب",
+  "@aboutBook": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "khatmah": "الختمة",
+  "@khatmah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createKhatmah": "أنشء ختمة",
+  "@createKhatmah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "khatmahName": "إسم الختمة",
+  "@khatmahName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addKhatmah": "أضف ختمة",
+  "@addKhatmah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "duration": "المدة",
+  "@duration": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "divisionBySahabah": "تحزيب الصحابة",
+  "@divisionBySahabah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "choiceColor": "أختر اللون",
+  "@choiceColor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchInBooks": "ابحث في الكتب",
+  "@searchInBooks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hasPassed": "قد مضى",
+  "@hasPassed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloading": "جارِ التحميل...",
+  "@downloading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "startHijriYear": "بداية العام الهجري",
+  "@startHijriYear": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reminderToFastTasoo'a": "تذكير بصيام تاسوعاء",
+  "@reminderToFastTasoo'a": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reminderToFastAshura": "تذكير بصيام عاشوراء",
+  "@reminderToFastAshura": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ramadhan": "شهر رمضان",
+  "@ramadhan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nightOfQadir": "تذكير بليلة القدر",
+  "@nightOfQadir": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "EidAl-Fitr": "عيد الفطر",
+  "@EidAl-Fitr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sexShawwal": "تذكير بصيام الستّ من شوال",
+  "@sexShawwal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "arafahReminder": "تذكير بصيام يوم عرفة",
+  "@arafahReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tenDaysOfDhul-Hijjah": "وليال عشر",
+  "@tenDaysOfDhul-Hijjah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "EidAl-Adha": "عيد الأضحى",
+  "@EidAl-Adha": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "choiceBackgroundColor": "اختر لون الخلفية",
+  "@choiceBackgroundColor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reset": "إعادة ضبط",
+  "@reset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Medinan": "مدنية",
+  "@Medinan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Meccan": "مكية",
+  "@Meccan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "surahNames": "أسماء السورة",
+  "@surahNames": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutSurah": "عن السورة",
+  "@aboutSurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "الإشعارات",
+  "@notification": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noNotifications": "لا توجد إشعارات",
+  "@noNotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "reminders": "تذكير",
+  "@reminders": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "customReminder": "تذكير مخصص",
+  "@customReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addMore": "أضف المزيد",
+  "@addMore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "What'sNewDetails10": "۞ جعل التطبيق يدعم اللغة الكردية، التركية والروسية.\n۞ إضافةالمزيد من القراء.",
+  "@What'sNewDetails10": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chooseDhekr": "اختر الذكر",
+  "@chooseDhekr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectTime": "حدد وقتًا للتبينه",
+  "@selectTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadBookFirst": "يرجى تحميل الكتاب أولًا.",
+  "@downloadBookFirst": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastDayOf": "اليوم الأخير لشهر",
+  "@lastDayOf": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "booksDownloaded": "تم تحميل الكتاب.",
+  "@booksDownloaded": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "booksDeleted": "تم حذف الكتاب.",
+  "@booksDeleted": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noBooksDownloaded": "لم تحمل أي كتاب بعد.",
+  "@noBooksDownloaded": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notifyQuranBody": "لقد توقفت عند الصفحة @currentPageNumber في القرآن الكريم، هل ترغب في المتابعة؟",
+  "@notifyQuranBody": {
+    "type": "text",
+    "placeholders": {
+      "currentPageNumber": {}
+    }
+  },
+  "notifyAdhkarBody": "لا تنسى قراءة @adhkarType",
+  "@notifyAdhkarBody": {
+    "type": "text",
+    "placeholders": {
+      "adhkarType": {}
+    }
+  },
+  "notifyBooksBody": "لا تنسى متابعة قراءة كتاب @bookName",
+  "@notifyBooksBody": {
+    "type": "text",
+    "placeholders": {
+      "bookName": {}
+    }
+  },
+  "notifyListenBody": "لا تنسى متابعة الإستماع للسور",
+  "@notifyListenBody": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lastSearch": "آخر بحث",
+  "@lastSearch": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ashura": "عاشوراء",
+  "@ashura": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "arafah": "يوم عرفه",
+  "@arafah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editHijriDay": "تعديل الأيام",
+  "@editHijriDay": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fonts": "الخطوط",
+  "@fonts": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fontsNotes": "للحصول على تجربة أفضل ومظهر مثالي للمصحف، يرجى تحميل الخطوط الخاصة به.",
+  "@fontsNotes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "defaultFontText": "الخط الافتراضي",
+  "@defaultFontText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadedFontsText": "خط المصحف",
+  "@downloadedFontsText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "calenderSettings": "إعدادات التقويم",
+  "@calenderSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "islamicCalendar": "التقويم الاسلامي",
+  "hijriCalendar": "التقويم الهجري",
+  "calendar": "التقويم",
+  "events": "المناسبات",
+  "year": "سنة",
+  "month": "شهر",
+  "hijri": "هجري",
+  "Sun": "الأحد",
+  "Mon": "الإثنين",
+  "Tue": "الثلاثاء",
+  "Wed": "الأربعاء",
+  "Thu": "الخميس",
+  "Fri": "الجمعة",
+  "Sat": "السبت",
+  "adhan_fajr": "الفجر",
+  "@adhan_fajr": {
+    "description": "A word for 'Fajr' in its language ",
+    "eg_english": "Fajr"
+  },
+  "adhan_sunrise": "شروق الشمس",
+  "@adhan_sunrise": {
+    "description": "A word for sunrise in its language  ",
+    "eg_english": "Sunrise"
+  },
+  "adhan_dhuhr": "الظهر",
+  "@adhan_dhuhr": {
+    "description": "A word for Dhuhr in its language  ",
+    "eg_english": "Dhuhr"
+  },
+  "adhan_jummah": "الجمعة",
+  "@adhan_jummah": {
+    "description": "A word for 'Jummah' in its language  ",
+    "eg_english": "Jummah"
+  },
+  "adhan_asr": "العصر",
+  "@adhan_asr": {
+    "description": "A word for 'Asr' in its language  ",
+    "eg_english": "Asr"
+  },
+  "adhan_magrib": "المغرب",
+  "@adhan_magrib": {
+    "description": "A word for 'Magrib' in its language  ",
+    "eg_english": "Magrib"
+  },
+  "adhan_isha": "العشاء",
+  "@adhan_isha": {
+    "description": "A word for 'Isha' in its language  ",
+    "eg_english": "Isha"
+  },
+  "adhan_midnight": "منتصف اليل",
+  "@adhan_midnight": {
+    "description": "A word for 'Midnight' in its language  ",
+    "eg_english": "Midnight"
+  },
+  "adhan_third_night": "الثلث الأخير من اليل",
+  "@adhan_third_night": {
+    "description": "A word for 'Last Third Night' in its language  ",
+    "eg_english": "Last Third Night"
+  },
+  "inexact_notify": "إخطار مبكر / متأخر",
+  "@inexact_notify": {
+    "description": "A sentence for weather the notification be exact or delayed or early ",
+    "eg_english": "Early/Delayed Notification"
+  },
+  "notify_me_before": "نبهني {min} دقائق/دقيقة قبل الأذان",
+  "@notify_me_before": {
+    "description": "Describes when the notification should be sent early ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes before azan time"
+  },
+  "notify_me_after": "نبهني {min} دقائق/دقيقة بعد الأذان",
+  "@notify_me_after": {
+    "description": "Describes when the notification should be sent later ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes after azan time"
+  },
+  "silent_adhan": "الصامت",
+  "@silent_adhan": {
+    "description": "No notification should be sent",
+    "eg_english": "Silent"
+  },
+  "notification_only": "التنبيه بدون أذان",
+  "@notification_only": {
+    "description": "Only send the notification with default sound ",
+    "eg_english": "Notification Only"
+  },
+  "ringtone": "التنبيه بصوت رنة الهاتف",
+  "@ringtone": {
+    "description": "Play the ringtone during notification '",
+    "eg_english": "Ringtone"
+  },
+  "adhan_mecca": "أذان - مكة",
+  "@adhan_mecca": {
+    "description": "Play the Azan of Mecca during notification ",
+    "eg_english": "Azan Mecca"
+  },
+  "adhan_medina": "أذان - المدينة",
+  "@adhan_medina": {
+    "description": "Play the azan of medina during notification ",
+    "eg_english": "Azan Medina"
+  },
+  "alarm": "التنبيه بصوت المنبه",
+  "@alarm": {
+    "description": "Play the alarm during notification ",
+    "eg_english": "Alarm"
+  },
+  "@__________________________________________Global_Page": {},
+  "locale": "ar",
+  "@locale": {
+    "description": "Name of Locale.",
+    "eg_english": "en"
+  },
+  "text_direction": "rtl",
+  "@text_direction": {
+    "description": "Direction of the main language - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr",
+    "eg_arabic": "rtl"
+  },
+  "numeric_direction": "ltr",
+  "@numeric_direction": {
+    "description": "Direction of the numeric system (Numbers like 1253) - Either Left-To-Right (ltr) or Right-To-left(rtl).",
+    "eg_english": "ltr",
+    "eg_arabic": "ltr"
+  },
+  "current_lang": "العربية",
+  "@current_lang": {
+    "description": "Name of this language in its language",
+    "eg_english": "English"
+  },
+  "one": "١",
+  "@one": {
+    "description": "Translation of the digit 1",
+    "eg_english": "1"
+  },
+  "two": "٢",
+  "@two": {
+    "description": "Translation of the digit 2",
+    "eg_english": "2"
+  },
+  "three": "٣",
+  "@three": {
+    "description": "Translation of the digit 3",
+    "eg_english": "3"
+  },
+  "four": "٤",
+  "@four": {
+    "description": "Translation of the digit 4",
+    "eg_english": "4"
+  },
+  "five": "٥",
+  "@five": {
+    "description": "Translation of the digit 5",
+    "eg_english": "5"
+  },
+  "six": "٦",
+  "@six": {
+    "description": "Translation of the digit 6",
+    "eg_english": "6"
+  },
+  "seven": "٧",
+  "@seven": {
+    "description": "Translation of the digit 7",
+    "eg_english": "7"
+  },
+  "eight": "٨",
+  "@eight": {
+    "description": "Translation of the digit 8",
+    "eg_english": "8"
+  },
+  "nine": "٩",
+  "@nine": {
+    "description": "Translation of the digit 9",
+    "eg_english": "9"
+  },
+  "zero": "٠",
+  "@zero": {
+    "description": "Translation of the digit 0",
+    "eg_english": "0"
+  },
+  "arabic_month_muharram": "ٱلْمُحَرَّم",
+  "@arabic_month_muharram": {
+    "description": "Transliteration of the arabic month Muharram",
+    "eg_english": "Muharram"
+  },
+  "arabic_month_safar": "صَفَر",
+  "@arabic_month_safar": {
+    "description": "Transliteration of the arabic month Safar",
+    "eg_english": "Safar"
+  },
+  "arabic_month_rabi_al_awwal": "ربــيـــع الأول",
+  "@arabic_month_rabi_al_awwal": {
+    "description": "Transliteration of the arabic month Rabi al-Awwal",
+    "eg_english": "Rabi al-Awwal"
+  },
+  "arabic_month_rabi_al_thani": "جُمَادَىٰٱلْآخِرَة",
+  "@arabic_month_rabi_al_thani": {
+    "description": "Transliteration of the arabic month Rabi al-Thani",
+    "eg_english": "Rabi al-Thani"
+  },
+  "arabic_month_jumada_al_awwal": "جُمَادَىٰ ٱلْأَوَّل",
+  "@arabic_month_jumada_al_awwal": {
+    "description": "Transliteration of the arabic month Jumada al-Awwal",
+    "eg_english": "Jumada al-Awwal"
+  },
+  "arabic_month_jumada_al_thani": "رَبِيع ٱلثَّانِي",
+  "@arabic_month_jumada_al_thani": {
+    "description": "Transliteration of the arabic month Jumada al-Thani",
+    "eg_english": "Jumada al-Thani"
+  },
+  "arabic_month_rajab": "رَجَب",
+  "@arabic_month_rajab": {
+    "description": "Transliteration of the arabic month Rajab",
+    "eg_english": "Rajab"
+  },
+  "arabic_month_shaban": "شعبان",
+  "@arabic_month_shaban": {
+    "description": "Transliteration of the arabic month Shaban",
+    "eg_english": "Shaban"
+  },
+  "arabic_month_ramadan": "رَمَضَان",
+  "@arabic_month_ramadan": {
+    "description": "Transliteration of the arabic month Ramadan",
+    "eg_english": "Ramadan"
+  },
+  "arabic_month_shawwal": "شَوَّال",
+  "@arabic_month_shawwal": {
+    "description": "Transliteration of the arabic month Shawwal",
+    "eg_english": "Shawwal"
+  },
+  "arabic_month_dhu_al_qadha": "ذُو ٱلْقَعْدَة",
+  "@arabic_month_dhu_al_qadha": {
+    "description": "Transliteration of the arabic month Dhu al-Qadah",
+    "eg_english": "Dhu al-Qadah"
+  },
+  "arabic_month_dhu_al_hijjah": "ذُو ٱلْحِجَّة",
+  "@arabic_month_dhu_al_hijjah": {
+    "description": "Transliteration of the arabic month Dhu al-Hijjah",
+    "eg_english": "Dhu al-Hijjah"
+  },
+  "hour": "ساعة",
+  "@hour": {
+    "description": "The word hour (short form if possible) - e.g. for English: 'hr' ",
+    "eg_english": "hr"
+  },
+  "minute": "دقيقة",
+  "@minute": {
+    "description": "The word form minute (short form if possible) - e.g. for English: 'min' ",
+    "eg_english": "min"
+  },
+  "am": "",
+  "@am": {
+    "description": "The word form am (short form if possible) - e.g. for English: 'am' ",
+    "eg_english": "am"
+  },
+  "pm": "",
+  "@pm": {
+    "description": "The word form pm (short form if possible) - e.g. for English: 'pm' ",
+    "eg_english": "pm"
+  },
+  "close": "إغلاق",
+  "@close": {
+    "description": "The word Close - e.g. for English: 'Close' ",
+    "eg_english": "CLose"
+  },
+  "notification": "تنبيه",
+  "@notification": {
+    "description": "Describes a notification - e.g. for English: 'Notification' ",
+    "eg_english": "Notification"
+  },
+  "adhan": "الأذان",
+  "@adhan": {
+    "description": "Describes a button called Adhan/Azan - e.g. for English: 'Azan' ",
+    "eg_english": "Azan"
+  },
+  "qibla": "القبلة",
+  "@qibla": {
+    "description": "Describes a button called Qibla - e.g. for English: 'Qibla' ",
+    "eg_english": "Qibla"
+  },
+  "dua": "دعاء",
+  "@dua": {
+    "description": "Describes a button called Dua - e.g. for English: 'Dua' ",
+    "eg_english": "Dua"
+  },
+  "tasbih": "تَسْبِيح",
+  "@tasbih": {
+    "description": "Describes a button called tasbih - e.g. for English: 'Tasbih' ",
+    "eg_english": "Tasbih"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Describes a button called Settings  ",
+    "eg_english": "Settings"
+  },
+  "nearby": "مسجد",
+  "@nearby": {
+    "description": "Describes a button called Nearby - e.g. for English: 'Nearby' used for nearby mosque",
+    "eg_english": "Nearby"
+  },
+  "search": "البحث",
+  "@search": {
+    "description": "Describes a button called Search ",
+    "eg_english": "Search"
+  },
+  "language": "لغة",
+  "@language": {
+    "description": "A word for Language Selection  ",
+    "eg_english": "Language"
+  },
+  "app_name": "أَذَان",
+  "@app_name": {
+    "description": "The transliteration for Azan ",
+    "eg_english": "Azan"
+  },
+  "location": "الموقع",
+  "@location": {
+    "description": "The translation of the word location  ",
+    "eg_english": "Location"
+  },
+  "next": "التالي",
+  "@next": {
+    "description": "The translation of the word 'Next'  ",
+    "eg_english": "Next"
+  },
+  "reset": "إعادة تعيين",
+  "@reset": {
+    "description": "The translation of the word 'Reset'  ",
+    "eg_english": "Reset"
+  },
+  "type": "نوع",
+  "@type": {
+    "description": "The translation for the word 'Type' - e.g. for English: ",
+    "eg_english": "'Type' - 'Type of Azan Notification'"
+  },
+  "timing": "التوقيت",
+  "@timing": {
+    "description": "The translation for the word 'Timing' - e.g. for English:  ",
+    "eg_english": "'Timing', 'Timing for the Azan Notification'"
+  },
+  "bttn_open_settings": "فتح الإعدادات",
+  "@bttn_open_settings": {
+    "description": "The translation for the sentence 'Open Settings'  ",
+    "eg_english": "Open Settings"
+  },
+  "bttn_okay": "نعم",
+  "@bttn_okay": {
+    "description": "The translation for the word 'okay'  ",
+    "eg_english": "Okay"
+  },
+  "bttn_remind_me_later": "ذكرني لاحقا",
+  "@bttn_remind_me_later": {
+    "description": "The translation for the sentence 'Remind me later' ",
+    "eg_english": "Remind Me Later"
+  },
+  "bttn_never_ask_again": "لا تسألني مجددا",
+  "@bttn_never_ask_again": {
+    "description": "The translation for the sentence 'Never Ask me Again'  ",
+    "eg_english": "Never Ask Again"
+  },
+  "finding": "العثور على...",
+  "@finding": {
+    "description": "An indicator to indication the app is finding the location  ",
+    "eg_english": "Finding..."
+  },
+  "error_occured": "حدث خطأ",
+  "@error_occured": {
+    "description": "An indicator to indicate an error has occurred  ",
+    "eg_english": "Error Occured"
+  },
+  "no_location_available": "لا يوجد موقع متاح",
+  "@no_location_available": {
+    "description": "An Indicator to indicate no location is currently available  ",
+    "eg_english": "No Location Available"
+  },
+  "tap_to_update": "انقر للتحديث",
+  "@tap_to_update": {
+    "description": "A button to which updates content on tap  ",
+    "eg_english": "Tap to update"
+  },
+  "default_mode": "إفتراضي",
+  "@default_mode": {
+    "description": "A Button to change the setting to factory mode  ",
+    "eg_english": "Default"
+  },
+  "preview_of_font": "معاينة الخطوط الأخرى",
+  "@preview_of_font": {
+    "description": "Preview of the font size - e.g. for English ''",
+    "eg_english": "Preview Of Other Font sizes"
+  },
+  "share_app": "شارك التطبيق",
+  "@share_app": {
+    "description": "Share the app  ",
+    "eg_english": "Share with friends"
+  },
+  "about": "حول التطبيق",
+  "@about": {
+    "description": "About panel - e.g. for English: 'About'",
+    "eg_english": "About"
+  },
+  "try_again": "حاول مرة أخرى",
+  "@try_again": {
+    "description": "A button to try again  ",
+    "eg_english": "Try Again"
+  },
+  "run_in_background": "قم بتشغيل التطبيق في الخلفية",
+  "@run_in_background": {
+    "description": "A switch to toggle running app in background",
+    "eg_english": "Run in background"
+  },
+  "run_in_background_desc": "قم بتشغيل تطبيق الأذان في الخلفية. لذلك ، لن تفوتك أي إخطارات. سيستخدم هذا موارد إضافية!",
+  "@run_in_background_desc": {
+    "description": "Run Azan in background. So, you wont miss any notification. This would use extra resources!",
+    "eg_english": "Run in background desc"
+  },
+  "@__________________________________________Welcome_page": {},
+  "location_privacy_short": "الآذان يركز على الخصوصية. يتم تخزين موقعك على جهازك محليًا.",
+  "@location_privacy_short": {
+    "description": "A short description of the location privacy policy  ",
+    "eg_english": "Azan is privacy focused. Your location is stored on your device locally."
+  },
+  "location_required": "موقعك مطلوب",
+  "@location_required": {
+    "description": "A translation for the word 'Location Required' -  ",
+    "eg_english": "Location Required"
+  },
+  "location_found": "تم العثور على موقعك",
+  "@location_found": {
+    "description": "A translation for the word 'Location Found' ",
+    "eg_english": "Location Found"
+  },
+  "permission_denied": "تم رفض الإذن",
+  "@permission_denied": {
+    "description": "A translation for the word 'Permission Denied' ",
+    "eg_english": "Permission Denied"
+  },
+  "location_permission_request_short": "موقعك مطلوب لحساب وقت الأذان وعرض بوصلة القبلة وإظهار المساجد القريبة",
+  "@location_permission_request_short": {
+    "description": "A short description explaining why the location is required   ",
+    "eg_english": "Your location is needed to calculate the time of azan, display the Qibla Compass and Show Nearby Mosques"
+  },
+  "@__________________________________________Adhan_Page": {},
+  "adhan_fajr": "الفجر",
+  "@adhan_fajr": {
+    "description": "A word for 'Fajr' in its language ",
+    "eg_english": "Fajr"
+  },
+  "adhan_sunrise": "شروق الشمس",
+  "@adhan_sunrise": {
+    "description": "A word for sunrise in its language  ",
+    "eg_english": "Sunrise"
+  },
+  "adhan_dhuhr": "الظهر",
+  "@adhan_dhuhr": {
+    "description": "A word for Dhuhr in its language  ",
+    "eg_english": "Dhuhr"
+  },
+  "adhan_jummah": "الجمعة",
+  "@adhan_jummah": {
+    "description": "A word for 'Jummah' in its language  ",
+    "eg_english": "Jummah"
+  },
+  "adhan_asr": "العصر",
+  "@adhan_asr": {
+    "description": "A word for 'Asr' in its language  ",
+    "eg_english": "Asr"
+  },
+  "adhan_magrib": "المغرب",
+  "@adhan_magrib": {
+    "description": "A word for 'Magrib' in its language  ",
+    "eg_english": "Magrib"
+  },
+  "adhan_isha": "العشاء",
+  "@adhan_isha": {
+    "description": "A word for 'Isha' in its language  ",
+    "eg_english": "Isha"
+  },
+  "adhan_midnight": "منتصف اليل",
+  "@adhan_midnight": {
+    "description": "A word for 'Midnight' in its language  ",
+    "eg_english": "Midnight"
+  },
+  "adhan_third_night": "الثلث الأخير من اليل",
+  "@adhan_third_night": {
+    "description": "A word for 'Last Third Night' in its language  ",
+    "eg_english": "Last Third Night"
+  },
+  "inexact_notify": "إخطار مبكر / متأخر",
+  "@inexact_notify": {
+    "description": "A sentence for weather the notification be exact or delayed or early ",
+    "eg_english": "Early/Delayed Notification"
+  },
+  "notify_me_before": "نبهني {min} دقائق/دقيقة قبل الأذان",
+  "@notify_me_before": {
+    "description": "Describes when the notification should be sent early ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes before azan time"
+  },
+  "notify_me_after": "نبهني {min} دقائق/دقيقة بعد الأذان",
+  "@notify_me_after": {
+    "description": "Describes when the notification should be sent later ",
+    "placeholders": {
+      "min": {
+        "type": "",
+        "example": "12"
+      }
+    },
+    "eg_english": "Notify me {min} minutes after azan time"
+  },
+  "silent_adhan": "الصامت",
+  "@silent_adhan": {
+    "description": "No notification should be sent",
+    "eg_english": "Silent"
+  },
+  "notification_only": "التنبيه بدون أذان",
+  "@notification_only": {
+    "description": "Only send the notification with default sound ",
+    "eg_english": "Notification Only"
+  },
+  "ringtone": "التنبيه بصوت رنة الهاتف",
+  "@ringtone": {
+    "description": "Play the ringtone during notification '",
+    "eg_english": "Ringtone"
+  },
+  "adhan_mecca": "أذان - مكة",
+  "@adhan_mecca": {
+    "description": "Play the Azan of Mecca during notification ",
+    "eg_english": "Azan Mecca"
+  },
+  "adhan_medina": "أذان - المدينة",
+  "@adhan_medina": {
+    "description": "Play the azan of medina during notification ",
+    "eg_english": "Azan Medina"
+  },
+  "alarm": "التنبيه بصوت المنبه",
+  "@alarm": {
+    "description": "Play the alarm during notification ",
+    "eg_english": "Alarm"
+  },
+  "@__________________________________________Settings_Page": {},
+  "global": "العالمية",
+  "@global": {
+    "description": "The category global settings i.e. that applies to the entire app ",
+    "eg_english": "Global"
+  },
+  "click_to_change": "اضغط للتغيير",
+  "@click_to_change": {
+    "description": "The user can change a settings by tapping a Button  ",
+    "eg_english": "Click to change"
+  },
+  "madhab": "مذهب",
+  "@madhab": {
+    "description": "Select a madhab for asr time  ",
+    "eg_english": "Madhab"
+  },
+  "hanafi_madhab": "حنفي مذهب",
+  "@hanafi_madhab": {
+    "description": "The transliteration of Hanafi madhab  ",
+    "eg_english": "Hanafi Madhab"
+  },
+  "shafi_madhab": "شافي مذهب",
+  "@shafi_madhab": {
+    "description": "The transliteration of the Shafii Madhab  ",
+    "eg_english": "Shafi madhab"
+  },
+  "hanafi_asr_desc": "توقيت العصر المتأخر",
+  "@hanafi_asr_desc": {
+    "description": "The descrion of the change of selecting hanafi madhab ",
+    "eg_english": "Later Asr Time"
+  },
+  "shafi_asr_desc": "توقيت العصر المبكر",
+  "@shafi_asr_desc": {
+    "description": "The description of the change of selecting the shafi madhab  ",
+    "eg_english": "Early Asr Time"
+  },
+  "persistent_notify": "التنبيه دوما",
+  "@persistent_notify": {
+    "description": "will the notification be persistent? ",
+    "eg_english": "Persistent Notification"
+  },
+  "persistent_notify_desc": "أظهر الأذان في التنبيه دوما",
+  "@persistent_notify_desc": {
+    "description": "Description for the notification be persistent ",
+    "eg_english": "Show the Azan notification all the time"
+  },
+  "theme": "المظهر",
+  "@theme": {
+    "description": "Settings for the theme  ",
+    "eg_english": "Theme"
+  },
+  "always_dark": "الوضع الليلي",
+  "@always_dark": {
+    "description": "Always show the dark-mode irrespective of the device theme ",
+    "eg_english": "Always Dark"
+  },
+  "always_light": "الوضع الصباحي",
+  "@always_light": {
+    "description": "Always show the light-mode irrespective of the device theme ",
+    "eg_english": "Always Light"
+  },
+  "follow_system": "اتبع النظام للموضوع",
+  "@follow_system": {
+    "description": "Follow the system for theme  ",
+    "eg_english": "Follow System"
+  },
+  "calc_method": "طريقة الحساب",
+  "@calc_method": {
+    "description": "Calculation method of the Azan times  ",
+    "eg_english": "Calculation Method"
+  },
+  "high_lat_rule": "قواعد خطوط العرض العالية",
+  "@high_lat_rule": {
+    "description": "Rules for high latitude for azan time calculation  ",
+    "eg_english": "High Lat Rules"
+  },
+  "adhan_visibility": "ظهور الأذان",
+  "@adhan_visibility": {
+    "description": "Visibility of some azan times  ",
+    "eg_english": "Azan Visibility"
+  },
+  "adhan_manual_correction": "التصحيحات اليدوية",
+  "@adhan_manual_correction": {
+    "description": "Manual Correction for some azan times ",
+    "eg_english": "Manual Corrections"
+  },
+  "support_dev": "دعم مطوري التطبيق",
+  "@support_dev": {
+    "description": "Category of supporting development ",
+    "eg_english": "Support Development"
+  },
+  "rate_on_play_store": "قيم التطبيق",
+  "@rate_on_play_store": {
+    "description": "Button to rate on play store  ",
+    "eg_english": "Rate on Play Store"
+  },
+  "rate_on_play_store_desc": "سيشجعنا هذا كثيرا",
+  "@rate_on_play_store_desc": {
+    "description": "Description of the rate button ",
+    "eg_english": "That would motivate us a lot."
+  },
+  "help_us_translate": "ساعدنا على الترجمة",
+  "@help_us_translate": {
+    "description": "A button for user to translate the app ",
+    "eg_english": "Help us translate"
+  },
+  "help_us_translate_desc": "ألا ترى لغتك؟ ساعدنا في ترجمة ميزات التطبيق والدعاء للغة معينة.",
+  "@help_us_translate_desc": {
+    "description": "Description for the help_us_translate button ",
+    "eg_english": "Don't see your language? Help us translate the app features and dua for a particular language."
+  },
+  "github_ripo": "Github Repository",
+  "@github_ripo": {
+    "description": "A button to go to the github repo  ",
+    "eg_english": "Github Repository"
+  },
+  "github_ripo_desc": "تعرف Flutter تنمية؟ انضم إلينا في رحلة السبيله هذه أو امنحنا نجمة لتحفيزنا.",
+  "@github_ripo_desc": {
+    "description": "Description for the github repo ",
+    "eg_english": ""
+  },
+  "report_bug": "تقرير Bug",
+  "@report_bug": {
+    "description": "A button to report a bug to the development team ",
+    "eg_english": "Report a bug"
+  },
+  "report_bug_desc": "آسف ، كان عليك مواجهتها. يمكنك إما الإبلاغ عن مشكلة في github أو عبر البريد الإلكتروني. زجاك الله للعلم",
+  "@report_bug_desc": {
+    "description": "Description of the report_bug button ",
+    "eg_english": "Sorry, you had to face it. You can either report a problem in github or through email. Zajakallah for the information."
+  },
+  "make_dua": "ادعو لنا",
+  "@make_dua": {
+    "description": "A button asking for dua  ",
+    "eg_english": "Make dua for us"
+  },
+  "make_dua_desc": "عن أبي الدرداء: قال رسول الله صلى الله عليه وسلم: ما من خادم مسلم يدعو أخاه من وراء ظهره إلا أن الملاك يقول: ولكم كذلك.",
+  "@make_dua_desc": {
+    "description": " Description of the dua button - Simply translate the english dua   ",
+    "eg_english": "Abu Darda reported: The Messenger of Allah, peace and blessings be upon him, said, “No Muslim servant supplicates for his brother behind his back but that the angel says: And for you the same.”"
+  },
+  "make_dua_action": "جزاكم الله خيرا",
+  "@make_dua_action": {
+    "description": "Action for make dua ",
+    "eg_english": "May Allah reward you with something good :-)"
+  },
+  "request_a_feature": "طلب خاصية",
+  "@request_a_feature": {
+    "description": "Button for requesting a new feature ",
+    "eg_english": "Request a feature"
+  },
+  "request_a_feature_desc": "هل تحتاج إلى ميزة إضافية أو دعاء؟ اقترحه علينا",
+  "@request_a_feature_desc": {
+    "description": "Description for the request button ",
+    "eg_english": "Need additional feature or dua? Suggest it to us"
+  },
+  "show_translation": "إظهار الترجمة",
+  "@show_translation": {
+    "description": "Show translation of the duas  ",
+    "eg_english": "Show Translation"
+  },
+  "show_transliteration": "إظهار الترجمة الحرفية",
+  "@show_transliteration": {
+    "description": "Show transliteration of the duas  ",
+    "eg_english": "Show Transliteration"
+  },
+  "translation_lang": "لغة الترجمة",
+  "@translation_lang": {
+    "description": "Option to choose a translation language  ",
+    "eg_english": "Translation Language"
+  },
+  "disable_battery_optimization": "تعطيل تحسين البطارية",
+  "@disable_battery_optimization": {
+    "description": "Disable battery optimization for better notification  ",
+    "eg_english": "Disable Battery Optimization"
+  },
+  "disable_battery_optimization_desc": "يرجى تعطيل ميزة تحسين البطارية حتى لا تفوتك أي إخطارات!",
+  "@disable_battery_optimization_desc": {
+    "description": "Description for battery_optimization_disable  ",
+    "eg_english": "Please disable the battery optimization feature so that you don't miss any notifications!"
+  },
+  "arabic_font_size": "حجم الخط العربي",
+  "@arabic_font_size": {
+    "description": "Arabic font size selector - e.g for English: ''",
+    "eg_english": "Arabic Font Selector"
+  },
+  "other_font_size": "حجم الخط",
+  "@other_font_size": {
+    "description": "Other (translation/transliteration) font size selector - e.g for English: ''",
+    "eg_english": "Other Font Selector"
+  },
+  "primary_language": "اللغة الأساسية",
+  "@primary_language": {
+    "description": "Primary language of the dua",
+    "eg_english": "Primary Language"
+  },
+  "@__________________________________________Dua_Page": {},
+  "favs": "ادعية مفضلة",
+  "@favs": {
+    "description": "Favourites button '' ",
+    "eg_english": "Favourites"
+  },
+  "add_to_fav": "أضف إلى المفضلة",
+  "@add_to_fav": {
+    "description": "A button to add duas to favourites  ",
+    "eg_english": "Add to Favourite"
+  },
+  "add_to_fav_action": "أضيفت إلى المفضلة",
+  "@add_to_fav_action": {
+    "description": "An action when add duas to favourites  ",
+    "eg_english": "Added to Favourite"
+  },
+  "remove_from_fav": "إزالة من المفضلة",
+  "@remove_from_fav": {
+    "description": "A button to remove dua from favourites  ",
+    "eg_english": "Remove from Favourites"
+  },
+  "remove_from_fav_action": "تمت إزالتها من المفضلة",
+  "@remove_from_fav_action": {
+    "description": "An action when remove dua from favourites  ",
+    "eg_english": "Removed from Favourites"
+  },
+  "report_an_error": "الإبلاغ عن خطأ",
+  "@report_an_error": {
+    "description": "Report an error in the dua  ",
+    "eg_english": "Report an error"
+  },
+  "copy_dua": "انسخ الدعاء",
+  "@copy_dua": {
+    "description": "A button to copy the entire dua  ",
+    "eg_english": "Copy Dua"
+  },
+  "copy_dua_action": "نسخ الدعاء إلى الحافظة",
+  "@copy_dua_action": {
+    "description": "Action for copying dua '' ",
+    "eg_english": "Copied to clipboard!"
+  },
+  "@__________________________________________Qibla_page": {},
+  "you_are_facing": "أنت في اتجاه",
+  "@you_are_facing": {
+    "description": "A translation of the sentence",
+    "eg_english": "You are facing"
+  },
+  "compass_heading_north": "شمال",
+  "compass_heading_north_east": "الشمال الشرقي",
+  "compass_heading_east": "الشرق",
+  "compass_heading_south_east": "الجنوب الشرقي",
+  "compass_heading_south": "جنوب",
+  "compass_heading_south_west": "جنوب غرب",
+  "compass_heading_west": "الغرب",
+  "compass_heading_north_west": "الشمال الغربي",
+  "@compass_headings": {
+    "description": "headings of compass - Translation"
+  },
+  "@__________________________________________Azkar_page": {},
+  "athkar": "أذكار",
+  "azkar_morning": "أذكار الصباح",
+  "azkar_evening": "أذكار المساء",
+  "before_sleeping": "Before Sleeping Azkar",
+  "when_waking_up_sleep": "أذكار الاستيقاظ من النوم",
+  "when_wearing_garment": "دعاء لبس الثوب",
+  "when_wearing_new_garment": "دعاء لبس الثوب الجديد",
+  "someone_wearing_new_garment": "الدعاء لمن لبس ثوبا جديدا",
+  "when_taking_off_clothes": "ما يقول إذا وضع الثوب",
+  "before_entering_toilet": "دعاء دخول الخلاء - الحمام",
+  "after_leaving_toilet": "دعاء الخروج من الخلاء - الحمام",
+  "when_starting_ablution": "الذكر بعد الفراغ من الوضوء",
+  "after_finishing_ablution": "",
+  "when_leaving_house": "الذكر عند الخروج من المنزل",
+  "when_entering_house": "الذكر عند دخول المنزل",
+  "when_going_to_the_mosque": "دعاء الذهاب إلى المسجد",
+  "when_entering_mosque": "دعاء دخول المسجد",
+  "when_leaving_mosque": "دعاء الخروج من المسجد",
+  "when_hearing_athan": "دعاء سماع الأذان",
+  "@__________________________________________Adhan_Redesign": {},
+  "current_prayer": "الصلاة الحالية",
+  "next_prayer_in": "الصلاة القادمة في",
+  "prayer_time_started": "وقت الصلاة",
+  "prayer_schedule": "جدول الصلوات",
+  "prayer_tracking": "متابعة الصلوات",
+  "daily_completion": "% اليوم",
+  "prayers_today": "صلوات اليوم",
+  "achievement": "إنجاز",
+  "mark_as_prayed": "سجل صلاتك",
+  "achievements": "الإنجازات",
+  "audioStorage": "تخزين الصوت",
+  "@audioStorage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadedAudio": "الصوت المحمَّل",
+  "@downloadedAudio": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadSurah": "تحميل السورة",
+  "@downloadSurah": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancelDownload": "إلغاء التحميل",
+  "@cancelDownload": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "retryDownload": "إعادة المحاولة",
+  "@retryDownload": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteCachedAudio": "حذف الصوت المحمَّل",
+  "@deleteCachedAudio": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteCachedAudioConfirm": "هل أنت متأكد أنك تريد حذف هذا الصوت المحمَّل؟",
+  "@deleteCachedAudioConfirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearAllCache": "حذف جميع التنزيلات",
+  "@clearAllCache": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearAllCacheConfirm": "سيؤدي هذا إلى حذف جميع ملفات الصوت المحمَّلة. هل أنت متأكد؟",
+  "@clearAllCacheConfirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableOffline": "متاح بدون إنترنت",
+  "@availableOffline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "offline": "أوفلاين",
+  "@offline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "totalDownloaded": "المحمَّل",
+  "@totalDownloaded": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "storageUsed": "المساحة المستخدمة",
+  "@storageUsed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noDownloadsYet": "لا توجد تنزيلات بعد",
+  "@noDownloadsYet": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "downloadHintText": "انقر على أيقونة التحميل بجانب أي سورة لحفظها للاستماع بدون إنترنت",
+  "@downloadHintText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "listenToQuran": "استمع إلى القرآن الكريم",
+  "playAyah": "استمع",
+  "playSurah": "السورة"
+,
+  "compassCalibration": "معايرة البوصلة مطلوبة",
+  "calibrationInstruction": "حرّك هاتفك بحركة على شكل رقم 8 لمعايرة البوصلة.",
+  "facingQibla": "أنت تواجه القبلة",
+  "rotateToQibla": "أدر هاتفك نحو القبلة",
+  "findingLocation": "جارٍ تحديد موقعك…",
+  "usingCachedLocation": "يتم استخدام الموقع المحفوظ - قد تختلف النتائج قليلاً.",
+  "retry": "إعادة المحاولة",
+  "qiblaInfo": "معلومات القبلة",
+  "distanceToMakkah": "المسافة إلى مكة",
+  "bearing": "الاتجاه",
+  "currentHeading": "الاتجاه الحالي",
+  "compassAccuracy": "دقة البوصلة",
+  "prayerTimes": "أوقات الصلاة",
+  "qiblaSettings": "إعدادات القبلة",
+  "northType": "نوع الشمال",
+  "magneticNorth": "الشمال المغناطيسي",
+  "trueNorth": "الشمال الحقيقي",
+  "vibration": "الاهتزاز",
+  "vibrateWhenAligned": "اهتزاز عند مواجهة القبلة",
+  "sound": "الصوت",
+  "soundWhenAligned": "تشغيل صوت عند مواجهة القبلة",
+  "autoRefresh": "تحديث تلقائي",
+  "autoRefreshLocation": "تحديث الموقع تلقائياً",
+  "compassSensitivity": "حساسية البوصلة",
+  "fullScreen": "ملء الشاشة",
+  "nearbyMosques": "المساجد القريبة",
+  "manualLocation": "تحديد الموقع يدوياً",
+  "searchCity": "البحث عن مدينة",
+  "enterCoordinates": "أدخل الإحداثيات",
+  "apply": "تطبيق",
+  "citySearchFailed": "فشل البحث. تحقق من اتصالك بالإنترنت.",
+  "tapToExit": "اضغط في أي مكان للخروج",
+  "compassNotSupported": "البوصلة غير مدعومة",
+  "compassNotSupportedDesc": "جهازك لا يحتوي على مستشعر مغناطيسي. لا يزال بإمكانك معرفة اتجاه القبلة بناءً على موقعك.",
+  "locationNeededForPrayer": "فعّل الموقع لعرض أوقات الصلاة",
+  "countdown": "متبقي",
+  "currentPrayer": "الصلاة الحالية",
+  "nextPrayer": "الصلاة القادمة"
+}

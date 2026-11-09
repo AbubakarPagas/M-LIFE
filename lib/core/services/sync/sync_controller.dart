@@ -1,0 +1,209 @@
+import 'dart:async';
+import 'dart:io' show Platform;
+
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+
+import '../../../presentation/pages/adhkar/controller/adhkar_controller.dart';
+import '../../../presentation/pages/books/books.dart';
+import '../../../presentation/pages/quran_page/quran.dart';
+import '../../utils/constants/sync_constants.dart';
+import 'sync_service.dart';
+
+/// متحكم مزامنة الأجهزة — حالة قابلة للرصد + تريغرات المزامنة:
+/// إطلاق/عودة للتطبيق، debounce بعد الكتابات المحلية، مؤقت خفيف كل 10 دقائق،
+/// وزر تحديث يدوي.
+class SyncController extends GetxController with WidgetsBindingObserver {
+  /// نمط الوصول الموحد في التطبيق — نسخة دائمة تُنشأ عند أول استخدام.
+  /// (تسجيل GetIt الـ lazy وحده لا يُنشئ النسخة قبل أول sl<>‎ وهذا لا يحدث).
+  static SyncController get instance => Get.isRegistered<SyncController>()
+      ? Get.find<SyncController>()
+      : Get.put(SyncController(), permanent: true);
+
+  final SyncService syncService = SyncService();
+
+  final roomId = Rxn<String>();
+  final deviceCount = 0.obs;
+  final isSyncing = false.obs;
+
+  /// أثناء إنشاء/انضمام مجموعة (غير المزامنة الدورية) — لأزرار التحميل.
+  final isPairing = false.obs;
+  final lastSyncAt = Rxn<int>();
+  final lastError = Rxn<String>();
+
+  final bool isDesktop = Platform.isWindows || Platform.isLinux;
+
+  Timer? _debounceTimer;
+  Timer? _pullTimer;
+  Timer? _dirtyCheckTimer;
+  bool _disposed = false;
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+    roomId.value = syncService.roomId;
+    lastSyncAt.value = syncService.lastSyncAt;
+    syncService.onRemoteChangesApplied = _refreshControllers;
+    if (syncService.isPaired) {
+      _startPullTimer();
+      _scheduleInitialSync();
+      refreshRoomInfo();
+    }
+  }
+
+  void _scheduleInitialSync() {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!_disposed) _runSync();
+    });
+  }
+
+  void _startPullTimer() {
+    _pullTimer?.cancel();
+    _pullTimer = Timer.periodic(const Duration(minutes: 10), (_) => _runSync());
+    // فحص محلي خفيف كل 30 ثانية: يدفع كتابات KV (مثل موضع القراءة) التي
+    // لا تملك خطاف كتابة فوريًا — بلا شبكة إلا عند وجود تغيير فعلي.
+    _dirtyCheckTimer?.cancel();
+    _dirtyCheckTimer = Timer.periodic(const Duration(seconds: 30), (_) async {
+      if (_disposed || isSyncing.value) return;
+      if (await syncService.hasLocalChanges()) _runSync();
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _runSync();
+      refreshRoomInfo();
+    } else if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden ||
+        state == AppLifecycleState.paused) {
+      // لحظة مغادرة التطبيق هي لحظة تبديل الجهاز — ادفع المحلي فورًا.
+      _pushIfDirty();
+    }
+  }
+
+  Future<void> _pushIfDirty() async {
+    if (_disposed || isSyncing.value) return;
+    if (await syncService.hasLocalChanges()) _runSync();
+  }
+
+  Future<bool> _runSync() async {
+    if (!syncService.isPaired || isSyncing.value) return false;
+    isSyncing.value = true;
+    try {
+      await syncService.syncNow();
+      lastError.value = null;
+      return true;
+    } catch (e) {
+      // لا تبتلع الأخطاء بصمت — ظهورها في الكونسول أساسي للتشخيص.
+      print('SyncController: sync failed: $e');
+      lastError.value = '$e';
+      return false;
+    } finally {
+      isSyncing.value = false;
+      lastSyncAt.value = syncService.lastSyncAt;
+    }
+  }
+
+  /// تستدعى بعد أي كتابة محلية على بيانات قابلة للمزامنة (علامات/خطط...).
+  void onLocalChange() {
+    if (!syncService.isPaired) return;
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(SyncConstants.pushDebounce, () => _runSync());
+  }
+
+  /// مزامنة يدوية من شاشة الإعدادات — تعيد نجاح العملية للواجهة.
+  Future<bool> syncNow() => _runSync();
+
+  Future<bool> createGroup() async {
+    isPairing.value = true;
+    try {
+      return await _createGroup();
+    } finally {
+      isPairing.value = false;
+    }
+  }
+
+  Future<bool> _createGroup() async {
+    final result = await syncService.createGroup();
+    if (result.ok) {
+      roomId.value = result.value;
+      lastError.value = null;
+      _startPullTimer();
+      refreshRoomInfo();
+    } else {
+      lastError.value = result.value;
+    }
+    return result.ok;
+  }
+
+  Future<bool> joinGroup(String code) async {
+    isPairing.value = true;
+    try {
+      return await _joinGroup(code);
+    } finally {
+      isPairing.value = false;
+    }
+  }
+
+  Future<bool> _joinGroup(String code) async {
+    final result = await syncService.joinGroup(code);
+    if (result.ok) {
+      roomId.value = result.value;
+      lastError.value = null;
+      _startPullTimer();
+      refreshRoomInfo();
+      _refreshControllers();
+    } else {
+      lastError.value = result.value;
+    }
+    return result.ok;
+  }
+
+  Future<void> resetSync() async {
+    _debounceTimer?.cancel();
+    _pullTimer?.cancel();
+    await syncService.resetSync();
+    roomId.value = null;
+    deviceCount.value = 0;
+    lastSyncAt.value = null;
+    lastError.value = null;
+  }
+
+  Future<void> refreshRoomInfo() async {
+    if (!syncService.isPaired) return;
+    final info = await syncService.roomInfo();
+    if (info != null) deviceCount.value = info.deviceCount;
+  }
+
+  void _refreshControllers() {
+    if (Get.isRegistered<BookmarksController>()) {
+      Get.find<BookmarksController>().getBookmarks();
+      Get.find<BookmarksController>().getBookmarksText();
+    }
+    if (Get.isRegistered<AzkarController>()) {
+      Get.find<AzkarController>().getAdhkar('');
+    }
+    if (Get.isRegistered<KhatmahController>()) {
+      Get.find<KhatmahController>().loadKhatmas();
+    }
+    if (Get.isRegistered<BooksBookmarksController>()) {
+      Get.find<BooksBookmarksController>().fetchBookmarks();
+    }
+    if (Get.isRegistered<BooksController>()) {
+      // لتحديث قائمة "آخر قراءة" بعد وصول lastRead_* من الأجهزة الأخرى.
+      Get.find<BooksController>().loadLastRead();
+    }
+  }
+
+  @override
+  void onClose() {
+    _disposed = true;
+    _debounceTimer?.cancel();
+    _pullTimer?.cancel();
+    _dirtyCheckTimer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose();
+  }
+}

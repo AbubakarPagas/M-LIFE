@@ -1,0 +1,81 @@
+part of '../../quran.dart';
+
+class QuranState {
+ /// -------- [Variables] ----------
+  List<SurahModel> surahs = [];
+  List<List<AyahModel>> pages = [];
+  List<AyahModel> allAyahs = [];
+
+  /// Page Controller
+  // PageController quranPageController = PageController();
+  final FocusNode quranPageRLFocusNode = FocusNode();
+  final FocusNode quranPageUDFocusNode = FocusNode();
+  ScrollController ScrollUpDownQuranPage = ScrollController();
+
+  // RxInt currentPageNumber = 0.obs;
+  RxInt lastReadSurahNumber = 1.obs;
+  var selectedAyahIndexes = <int>[].obs;
+  bool isSelected = false;
+  final ScrollController scrollIndicatorController = ScrollController();
+  final ScrollController ayahsScrollController = ScrollController();
+  RxInt selectedIndicatorIndex = 0.obs;
+  RxDouble textWidgetPosition = (-240.0).obs;
+  RxBool isPlayExpanded = false.obs;
+  RxBool isSajda = false.obs;
+  RxBool isMoreOptions = false.obs;
+  ItemScrollController itemScrollController = ItemScrollController();
+  final ItemScrollController ayahsItemScrollController = ItemScrollController();
+  var moreOptionsMap = <String, bool>{}.obs;
+  RxInt selectMushafSettingsPage = 0.obs;
+  RxDouble ayahsWidgetHeight = 0.0.obs;
+  RxInt currentListPage = 1.obs;
+  final box = GetStorage();
+  int? lastDisplayedHizbQuarter;
+  Map<int, int> pageToHizbQuarterMap = {};
+
+  double surahItemHeight = 80.0;
+  double juzItemHeight = 145.0;
+  ScrollController? surahController;
+  ScrollController? juzListController;
+  RxInt backgroundPickerColor = Get.theme.colorScheme.primaryContainer
+      .toARGB32()
+      .obs;
+  RxInt temporaryBackgroundColor = Get.theme.colorScheme.primaryContainer
+      .toARGB32()
+      .obs;
+
+  RxBool isScrolling = false.obs;
+  bool isQuranLoaded = false;
+  RxInt selectedAyahNumber = 0.obs;
+  RxInt selectedSurahNumber = 0.obs;
+  var qPackage = QuranLibrary();
+  final QuranRepository _quranRepository = QuranRepository();
+
+  /// الآية المعروضة حاليًا في نافذة التفسير (تتغير بتمرير PageView) —
+  /// تقرأها أزرار نسخ/مشاركة التفسير لتعمل على المعروض لا المفتوح
+  RxInt currentTafsirAyahUQ = 0.obs;
+
+  /// إظهار أحكام التجويد أسفل الآية في صورة المشاركة (آية مفردة فقط)
+  // read بلا نوع يعيد dynamic و.obs عليه يُحل ديناميكيًا فينهار — لذا نُعلن النوع
+  final RxBool isTajweedRulesEnabled =
+      (GetStorage().read<bool>('isTajweedRules') ?? false).obs;
+
+  /// -------- [New Variables] ----------
+  final tabBarController = FlexibleSheetController();
+  final navBarController = FlexibleSheetController();
+  RxString topBarType = 'none'.obs;
+  RxString navBarType = 'none'.obs;
+  ExpansibleController languageController = ExpansibleController();
+  RxBool isLanguageExpanded = false.obs;
+  Rx<WordRef> ref = const WordRef(
+    ayahNumber: 1,
+    surahNumber: 1,
+    wordNumber: 1,
+  ).obs;
+   FloatingMenuExpendableController floatingController =
+       FloatingMenuExpendableController();
+
+  /// Alias kept for backward compatibility — delegates to [selectMushafSettingsPage].
+  /// 0 = Mushaf page view, 1 = Ayah list view.
+  RxInt get isPages => selectMushafSettingsPage;
+}

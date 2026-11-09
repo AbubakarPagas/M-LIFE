@@ -1,0 +1,286 @@
+part of '../quran.dart';
+
+class MushafSettings extends StatelessWidget {
+  MushafSettings({super.key});
+
+  final quranCtrl = QuranController.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          Text('choseQuran'.tr, style: AppTextStyles.titleMedium()),
+          const Gap(4),
+          Divider(
+            thickness: 1.0,
+            height: 1.0,
+            endIndent: 32.0,
+            indent: 32.0,
+            color: Theme.of(context).primaryColorLight.withValues(alpha: .5),
+          ),
+          const Gap(4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Column(
+              children: [
+                const Gap(8),
+                withTajweedWidget(context),
+                const Gap(8),
+                Divider(
+                  thickness: 1.0,
+                  height: 1.0,
+                  endIndent: 32.0,
+                  indent: 32.0,
+                  color: Theme.of(
+                    context,
+                  ).primaryColorLight.withValues(alpha: .5),
+                ),
+                const Gap(8),
+                _changeFontSize(context),
+                const Gap(8),
+                Divider(
+                  thickness: 1.0,
+                  height: 1.0,
+                  endIndent: 32.0,
+                  indent: 32.0,
+                  color: Theme.of(
+                    context,
+                  ).primaryColorLight.withValues(alpha: .5),
+                ),
+                const Gap(8),
+                _changeBackgroundColor(context),
+                const Gap(8),
+                _ayahAudioManager(context),
+                const Gap(8),
+                TasmeeSettings(),
+                const AutoScrollSettings(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _ayahAudioManager(BuildContext context) {
+    return Column(
+      children: [
+        const Gap(16),
+        // العنوان
+        Center(
+          child: Text('audioManager'.tr, style: AppTextStyles.titleMedium()),
+        ),
+        const Gap(4),
+        Divider(
+          thickness: 1.0,
+          height: 1.0,
+          endIndent: 32.0,
+          indent: 32.0,
+          color: Theme.of(context).primaryColorLight.withValues(alpha: .5),
+        ),
+        const Gap(10),
+        ContainerButton(
+          onPressed: () => customBottomSheet(
+            AyahDownloadManager(
+              onRequestDownload: (surahNum) async {
+                if (AudioCtrl.instance.state.isDownloading.value) return;
+                await AudioCtrl.instance.startDownloadAyahSurah(
+                  surahNum,
+                  context: context,
+                );
+              },
+              onRequestDelete: (surahNum) async {
+                await AudioCtrl.instance.deleteAyahSurahDownloads(surahNum);
+              },
+              isDark: themeCtrl.isDarkMode,
+              ayahStyle: AudioCtrl.instance.ayahAudioStyle,
+            ),
+          ),
+          value: true.obs,
+          height: 45,
+          width: double.infinity,
+          borderRadius: 8,
+          horizontalPadding: 8.0,
+          backgroundColor: context.theme.primaryColorLight.withValues(
+            alpha: .4,
+          ),
+          title: 'manager_ayah_downloads'.tr,
+        ),
+      ],
+    );
+  }
+
+  Widget _changeFontSize(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      margin: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColorLight.withValues(alpha: .15),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'fontSize'.tr,
+            style: AppTextStyles.titleMedium().copyWith(height: 2),
+          ),
+          GetBuilder<QuranCtrl>(
+            id: '_pageViewBuild',
+            builder: (ctr) => AnimatedCounterButton(
+              value: ctr.state.scaleFactor.value,
+              height: 32,
+              counterType: CounterType.decimal,
+              onChanged: (newValue) {
+                if (newValue < 1) return;
+                ctr.state.scaleFactor.value = newValue;
+                ctr.state.baseScaleFactor.value = newValue;
+                ctr.update(['_pageViewBuild']);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget withTajweedWidget(BuildContext context) {
+    final quran = QuranCtrl.instance.state;
+    return CustomSwitchListTile(
+      title: 'tajweed'.tr,
+      value: quran.isTajweedEnabled.value,
+      onChanged: (_) {
+        quran.isTajweedEnabled.toggle();
+        quranCtrl.state.box.write('isTajweed', quran.isTajweedEnabled.value);
+        Get.forceAppUpdate();
+      },
+    );
+  }
+
+  Widget _changeBackgroundColor(BuildContext context) {
+    return Obx(
+      () => ContainerButton(
+        onPressed: () {
+          Get.dialog(
+            Dialog(
+              alignment: Alignment.center,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              surfaceTintColor: Theme.of(context).colorScheme.primary,
+              child: SizedBox(
+                height: 380,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 16.0,
+                  ),
+                  child: Column(
+                    children: [
+                      ColorPicker(
+                        hasBorder: true,
+                        wheelHasBorder: true,
+                        wheelDiameter: 150,
+                        color: Color(
+                          quranCtrl.state.backgroundPickerColor.value,
+                        ),
+                        borderColor: context.theme.colorScheme.primary,
+                        onColorChanged: (Color color) =>
+                            quranCtrl.state.temporaryBackgroundColor.value =
+                                color.toARGB32(),
+                        pickersEnabled: const {
+                          ColorPickerType.wheel: true,
+                          ColorPickerType.both: false,
+                          ColorPickerType.primary: false,
+                          ColorPickerType.accent: false,
+                          ColorPickerType.custom: true,
+                        },
+                        customColorSwatchesAndNames: {
+                          const MaterialColor(0xffFFFBF8, <int, Color>{
+                            50: Color(0xffffffff),
+                            100: Color(0xfffffbfb),
+                            200: Color(0xffFFFBF8),
+                            300: Color(0xfffff9f5),
+                            400: Color(0xfffff7f1),
+                            500: Color(0xfffff6e2),
+                            600: Color(0xffefe3d1),
+                            700: Color(0xffdacdba),
+                            800: Color(0xffc8bba6),
+                            900: Color(0xffe3d0ac),
+                          }): 'Brown',
+                        },
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: ContainerButton(
+                              onPressed: () {
+                                quranCtrl.state.backgroundPickerColor.value =
+                                    context.theme.colorScheme.primaryContainer
+                                        .toARGB32();
+                                quranCtrl.state.box.remove(
+                                  BACKGROUND_PICKER_COLOR,
+                                );
+                                quranCtrl.update(['backgroundColor']);
+                                Get.back();
+                              },
+                              height: 35,
+                              title: 'reset',
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                          ),
+                          const Spacer(),
+                          Expanded(
+                            flex: 3,
+                            child: ContainerButton(
+                              onPressed: () => Get.back(),
+                              height: 35,
+                              title: 'cancel',
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                          ),
+                          const Gap(8),
+                          Expanded(
+                            flex: 3,
+                            child: ContainerButton(
+                              onPressed: () {
+                                quranCtrl.state.backgroundPickerColor.value =
+                                    quranCtrl
+                                        .state
+                                        .temporaryBackgroundColor
+                                        .value;
+                                quranCtrl.state.box.write(
+                                  BACKGROUND_PICKER_COLOR,
+                                  quranCtrl.state.backgroundPickerColor.value,
+                                );
+                                quranCtrl.update(['backgroundColor']);
+                                Get.back();
+                              },
+                              height: 35,
+                              title: 'ok',
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        value: true.obs,
+        height: 45,
+        width: double.infinity,
+        borderRadius: 8,
+        horizontalPadding: 8.0,
+        selectedColor: Color(quranCtrl.state.backgroundPickerColor.value),
+        backgroundColor: context.theme.primaryColorLight.withValues(alpha: .4),
+        title: 'choiceBackgroundColor',
+      ),
+    );
+  }
+}

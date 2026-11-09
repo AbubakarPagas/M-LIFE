@@ -1,0 +1,65 @@
+// ignore_for_file: constant_identifier_names
+
+const String MSTART_PAGE = 'mstart_page';
+const String MLAST_URAH = 'mLast_sorah';
+const String FONT_SIZE = 'font_size';
+const String AUDIO_PLAYER_SOUND = 'audio_player_sound';
+const String READER_NAME = 'reader_name';
+const String APP_FONT_FAMILY = 'APP_FONT_FAMILY';
+const String SURAH_AUDIO_PLAYER_SOUND = 'sorah_audio_player_sound';
+const String SURAH_AUDIO_PLAYER_NAME = 'sorah_audio_player_name';
+const String TAFSEER_VAL = 'tafseer_val';
+const String TAFSEER_TABLE_VAL = 'tafseer_table_val';
+const String LAST_SURAH = 'lastSurah';
+const String SELECTED_SURAH = "selectedSurah";
+const String LAST_POSITION = "last_Position";
+const String TRANSLATE_VALUE = "translateـvalue";
+const String SHARE_TRANSLATE_VALUE = "shareTransValue";
+const String TRANS = "trans";
+const String SWITCH_VALUE = "switchـvalue";
+const String LANG = "lang";
+const String LANG_NAME = "langName";
+const String LANGUAGE_FONT = "languageFont";
+const String READER_INDEX = "readerIndex";
+const String CURRENT_TRANSLATE = "currentTranslate";
+const String IS_TAFSEER = "is_tafseer";
+const String SET_THEME = "SET_THEME";
+const String SCREEN_SELECTED_VALUE = "SCREEN_SELECTED_VALUE";
+const String IS_SCREEN_SELECTED_VALUE = "IS_SCREEN_SELECTED_VALUE";
+const String SETTED_DATE_FOR_ZEKER = 'SETTED_DATE_FOR_ZEKER';
+const String ZEKER_OF_THE_DAY_AND_ID = 'ZEKER_OF_THE_DAY_AND_ID';
+const String SURAH_READER_INDEX = 'SURAH_READER_INDEX';
+const String SELECT_MUSHAF_SETTINGS = 'SELECT_MUSHAF_SETTINGS';
+const String LAST_SHOWN_UPDATE_INDEX = 'LAST_SHOWN_UPDATE_INDEX';
+const String IS_BOLD = 'IS_BOLD';
+const String KHATMAH = 'KHATMAH';
+const String SETTED_DATE_FOR_AYAH = 'SETTED_DATE_FOR_AYAH';
+const String AYAH_OF_THE_DAY_AND_AYAH_NUMBER = 'AYAH_OF_THE_DAY_AND_NUMBER';
+const String AYAH_OF_THE_DAY = 'AYAH_OF_THE_DAY';
+const String TAFSIR_OF_THE_DAY_AND_TAFSIR_NUMBER =
+    'TAFSIR_OF_THE_DAY_AND_NUMBER';
+const String CASHED_TAFSIR = 'CASHED_TAFSIR';
+const String TAFSIR_OF_THE_DAY_RADIO_VALUE = 'TAFSIR_OF_THE_DAY_RADIO_VALUE';
+const String ACTIVE_LOCATION = 'ACTIVE_LOCATION';
+const String SHAFI = 'SHAFI';
+const String HANAFI = 'HANAFI';
+const String HIGH_LATITUDE_RULE = 'HIGH_LATITUDE_RULE';
+const String AUTO_CALCULATION = 'AUTO_CALCULATION';
+const String ADHAN_NUMBER = 'ADHAN_NUMBER';
+const String ADHAN_SELECT = 'ADHAN_SELECT';
+const String PAGE_MODE = 'PAGE_MODE';
+const String PAGE_NUMBER = 'PAGE_NUMBER';
+const String BOOK_NAME = 'BOOK_NAME';
+const String BOOK_NUMBER = 'BOOK_NUMBER';
+const String TOTAL_PAGES = 'TOTAL_PAGES';
+const String DOWNLOADED_BOOKS = 'downloaded_books';
+const String IS_TASHKIL = 'IS_TASHKIL';
+const String BACKGROUND_PICKER_COLOR = 'BACKGROUND_PICKER_COLOR';
+const String SEARCH_HISTORY = 'SEARCH_HISTORY';
+const String AUDIO_SERVICE_INITIALIZED = 'AUDIO_SERVICE_INITIALIZED';
+
+// ── Audio player settings ────────────────────────────────────────────────────
+const String AUDIO_PLAYBACK_SPEED    = 'audio_playback_speed';
+const String AUDIO_QUALITY           = 'audio_quality';
+const String AUDIO_BG_PLAYBACK       = 'audio_bg_playback';
+const String AUDIO_AUTO_RESUME       = 'audio_auto_resume';

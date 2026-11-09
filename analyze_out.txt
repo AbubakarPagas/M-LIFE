@@ -1,0 +1,39 @@
+﻿Analyzing surah_audio...                                        
+
+warning - The value of the local variable 'ctrl' isn't used. Try removing the variable or using it - lib\presentation\pages\surah_audio\audio_surah.dart:15:11 - unused_local_variable
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:39:20 - undefined_class
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:189:23 - undefined_class
+  error - Undefined name 'kAllReciters'. Try correcting the name to one that is defined, or defining the name - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:205:20 - undefined_identifier
+   info - Unnecessary use of multiple underscores. Try using '_' - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:206:31 - unnecessary_underscores
+  error - Undefined name 'kAllReciters'. Try correcting the name to one that is defined, or defining the name - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:208:17 - undefined_identifier
+  error - Undefined name 'kAllReciters'. Try correcting the name to one that is defined, or defining the name - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:209:23 - undefined_identifier
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:224:9 - undefined_class
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:228:23 - undefined_class
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor or activeTrackColor instead. This feature was deprecated after v3.31.0-2.0.pre. Try replacing the use of the deprecated member with the replacement - lib\presentation\pages\surah_audio\screens\audio_settings_screen.dart:816:11 - deprecated_member_use
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:115:1 - undefined_class
+  error - The function 'FullReciterMeta' isn't defined. Try importing the library that defines 'FullReciterMeta', correcting the name to the name of an existing function, or defining a function named 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:128:10 - undefined_function
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:299:3 - undefined_class
+   info - Unnecessary use of multiple underscores. Try using '_' - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:522:43 - unnecessary_underscores
+   info - Statements in a for should be enclosed in a block. Try wrapping the statement in a block - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:665:30 - curly_braces_in_flow_control_structures
+  error - Undefined name 'kAllReciters'. Try correcting the name to one that is defined, or defining the name - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:1035:28 - undefined_identifier
+  error - The method 'FullReciterMeta' isn't defined for the type '_ActiveDownloadsBanner'. Try correcting the name to the name of an existing method, or defining a method named 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_storage_screen.dart:1037:27 - undefined_method
+  error - Undefined class 'FullReciterMeta'. Try changing the name to the name of an existing class, or creating a class with the name 'FullReciterMeta' - lib\presentation\pages\surah_audio\screens\audio_surah_with_ayahs.dart:214:9 - undefined_class
+  error - The named parameter 'timeBackgroundColor' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'timeBackgroundColor' - lib\presentation\pages\surah_audio\screens\audio_surah_with_ayahs.dart:595:25 - undefined_named_parameter
+  error - The named parameter 'thumbColor' isn't defined. Try correcting the name to an existing named parameter's name, or defining a named parameter with the name 'thumbColor' - lib\presentation\pages\surah_audio\screens\audio_surah_with_ayahs.dart:598:25 - undefined_named_parameter
+  error - The class 'NotificationManager' doesn't have an unnamed constructor. Try using one of the named constructors defined in 'NotificationManager' - lib\presentation\pages\surah_audio\screens\audio_surah_with_ayahs.dart:768:15 - new_with_undefined_constructor_default
+  error - The method 'updateBookProgress' isn't defined for the type 'NotificationManager'. Try correcting the name to the name of an existing method, or defining a method named 'updateBookProgress' - lib\presentation\pages\surah_audio\screens\audio_surah_with_ayahs.dart:768:37 - undefined_method
+   info - The imported package 'get' isn't a dependency of the importing package. Try adding a dependency for 'get' in the 'pubspec.yaml' file - lib\presentation\pages\surah_audio\surah_audio.dart:9:8 - depend_on_referenced_packages
+   info - Unnecessary use of string interpolation. Try replacing the string literal with the variable name - lib\presentation\pages\surah_audio\widgets\last_listen.dart:87:27 - unnecessary_string_interpolations
+  error - The getter 'svgPlayArrow' isn't defined for the type 'SvgPath'. Try importing the library that defines 'svgPlayArrow', correcting the name to the name of an existing getter, or defining a getter or field named 'svgPlayArrow' - lib\presentation\pages\surah_audio\widgets\online_play_button.dart:70:31 - undefined_getter
+  error - The class 'NotificationManager' doesn't have an unnamed constructor. Try using one of the named constructors defined in 'NotificationManager' - lib\presentation\pages\surah_audio\widgets\online_play_button.dart:74:23 - new_with_undefined_constructor_default
+  error - The method 'updateBookProgress' isn't defined for the type 'NotificationManager'. Try correcting the name to the name of an existing method, or defining a method named 'updateBookProgress' - lib\presentation\pages\surah_audio\widgets\online_play_button.dart:74:45 - undefined_method
+  error - The getter 'svgPauseArrow' isn't defined for the type 'SvgPath'. Try importing the library that defines 'svgPauseArrow', correcting the name to the name of an existing getter, or defining a getter or field named 'svgPauseArrow' - lib\presentation\pages\surah_audio\widgets\online_play_button.dart:92:31 - undefined_getter
+
+flutter : 28 issues found. (ran in 9.4s)
+At line:1 char:1
++ flutter analyze lib/presentation/pages/surah_audio/ 2>&1 | Out-File - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (28 issues found. (ran in 9.4s):St 
+   ring) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

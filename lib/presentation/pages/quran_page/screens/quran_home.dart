@@ -1,0 +1,371 @@
+part of '../quran.dart';
+
+class QuranHome extends StatelessWidget {
+ final bool? isTasmeeMode;
+  QuranHome({Key? key, this.isTasmeeMode = false}) : super(key: key);
+
+  final audioCtrl = AudioCtrl.instance;
+  final generalCtrl = GeneralController.instance;
+  final bookmarkCtrl = BookmarksController.instance;
+  final quranCtrl = QuranController.instance;
+  final searchCtrl = QuranSearchController.instance;
+
+
+  @override
+  Widget build(BuildContext context) {
+    // if (quranCtrl.state.tabBarController.isHandleVisible) {
+    //   quranCtrl.state.tabBarController.toggle();
+    // }
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (bool didPop, _) async {
+        // أنهِ وضع التسميع عند مغادرة الشاشة بأي طريقة (سحب للخلف أو زر).
+        if (TasmeeCtrl.instance.state.isTasmeeMode.value) {
+          TasmeeCtrl.instance.exitTasmeeMode();
+        }
+        if (didPop) {
+          return;
+        }
+        // await HomeWidgetService.instance.updateReadingProgress();
+        quranCtrl.state.selectedAyahIndexes.clear();
+        Get.back();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        body: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColorDark,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Center(child: QuranPages()),
+                ),
+                GetBuilder<GeneralController>(
+                  id: 'showControl',
+                  builder: (generalCtrl) =>
+                      generalCtrl.state.isShowControl.value
+                      ? Stack(
+                          children: [
+                            if (!isTasmeeMode!)
+                              DisplayModeBar(
+                                isDark: themeCtrl.isDarkMode,
+                                languageCode: Get.locale!.languageCode,
+                                style: quranCtrl.displayModeBarStyle,
+                              ),
+                            // if (!isTasmeeMode!) const QuranTopBar(),
+                            if (!isTasmeeMode!)
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: TajweedMenuWidget(),
+                              ),
+                            _tasmeeButton(context),
+                            /* TopBarWidget(
+                              isHomeChild: true,
+                              isQuranSetting: true,
+                              isNotification: false,
+                              tabBarController:
+                                  quranCtrl.state.tabBarController,
+                              // في وضع AI: اعرض AssistantView + ModelSelector بدل QuranSearch.
+                              bodyChild: Obx(() {
+                                if (searchCtrl.state.isAiMode.value) {
+                                  return AiBodyWidget();
+                                }
+                                return QuranSearch();
+                              }),
+                              // في وضع التسميع يُخفى حقل البحث.
+                              centerChild: isTasmeeMode!
+                                  ? null
+                                  : TextFieldBarWidget(
+                                      controller:
+                                          searchCtrl.state.searchTextEditing,
+                                      horizontalPadding: 0.0,
+                                      onPressed: () {
+                                        quranCtrl.setTopBarType =
+                                            TopBarType.search;
+                                        quranCtrl.state.tabBarController.open();
+                                      },
+                                      onButtonPressed: () {
+                                        searchCtrl.state.searchTextEditing
+                                            .clear();
+                                        searchCtrl.state.ayahList.clear();
+                                        searchCtrl.state.surahList.clear();
+                                        // امسح محادثة المساعد أيضاً إن كانت نشطة.
+                                        if (searchCtrl.state.isAiMode.value) {
+                                          AiSearchController.instance
+                                              .clearConversation();
+                                        }
+                                      },
+                                      onChanged: (query) {
+                                        // في وضع AI: لا بحث مباشر (الإرسال عند Enter فقط).
+                                        if (searchCtrl.state.isAiMode.value)
+                                          return;
+                                        if (searchCtrl
+                                                .state
+                                                .searchTextEditing
+                                                .text
+                                                .isNotEmpty ||
+                                            query.trim().isNotEmpty) {
+                                          searchCtrl.surahSearchMethod(query);
+                                          searchCtrl.search(query);
+                                        } else {
+                                          searchCtrl.state.searchTextEditing
+                                              .clear();
+                                          searchCtrl.state.ayahList.clear();
+                                          searchCtrl.state.surahList.clear();
+                                        }
+                                      },
+                                      onSubmitted: (query) {
+                                        // في وضع AI: أرسل للمساعد الذكي.
+                                        if (searchCtrl.state.isAiMode.value) {
+                                          if (query.trim().isNotEmpty) {
+                                            AiSearchController.instance
+                                                .sendMessage(query);
+                                            searchCtrl.state.searchTextEditing
+                                                .clear();
+                                          }
+                                          return;
+                                        }
+                                        if (query.trim().isNotEmpty) {
+                                          searchCtrl.addSearchItem(query);
+                                        }
+                                      },
+                                    ),
+                            ), */
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: NavBarWidget(
+                                navBarController:
+                                    quranCtrl.state.navBarController,
+                              ),
+                            ),
+                            // const AutoScrollSpeedSliderWidget(),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _tasmeeButton(BuildContext context) {
+    return isTasmeeMode!
+        ? Align(
+            alignment: AlignmentDirectional.bottomEnd,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: .spaceBetween,
+                  mainAxisSize: .max,
+                  children: [
+                    Container(
+                      height: 62,
+                      width: 62,
+                      padding: const EdgeInsets.all(6),
+                      margin: const EdgeInsets.only(bottom: 70),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: Container(
+                        height: 58,
+                        width: 58,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        ),
+                        child: Obx(
+                          () => CustomButton(
+                            height: 70,
+                            width: 70,
+                            tooltip: 'tasmeeModeTitle'.tr,
+                            title: switch (TasmeeCtrl
+                                .instance
+                                .state
+                                .mode
+                                .value) {
+                              TasmeeMode.corrector =>
+                                'tasmeeModeCorrector'.tr.replaceAll(' ', '\n'),
+                              TasmeeMode.teacher =>
+                                'tasmeeModeTeacher'.tr.replaceAll(' ', '\n'),
+                              _ => 'tasmeeModeTasmee'.tr.replaceAll(' ', '\n'),
+                            },
+                            textStyle: AppTextStyles.titleMedium(
+                              color: context.theme.colorScheme.inversePrimary,
+                              fontSize: 14,
+                              height: 1.2,
+                            ),
+                            onPressed: () => customBottomSheet(
+                              const TasmeeModeSheetWidget(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (TasmeeCtrl.instance.state.mode.value ==
+                        TasmeeMode.teacher)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        margin: const EdgeInsets.only(bottom: 45),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        child: AyahChangeReader(
+                          downloadManagerStyle:
+                              AudioCtrl.instance.ayahDownloadManagerStyle,
+                          style: AudioCtrl.instance.ayahAudioStyle.copyWith(
+                            currentReaderTextStyle: AppTextStyles.titleMedium(
+                              color: context.theme.canvasColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          isDark: themeCtrl.isDarkMode,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        : const SizedBox.shrink();
+  }
+
+  /// يبني جسم وضع AI: شريط اختيار النموذج + واجهة المساعد.
+  // Widget _buildAiBody(BuildContext context) {
+  //   final ctrl = AiSearchController.instance;
+  //   // اضبط وضع المساعد في AiSearchController ليقرأه AssistantView.
+  //   ctrl.state.midasMode.value = MidasMode.assistant;
+  //   return Container(
+  //     height: Get.height,
+  //     width: Get.width,
+  //     color: context.theme.colorScheme.primaryContainer,
+  //     child: SafeArea(
+  //       child: Column(
+  //         children: [
+  //           // واجهة المساعد الموحَّد (المحادثة + مؤشر التفكير + أزرار النسخ).
+  //           Expanded(
+  //             child: UnifiedAssistantView(
+  //               isInMidad: false,
+  //               iconColor: context.theme.primaryColorLight,
+  //               textColor: context.theme.colorScheme.inversePrimary,
+  //             ),
+  //           ),
+  //           // شريط اختيار النموذج (ModelSelectorWidget من ai_search).
+  //           Padding(
+  //             padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  //             child: Row(
+  //               mainAxisAlignment: .spaceBetween,
+  //               children: [
+  //                 // سجل المحادثة — يظهر في الوضعين (موحّد).
+  //                 CustomButton(
+  //                   // tooltip: 'newChat'.tr,
+  //                   onPressed: () =>
+  //                       customBottomSheet(const ChatHistorySheet()),
+  //                   isCustomSvgColor: true,
+  //                   svgPath: SvgPath.svgHomeHistory,
+  //                   svgColor: context.theme.primaryColorLight,
+  //                 ),
+  //                 ModelSelectorWidget(
+  //                   textColor: context.theme.colorScheme.inversePrimary,
+  //                   backgroundColor: context.theme.primaryColorLight,
+  //                 ),
+  //                 CustomButton(
+  //                   // tooltip: 'newChat'.tr,
+  //                   onPressed: () => ctrl.clearConversation(),
+  //                   isCustomSvgColor: true,
+  //                   svgPath: SvgPath.svgHomeNewChat,
+  //                   svgColor: context.theme.primaryColorLight,
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+}
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final cs = Theme.of(context).colorScheme;
+
+//     return PopScope(
+//       canPop: false,
+//       onPopInvokedWithResult: (bool didPop, _) {
+//         if (didPop) return;
+//         quranCtrl.state.selectedAyahIndexes.clear();
+//         Get.back();
+//       },
+//       child: Scaffold(
+//         resizeToAvoidBottomInset: true,
+//         backgroundColor: cs.primary,
+//         body: SafeArea(
+//           child: Stack(
+//             children: [
+//               // ── Full-screen Quran content ─────────────────────────────────
+//               Positioned.fill(
+//                 child: NotificationListener<ScrollNotification>(
+//                   onNotification: (notification) {
+//                     if (notification is ScrollStartNotification) {
+//                       generalCtrl.onContentScrollStart();
+//                     } else if (notification is ScrollEndNotification) {
+//                       generalCtrl.onContentScrollEnd();
+//                     }
+//                     return false;
+//                   },
+//                   child: Directionality(
+//                     textDirection: TextDirection.rtl,
+//                     child: ScreenSwitch(),
+//                   ),
+//                 ),
+//               ),
+//               // ── Floating audio player pinned to the bottom ────────────────
+//               Positioned(
+//                 left: 0,
+//                 right: 0,
+//                 bottom: 0,
+//                 child: Obx(() {
+//                   final hidden =
+//                       generalCtrl.state.isScrollingContent.value ||
+//                       generalCtrl.state.isAudioWidgetHidden.value;
+//                   return AnimatedSlide(
+//                     offset: hidden ? const Offset(0, 1.0) : Offset.zero,
+//                     duration: const Duration(milliseconds: 320),
+//                     curve: hidden ? Curves.easeIn : Curves.easeOutCubic,
+//                     child: AnimatedOpacity(
+//                       opacity: hidden ? 0.0 : 1.0,
+//                       duration: const Duration(milliseconds: 260),
+//                       child: GestureDetector(
+//                         onTap: () => generalCtrl.toggleAudioWidget(),
+//                         behavior: HitTestBehavior.translucent,
+//                         child: AudioWidget(),
+//                       ),
+//                     ),
+//                   );
+//                 }),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
