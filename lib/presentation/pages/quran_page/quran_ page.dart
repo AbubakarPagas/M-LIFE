@@ -101,7 +101,7 @@ class _QuranState extends State<Quran> with SingleTickerProviderStateMixin {
         ],
         body: TabBarView(
           controller: _tabController,
-          children: <Widget>[QuranSurahList(), QuranJuz(), BookmarksList()],
+          children: <Widget>[QuranSurahList(), QuranJuzList(), BookmarksList()],
         ),
       ),
     );

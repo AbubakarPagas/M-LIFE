@@ -52,19 +52,19 @@ class QuranHome extends StatelessWidget {
                       ? Stack(
                           children: [
                             if (!isTasmeeMode!)
-                              DisplayModeBar(
+                             DisplayModeBar(
                                 isDark: themeCtrl.isDarkMode,
                                 languageCode: Get.locale!.languageCode,
                                 style: quranCtrl.displayModeBarStyle,
-                              ),
-                            // if (!isTasmeeMode!) const QuranTopBar(),
+                              ), 
+                           if (!isTasmeeMode!) const QuranTopBar(),
                             if (!isTasmeeMode!)
-                              Align(
+                              /* Align(
                                 alignment: Alignment.centerLeft,
                                 child: TajweedMenuWidget(),
-                              ),
+                              ), */
                             _tasmeeButton(context),
-                            /* TopBarWidget(
+                             TopBarWidget(
                               isHomeChild: true,
                               isQuranSetting: true,
                               isNotification: false,
@@ -102,8 +102,9 @@ class QuranHome extends StatelessWidget {
                                       },
                                       onChanged: (query) {
                                         // في وضع AI: لا بحث مباشر (الإرسال عند Enter فقط).
-                                        if (searchCtrl.state.isAiMode.value)
+                                        if (searchCtrl.state.isAiMode.value) {
                                           return;
+                                        }
                                         if (searchCtrl
                                                 .state
                                                 .searchTextEditing
@@ -135,7 +136,7 @@ class QuranHome extends StatelessWidget {
                                         }
                                       },
                                     ),
-                            ), */
+                            ),
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: NavBarWidget(

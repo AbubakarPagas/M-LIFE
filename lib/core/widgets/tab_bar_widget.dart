@@ -1,7 +1,7 @@
 import 'package:flexible_sheet/flexible_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_library/quran_library.dart';
+
 
 import '../../presentation/pages/books/books.dart';
 import '../../presentation/pages/quran_page/quran.dart';
@@ -12,7 +12,7 @@ import '../services/services_locator.dart';
 import '../utils/constants/extensions/extensions.dart';
 import 'container_button.dart';
 import 'local_notification/notification_screen.dart';
-import 'local_notification/widgets/notification_icon_widget.dart';
+
 import 'settings_list.dart';
 
 enum TopBarType { none, search, settings }
@@ -49,6 +49,9 @@ class TopBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final surface = Theme.of(context).colorScheme.primaryContainer;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return FlexibleSheet(
@@ -82,170 +85,20 @@ class TopBarWidget extends StatelessWidget {
           },
           handleBuilder: (currentHeight) {
             final isExpanded = currentHeight >= 155;
-            return Column(
-              children: [
-                Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        height: 62,
-                        width: 62,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(8),
-                            bottomLeft: Radius.circular(8),
-                          ),
-                          color:
-                              squareColor ??
-                              Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        height: 62,
-                        width: 62,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(8),
-                            bottomLeft: Radius.circular(8),
-                          ),
-                          color:
-                              squareColor ??
-                              Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 53,
-                      width: Get.width,
-                      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                        ),
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: isHomeChild
-                                ? Obx(() {
-                                    // فقط في وضع بحث القرآن: اعرض زر التبديل لـ AI
-                                    // بدل زر Home لاستغلال المساحة.
-                                    if (quranCtrl.getTopBarType(
-                                      TopBarType.search,
-                                    )) {
-                                      return _buildAiToggleButton(context);
-                                    }
-                                    // if (booksCtrl.getTopBarType(
-                                    //   TopBarType.search,
-                                    // )) {
-                                    //   return _buildAiToggleButton(context);
-                                    // }
-                                    // وإلا: زر Home الأصلي كما هو.
-                                    return ContainerButton(
-                                      onPressed: () async {
-                                        if (isBackButton ?? false) {
-                                          quranCtrl.setTopBarType =
-                                              TopBarType.none;
-                                          Get.back();
-                                          return;
-                                        }
-                                        quranCtrl.setTopBarType =
-                                            TopBarType.none;
-                                      /*   TasmeeCtrl.instance.exitTasmeeMode();
-                                        Get.offAll(
-                                          () => const HomeScreen(),
-                                          transition: Transition.upToDown,
-                                        ); */
-                                        sl<QuranController>()
-                                            .state
-                                            .selectedAyahIndexes
-                                            .clear();
-                                      },
-                                      svgHeight: 35,
-                                      svgWidth: 35,
-                                      horizontalMargin: 4.0,
-                                      verticalMargin: 5.0,
-                                      backgroundColor: Colors.transparent,
-                                      svgColor:
-                                          context.theme.colorScheme.primary,
-                                      svgWithColorPath: isBackButton ?? false
-                                          ? SvgPath.svgHomeArrowBack
-                                          : SvgPath.svgHomeHome,
-                                    );
-                                  })
-                                : isNotification
-                                ? FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: ContainerButton(
-                                      onPressed: () => customBottomSheet(
-                                        NotificationsScreen(),
-                                      ),
-                                      svgHeight: 35,
-                                      svgWidth: 35,
-                                      horizontalMargin: 6.0,
-                                      verticalMargin: 12.0,
-                                      backgroundColor: Colors.transparent,
-                                      child: Container()
-                                     /*  const NotificationIconWidget(
-                                        iconHeight: 30,
-                                      ), */
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
-                          ),
-                          Expanded(
-                            flex: 12,
-                            child: centerChild != null
-                                ? centerChild!
-                                : SizedBox(width: Get.width),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: ContainerButton(
-                              onPressed:
-                                  settingOnTap ??
-                                  () {
-                                    quranCtrl.setTopBarType =
-                                        TopBarType.settings;
-                                    tabBarController.toggle();
-                                    quranCtrl.state.isPlayExpanded.value =
-                                        false;
-                                  },
-                              svgHeight: 35,
-                              svgWidth: 35,
-                              horizontalMargin: 4.0,
-                              verticalMargin: 4.0,
-                              backgroundColor: Colors.transparent,
-                              svgColor: context.theme.colorScheme.primary,
-                              svgWithColorPath: isExpanded
-                                  ? SvgPath.svgHomeClose
-                                  : SvgPath.svgHomeSetting,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 8,
-                  width: 350,
-                  margin: const EdgeInsets.symmetric(horizontal: 62.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: squareColor ?? Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ],
+            return _AppBarHandle(
+              isExpanded: isExpanded,
+              isHomeChild: isHomeChild,
+              isNotification: isNotification,
+              isBackButton: isBackButton ?? false,
+              centerChild: centerChild,
+              settingOnTap: settingOnTap,
+              squareColor: squareColor,
+              primary: primary,
+              surface: surface,
+              tabBarController: tabBarController,
+              quranCtrl: quranCtrl,
+              booksCtrl: booksCtrl,
+              onAiToggle: () => _buildAiToggleButton(context),
             );
           },
           childBuilder: (currentHeight) {
@@ -277,25 +130,211 @@ class TopBarWidget extends StatelessWidget {
     return Obx(() {
       final isAi =
           searchCtrl.state.isAiMode.value || booksCtrl.state.isAiMode.value;
-      return ContainerButton(
-        onPressed: () {
+      return _AppBarActionButton(
+        onTap: () {
           searchCtrl.state.isAiMode.value = !isAi;
           booksCtrl.state.isAiMode.value = !isAi;
-          // امسح حقل البحث عند التبديل لتفادي نتائج مختلطة.
           searchCtrl.state.searchTextEditing.clear();
           searchCtrl.state.ayahList.clear();
           searchCtrl.state.surahList.clear();
         },
-        svgHeight: 35,
-        svgWidth: 35,
-        horizontalMargin: 4.0,
-        verticalMargin: 5.0,
-        backgroundColor: Colors.transparent,
-        svgColor: isAi
+        svgPath: SvgPath.svgHomeAiMcp,
+        color: isAi
             ? context.theme.colorScheme.primary
-            : context.theme.colorScheme.primary.withValues(alpha: 0.5),
-        svgWithColorPath: SvgPath.svgHomeAiMcp,
+            : context.theme.colorScheme.primary.withValues(alpha: 0.4),
+        isActive: isAi,
       );
     });
+  }
+}
+
+// ─── AppBar handle rendered inside the FlexibleSheet ────────────────────────
+class _AppBarHandle extends StatelessWidget {
+  final bool isExpanded;
+  final bool isHomeChild;
+  final bool isNotification;
+  final bool isBackButton;
+  final Widget? centerChild;
+  final VoidCallback? settingOnTap;
+  final Color? squareColor;
+  final Color primary;
+  final Color surface;
+  final FlexibleSheetController tabBarController;
+  final QuranController quranCtrl;
+  final BooksController booksCtrl;
+  final Widget Function() onAiToggle;
+
+  const _AppBarHandle({
+    required this.isExpanded,
+    required this.isHomeChild,
+    required this.isNotification,
+    required this.isBackButton,
+    required this.centerChild,
+    required this.settingOnTap,
+    required this.squareColor,
+    required this.primary,
+    required this.surface,
+    required this.tabBarController,
+    required this.quranCtrl,
+    required this.booksCtrl,
+    required this.onAiToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final barColor = squareColor ?? primary;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // ── Main AppBar row ───────────────────────────────────────────────
+        Container(
+          height: 56,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: surface,
+            border: Border(
+              bottom: BorderSide(
+                color: barColor.withValues(alpha: 0.18),
+                width: 1,
+              ),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: barColor.withValues(alpha: 0.08),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(width: 4),
+              // ── Leading action ────────────────────────────────────────
+              SizedBox(
+                width: 44,
+                height: 44,
+                child: isHomeChild
+                    ? Obx(() {
+                        if (quranCtrl.getTopBarType(TopBarType.search)) {
+                          return onAiToggle();
+                        }
+                        return _AppBarActionButton(
+                          onTap: () async {
+                            if (isBackButton) {
+                              quranCtrl.setTopBarType = TopBarType.none;
+                              Get.back();
+                              return;
+                            }
+                            quranCtrl.setTopBarType = TopBarType.none;
+                            sl<QuranController>()
+                                .state
+                                .selectedAyahIndexes
+                                .clear();
+                          },
+                          svgPath: isBackButton
+                              ? SvgPath.svgHomeArrowBack
+                              : SvgPath.svgHomeHome,
+                          color: primary,
+                        );
+                      })
+                    : isNotification
+                    ? _AppBarActionButton(
+                        onTap: () => customBottomSheet(NotificationsScreen()),
+                        svgPath: SvgPath.svgHomeHome,
+                        color: primary,
+                      )
+                    : const SizedBox.shrink(),
+              ),
+              // ── Center content ────────────────────────────────────────
+              Expanded(
+                child: centerChild ?? const SizedBox.shrink(),
+              ),
+              // ── Trailing: settings / close ────────────────────────────
+              SizedBox(
+                width: 44,
+                height: 44,
+                child: _AppBarActionButton(
+                  onTap: settingOnTap ??
+                      () {
+                        quranCtrl.setTopBarType = TopBarType.settings;
+                        tabBarController.toggle();
+                        quranCtrl.state.isPlayExpanded.value = false;
+                      },
+                  svgPath: isExpanded
+                      ? SvgPath.svgHomeClose
+                      : SvgPath.svgHomeSetting,
+                  color: primary,
+                ),
+              ),
+              const SizedBox(width: 4),
+            ],
+          ),
+        ),
+        // ── Thin accent line below AppBar ─────────────────────────────────
+        Container(
+          height: 3,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                barColor.withValues(alpha: 0),
+                barColor.withValues(alpha: 0.5),
+                barColor,
+                barColor.withValues(alpha: 0.5),
+                barColor.withValues(alpha: 0),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Reusable icon button for the AppBar ─────────────────────────────────────
+class _AppBarActionButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String svgPath;
+  final Color color;
+  final bool isActive;
+
+  const _AppBarActionButton({
+    required this.onTap,
+    required this.svgPath,
+    required this.color,
+    this.isActive = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        width: 44,
+        height: 44,
+        alignment: Alignment.center,
+        decoration: isActive
+            ? BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              )
+            : null,
+        child: ContainerButton(
+          onPressed: onTap,
+          svgHeight: 26,
+          svgWidth: 26,
+          horizontalMargin: 0,
+          verticalMargin: 0,
+          horizontalPadding: 0,
+          verticalPadding: 0,
+          backgroundColor: Colors.transparent,
+          svgColor: color,
+          svgWithColorPath: svgPath,
+        ),
+      ),
+    );
   }
 }

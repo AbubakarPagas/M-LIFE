@@ -155,15 +155,21 @@ flutter:
 
 
   assets:
+    - assets/svg/
+    - assets/icons/
+    - assets/svg/surah_name/
+    - assets/svg/hijri/
+    - assets/svg/alwaqf/
+    - assets/svg/home/
+    - assets/svg/quran/
+    - assets/svg/audio/
+    - assets/svg/athkar/
+    - assets/svg/books/
+    - assets/svg/collection/
     - assets/images/
     - assets/images/collections/
     - assets/json/
-    - assets/svg/hijri/
-    - assets/svg/collection/
-    - assets/svg/
     - assets/adhan_times/
-    - assets/svg/surah_name/
-    - assets/svg/alwaqf/
     - assets/json/translate/
     - assets/lottie/
     - assets/locales/

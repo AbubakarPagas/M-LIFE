@@ -41,8 +41,8 @@ class TajweedMenuWidget extends StatelessWidget {
               SvgPath.svgAlwaqfMushafOrthographic,
               height: 40,
             ),
-            panelChild: Container()
-            // AlwaqfScreen(),
+            panelChild: AlwaqfScreen()
+            //  AlwaqfScreen(),
           );
   }
 }
