@@ -554,6 +554,11 @@
         "type": "text",
         "placeholders": {}
     },
+    "swipeForAyahs": "Смахните для перехода между аятами",
+    "@swipeForAyahs": {
+        "type": "text",
+        "placeholders": {}
+    },
     "ok": "OK",
     "@ok": {
         "type": "text",

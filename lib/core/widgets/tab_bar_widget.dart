@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../presentation/pages/books/books.dart';
 import '../../presentation/pages/quran_page/quran.dart';
+import '../../presentation/pages/quran_page/screens/quran_settings.dart';
 import '../../presentation/pages/quran_page/widgets/search/controller/quran_search_controller.dart' show QuranSearchController;
 import '/core/utils/constants/extensions/bottom_sheet_extension.dart';
 import '/core/utils/constants/svg_constants.dart';
@@ -112,7 +113,7 @@ class TopBarWidget extends StatelessWidget {
               return Material(
                 elevation: 8,
                 color: Colors.transparent,
-                child: SettingsList(
+                child: QuranSettingsList(
                   isQuranSetting: isQuranSetting,
                   isCalendarSetting: isCalendarSetting,
                 ),

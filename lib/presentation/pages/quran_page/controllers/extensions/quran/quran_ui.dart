@@ -24,7 +24,14 @@ extension QuranUi on QuranController {
     state._quranRepository.saveLastPage(page);
     // QuranController.instance.state.box.write(MSTART_PAGE, page);
     QuranCtrl.instance.state.currentPageNumber.value = page;
-    QuranLibrary.quranCtrl.quranPagesController.jumpToPage(page - 1);
+    // Only jump if the PageView is already attached (i.e. QuranHome is open).
+    // When called from the surah list, QuranHome hasn't been built yet so the
+    // controller has no scroll positions — jumping here would throw an assertion.
+    // The saved currentPageNumber is used as the initial page when QuranHome opens.
+    final pagesCtrl = QuranLibrary.quranCtrl.quranPagesController;
+    if (pagesCtrl.hasClients) {
+      pagesCtrl.jumpToPage(page - 1);
+    }
     if (state.navBarController.isOpen) {
       state.navBarController.close();
       setNavBarType = NavBarType.none;

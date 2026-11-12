@@ -554,6 +554,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "بکێشە بۆ مابەینی ئایەتەکان",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "باشە",
   "@ok": {
     "type": "text",

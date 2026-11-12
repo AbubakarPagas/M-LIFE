@@ -52,13 +52,13 @@ class QuranHome extends StatelessWidget {
                       ? Stack(
                           children: [
                             if (!isTasmeeMode!)
-                             DisplayModeBar(
+                              DisplayModeBar(
                                 isDark: themeCtrl.isDarkMode,
                                 languageCode: Get.locale!.languageCode,
                                 style: quranCtrl.displayModeBarStyle,
-                              ), 
-                           if (!isTasmeeMode!) const QuranTopBar(),
-                            if (!isTasmeeMode!)
+                              ),  
+                           if (!isTasmeeMode!) QuranTopBar(),
+                          //  if (!isTasmeeMode!)
                               /* Align(
                                 alignment: Alignment.centerLeft,
                                 child: TajweedMenuWidget(),

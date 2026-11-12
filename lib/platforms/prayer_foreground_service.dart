@@ -247,7 +247,7 @@ Future<_PrayerSnapshot?> _computeSnapshot() async {
       schedule: schedule,
     );
   } catch (e) {
-    print('[PrayerFgService] snapshot error: $e');
+    // print('[PrayerFgService] snapshot error: $e');
     return null;
   }
 }

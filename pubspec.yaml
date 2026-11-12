@@ -90,6 +90,7 @@ dependencies:
   sqflite: ^2.4.2
 
   # ── Location / Time ────────────────────────────────────────────────────────
+  # flutter_device_compass: ^2.2.0
   adhan: ^2.0.0+1
   geolocator: ^14.0.1
   geocoding: ^4.0.0
@@ -150,6 +151,12 @@ dev_dependencies:
 # The 0.5.x series uses a straightforward dlopen approach with no JNI dependency.
 dependency_overrides:
   sqlite3_flutter_libs: 0.5.42
+  # shared_preferences_android 2.4.0+ has a bug where detaching a background
+  # engine (audio_service / flutter_foreground_task) unregisters the plugin
+  # instance used by the main engine, causing "No instance with no name has
+  # been registered" on the next SharedPreferences.getInstance() call.
+  # Pin to 2.3.2 until the upstream fix lands (flutter/flutter#194920).
+  shared_preferences_android: 2.3.2
 flutter:
   uses-material-design: true
 

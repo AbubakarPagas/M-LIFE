@@ -555,6 +555,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "আয়াতের মধ্যে নেভিগেট করতে সোয়াইপ করুন",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "ঠিক আছে",
   "@ok": {
     "type": "text",

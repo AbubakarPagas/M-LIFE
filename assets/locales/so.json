@@ -555,6 +555,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "Dhaq si aad u dhex martid aayadaha",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "Haa",
   "@ok": {
     "type": "text",

@@ -170,6 +170,7 @@ class _QuranTabBar extends StatelessWidget {
         padding: const EdgeInsets.all(3),
         indicatorSize: TabBarIndicatorSize.tab,
         dividerColor: Colors.transparent,
+        unselectedLabelColor: primaryColor.withValues(alpha: 0.8),
         indicator: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(9),

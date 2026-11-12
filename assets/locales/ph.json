@@ -554,6 +554,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "Mag-swipe para mag-navigate sa pagitan ng mga talata",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "Sige",
   "@ok": {
     "type": "text",

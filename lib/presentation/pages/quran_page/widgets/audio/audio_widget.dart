@@ -1,12 +1,10 @@
-// part of '../../quran.dart';
-
 part of '../../quran.dart';
 
 class AudioWidget extends StatelessWidget {
   AudioWidget({Key? key}) : super(key: key);
+
   final quranCtrl = QuranController.instance;
   final audioCtrl = AudioCtrl.instance;
-  final generalCtrl = GeneralController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -14,669 +12,354 @@ class AudioWidget extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Obx(
         () => AnimatedCrossFade(
-          duration: const Duration(milliseconds: 200),
-          firstChild: SizedBox(
-            height: 50,
-            width: Get.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Center(child: PlayAyah()),
-                  Center(
-                    child: AyahChangeReader(
-                      downloadManagerStyle: audioCtrl.ayahDownloadManagerStyle,
-                      style: audioCtrl.ayahAudioStyle,
-                      isDark: themeCtrl.isDarkMode,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          secondChild: GetBuilder<AudioCtrl>(
-            id: 'audio_seekBar_id',
-            builder: (c) {
-              return SizedBox(
-                height: 170,
-                width: Get.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Gap(6),
-                    context.customArrowDown(
-                      close: () => quranCtrl.state.isPlayExpanded.value = false,
-                    ),
-                    const Gap(6),
-                    AyahChangeReader(
-                      downloadManagerStyle: audioCtrl.ayahDownloadManagerStyle,
-                      style: audioCtrl.ayahAudioStyle,
-                      isDark: themeCtrl.isDarkMode,
-                    ),
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Obx(
-                        () => c.state.isDownloading.value
-                            ? Obx(() {
-                                log(
-                                  'file size: ${audioCtrl.state.fileSize.value} => download progress  ${audioCtrl.state.downloadProgress.value}',
-                                );
-                                return SliderWidget.downloading(
-                                  currentPosition:
-                                      (audioCtrl.state.downloadProgress.value)
-                                          .toInt(),
-                                  filesCount: audioCtrl.state.fileSize.value,
-                                  horizontalPadding: 0,
-                                );
-                              })
-                            : StreamBuilder<PackagePositionData>(
-                                stream: audioCtrl.positionDataStream,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    final positionData = snapshot.data;
-                                    return SliderWidget.player(
-                                      horizontalPadding: 0.0,
-                                      duration:
-                                          positionData?.duration ??
-                                          Duration.zero,
-                                      position:
-                                          positionData?.position ??
-                                          Duration.zero,
-                                      // bufferedPosition:
-                                      //     positionData?.bufferedPosition ??
-                                      //         Duration.zero,
-                                      activeTrackColor: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                      onChangeEnd: AudioCtrl
-                                          .instance
-                                          .state
-                                          .audioPlayer
-                                          .seek,
-                                    );
-                                  }
-                                  return const SizedBox.shrink();
-                                },
-                              ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SkipToPrevious(),
-                          const PlayAyah(),
-                          SkipToNext(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          duration: const Duration(milliseconds: 250),
           crossFadeState: quranCtrl.state.isPlayExpanded.value
               ? CrossFadeState.showSecond
               : CrossFadeState.showFirst,
+          // ── Collapsed: single row ──────────────────────────────────────
+          firstChild: _CollapsedPlayer(audioCtrl: audioCtrl),
+          // ── Expanded: full player ──────────────────────────────────────
+          secondChild: _ExpandedPlayer(
+            quranCtrl: quranCtrl,
+            audioCtrl: audioCtrl,
+          ),
         ),
       ),
     );
   }
 }
 
-// class AudioWidget extends StatelessWidget {
-//   AudioWidget({Key? key}) : super(key: key);
+// ─────────────────────────────────────────────────────────────────────────────
+// Collapsed — play button + reader info in one row
+// ─────────────────────────────────────────────────────────────────────────────
 
-//   final quranCtrl = QuranController.instance;
-//   final audioCtrl = AudioCtrl.instance;
+class _CollapsedPlayer extends StatelessWidget {
+  const _CollapsedPlayer({required this.audioCtrl});
+  final AudioCtrl audioCtrl;
 
-//   // ── gold accent used for highlights ──────────────────────────────────────
-//   static const Color _gold = Color(0xFFD4A435);
-//   static const Color _goldLight = Color(0xFFF0C96A);
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final cs = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 58,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          children: [
+            // Play / Pause button
+            _PlayPauseButton(size: 38, audioCtrl: audioCtrl),
 
-//     return Padding(
-//       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-//       child: ClipRRect(
-//         borderRadius: BorderRadius.circular(24),
-//         child: Container(
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(24),
-//             color: cs.primaryContainer,
-//           ),
-//           child: Stack(
-//             children: [
-//               // ── Decorative banner watermark (top-right, very faint) ────────
-//               Positioned(
-//                 top: -10,
-//                 right: -10,
-//                 child: Opacity(
-//                   opacity: 0.07,
-//                   child: SvgPicture.asset(
-//                     SvgPath.svgSurahBanner1,
-//                     width: 150,
-//                     colorFilter: const ColorFilter.mode(
-//                       _goldLight,
-//                       BlendMode.srcIn,
-//                     ),
-//                   ),
-//                 ),
-//               ),
+            const SizedBox(width: 10),
 
-//               // ── Main content ───────────────────────────────────────────────
-//               Padding(
-//                 padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     // ── Row 1: Surah info ────────────────────────────────────
-//                     const _SurahInfoRow(gold: _gold, goldLight: _goldLight),
+            // Thin vertical divider
+            Container(
+              width: 1,
+              height: 26,
+              color: cs.primary.withValues(alpha: .20),
+            ),
 
-//                     const SizedBox(height: 8),
+            const SizedBox(width: 10),
 
-//                     // ── Gold divider line ────────────────────────────────────
-//                     Container(
-//                       height: 1,
-//                       decoration: BoxDecoration(
-//                         gradient: LinearGradient(
-//                           colors: [
-//                             Colors.transparent,
-//                             _gold.withValues(alpha: 0.45),
-//                             Colors.transparent,
-//                           ],
-//                         ),
-//                       ),
-//                     ),
+            // Reader + surah info
+            Expanded(
+              child: AyahChangeReader(
+                downloadManagerStyle: audioCtrl.ayahDownloadManagerStyle,
+                style: audioCtrl.ayahAudioStyle,
+                isDark: themeCtrl.isDarkMode,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-//                     const SizedBox(height: 8),
+// ─────────────────────────────────────────────────────────────────────────────
+// Expanded — seek bar + controls
+// ─────────────────────────────────────────────────────────────────────────────
 
-//                     // ── Row 2: Controls + action icons ───────────────────────
-//                     const Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         _PlaybackControls(gold: _gold),
-//                         _ActionButtons(gold: _gold),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _ExpandedPlayer extends StatelessWidget {
+  const _ExpandedPlayer({
+    required this.quranCtrl,
+    required this.audioCtrl,
+  });
 
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Row 1: Surah SVG name artwork + ayah badge  +  reciter info
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _SurahInfoRow extends StatelessWidget {
-//   const _SurahInfoRow({required this.gold, required this.goldLight});
-//   final Color gold;
-//   final Color goldLight;
+  final QuranController quranCtrl;
+  final AudioCtrl audioCtrl;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final audioCtrl = AudioCtrl.instance;
-//     final cs = Theme.of(context).colorScheme;
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
 
-//     return Obx(() {
-//       final uqNum = audioCtrl.state.currentAyahUniqueNumber.value;
+    return GetBuilder<AudioCtrl>(
+      id: 'audio_seekBar_id',
+      builder: (c) => SizedBox(
+        height: 170,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 6),
 
-//       // ── Surah number & ayah number ─────────────────────────────────────────
-//       int surahNum = 1;
-//       int ayahNum = 0;
-//       String readerName = '';
+            // ── Collapse handle ──────────────────────────────────────────
+            GestureDetector(
+              onTap: () => quranCtrl.state.isPlayExpanded.value = false,
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Center(
+                  child: Container(
+                    width: 36,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color: cs.primary.withValues(alpha: .25),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
-//       try {
-//         final surahData = QuranController.instance.getSurahDataByAyahUQ(uqNum);
-//         surahNum = surahData.surahNumber;
-//         final startUQ = surahData.ayahs.first.ayahUQNumber;
-//         ayahNum = uqNum - startUQ + 1;
-//       } catch (_) {}
+            const SizedBox(height: 4),
 
-//       final readers = ReadersConstants.activeAyahReaders;
-//       final readerIdx = audioCtrl.state.ayahReaderIndex.value.clamp(
-//         0,
-//         readers.length - 1,
-//       );
-//       readerName = readers[readerIdx].name;
+            // ── Reader info ──────────────────────────────────────────────
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: AyahChangeReader(
+                downloadManagerStyle: audioCtrl.ayahDownloadManagerStyle,
+                style: audioCtrl.ayahAudioStyle,
+                isDark: themeCtrl.isDarkMode,
+              ),
+            ),
 
-//       // Pad to 3 digits for surah SVG path
-//       final surahKey = surahNum.toString().padLeft(3, '0');
-//       final surahSvgPath = 'assets/svg/surah_name/$surahKey.svg';
+            const SizedBox(height: 4),
 
-//       return Row(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           // ── Reciter avatar ─────────────────────────────────────────────────
-//           _ReciterAvatar(gold: gold),
+            // ── Seek bar ─────────────────────────────────────────────────
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: Obx(
+                  () => c.state.isDownloading.value
+                      ? Obx(
+                          () => SliderWidget.downloading(
+                            currentPosition: audioCtrl
+                                .state
+                                .downloadProgress
+                                .value
+                                .toInt(),
+                            filesCount: audioCtrl.state.fileSize.value,
+                            horizontalPadding: 0,
+                          ),
+                        )
+                      : StreamBuilder<PackagePositionData>(
+                          stream: audioCtrl.positionDataStream,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const SizedBox(height: 20);
+                            }
+                            final pos = snapshot.data!;
+                            return SliderWidget.player(
+                              horizontalPadding: 0,
+                              duration: pos.duration ?? Duration.zero,
+                              position: pos.position ?? Duration.zero,
+                              activeTrackColor:
+                                  Theme.of(context).colorScheme.primary,
+                              onChangeEnd: audioCtrl
+                                  .state
+                                  .audioPlayer
+                                  .seek,
+                            );
+                          },
+                        ),
+                ),
+              ),
+            ),
 
-//           const SizedBox(width: 10),
+            // ── Playback controls ────────────────────────────────────────
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Skip previous
+                  _ControlButton(
+                    icon: Icons.skip_next_rounded, // RTL: skip_next = previous
+                    size: 28,
+                    color: cs.primary.withValues(alpha: .85),
+                    onTap: () async {
+                      final isRTL = Get.locale?.languageCode == 'ar';
+                      isRTL
+                          ? await audioCtrl.skipPreviousAyah(
+                              Get.context!,
+                              audioCtrl.currentAyah.ayahUQNumber,
+                            )
+                          : await audioCtrl.skipNextAyah(
+                              Get.context!,
+                              audioCtrl.currentAyah.ayahUQNumber,
+                            );
+                    },
+                  ),
 
-//           // ── Surah SVG name + reciter ───────────────────────────────────────
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 // Surah calligraphic name from SVG asset
-//                 SvgPicture.asset(
-//                   surahSvgPath,
-//                   height: 26,
-//                   colorFilter: ColorFilter.mode(cs.onPrimary, BlendMode.srcIn),
-//                   placeholderBuilder: (_) => Text(
-//                     '───',
-//                     style: TextStyle(
-//                       color: cs.onPrimary.withValues(alpha: 0.5),
-//                       fontSize: 14,
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(height: 4),
-//                 // Reciter name with mic icon
-//                 Row(
-//                   children: [
-//                     Icon(
-//                       Icons.mic_rounded,
-//                       size: 15,
-//                       color: gold.withValues(alpha: 0.9),
-//                     ),
-//                     const SizedBox(width: 4),
-//                     Expanded(
-//                       child: Text(
-//                         readerName.isNotEmpty ? readerName : '---',
-//                         style: TextStyle(
-//                           color: cs.onPrimary.withValues(alpha: 0.75),
-//                           fontFamily: 'kufi',
-//                           fontSize: 10,
-//                         ),
-//                         overflow: TextOverflow.ellipsis,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
+                  // Play / Pause (larger)
+                  _PlayPauseButton(size: 46, audioCtrl: audioCtrl),
 
-//           const SizedBox(width: 8),
+                  // Skip next
+                  _ControlButton(
+                    icon: Icons.skip_previous_rounded,
+                    size: 28,
+                    color: cs.primary.withValues(alpha: .85),
+                    onTap: () async {
+                      final isRTL = Get.locale?.languageCode == 'ar';
+                      isRTL
+                          ? await audioCtrl.skipNextAyah(
+                              Get.context!,
+                              audioCtrl.currentAyah.ayahUQNumber,
+                            )
+                          : await audioCtrl.skipPreviousAyah(
+                              Get.context!,
+                              audioCtrl.currentAyah.ayahUQNumber,
+                            );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-//           // ── Ayah badge ─────────────────────────────────────────────────────
-//           if (ayahNum > 0)
-//             Container(
-//               padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(10),
-//                 border: Border.all(
-//                   color: gold.withValues(alpha: 0.55),
-//                   width: 1,
-//                 ),
-//                 color: gold.withValues(alpha: 0.10),
-//               ),
-//               child: Column(
-//                 mainAxisSize: MainAxisSize.min,
-//                 children: [
-//                   Text(
-//                     'آية',
-//                     style: TextStyle(
-//                       color: gold,
-//                       fontFamily: 'kufi',
-//                       fontSize: 8,
-//                     ),
-//                   ),
-//                   Text(
-//                     '$ayahNum',
-//                     style: TextStyle(
-//                       color: cs.onPrimary,
-//                       fontFamily: 'kufi',
-//                       fontSize: 13,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//         ],
-//       );
-//     });
-//   }
-// }
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared play/pause button — works in both collapsed and expanded states
+// ─────────────────────────────────────────────────────────────────────────────
 
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Reciter circular avatar
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _ReciterAvatar extends StatelessWidget {
-//   const _ReciterAvatar({required this.gold});
-//   final Color gold;
+class _PlayPauseButton extends StatelessWidget {
+  const _PlayPauseButton({required this.size, required this.audioCtrl});
+  final double size;
+  final AudioCtrl audioCtrl;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final audioCtrl = AudioCtrl.instance;
-//     final cs = Theme.of(context).colorScheme;
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
 
-//     return Obx(() {
-//       return Container(
-//         width: 46,
-//         height: 46,
-//         decoration: BoxDecoration(
-//           shape: BoxShape.circle,
-//           gradient: LinearGradient(
-//             begin: Alignment.topLeft,
-//             end: Alignment.bottomRight,
-//             colors: [
-//               gold.withValues(alpha: 0.65),
-//               gold.withValues(alpha: 0.30),
-//             ],
-//           ),
-//           boxShadow: [
-//             BoxShadow(
-//               color: gold.withValues(alpha: 0.30),
-//               blurRadius: 8,
-//               offset: const Offset(0, 2),
-//             ),
-//           ],
-//         ),
-//         child: Padding(
-//           padding: const EdgeInsets.all(2.5),
-//           child: ClipOval(
-//             child: Container(
-//               decoration: BoxDecoration(
-//                 shape: BoxShape.circle,
-//                 color: cs.primary,
-//               ),
-//               child: Image.network(
-//                 audioCtrl.state.appIconUrl.value,
-//                 fit: BoxFit.cover,
-//                 errorBuilder: (_, __, ___) => Center(
-//                   child: SvgPicture.asset(
-//                     SvgPath.svgAlert,
-//                     colorFilter: ColorFilter.mode(
-//                       cs.onPrimary.withValues(alpha: 0.8),
-//                       BlendMode.srcIn,
-//                     ),
-//                     width: 24,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       );
-//     });
-//   }
-// }
+    return StreamBuilder<PlayerState>(
+      stream: audioCtrl.state.audioPlayer.playerStateStream,
+      builder: (context, snapshot) {
+        final state = snapshot.data;
+        final processing = state?.processingState;
+        final isLoading =
+            processing == ProcessingState.loading ||
+            processing == ProcessingState.buffering ||
+            (audioCtrl.state.isDownloading.value &&
+                audioCtrl.state.progress.value == 0);
 
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Playback controls: ⏮  ▶/⏸  ⏭
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _PlaybackControls extends StatelessWidget {
-//   const _PlaybackControls({required this.gold});
-//   final Color gold;
+        // Loading spinner
+        if (isLoading) {
+          return SizedBox(
+            width: size,
+            height: size,
+            child: Padding(
+              padding: EdgeInsets.all(size * .22),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: cs.primary,
+              ),
+            ),
+          );
+        }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final cs = Theme.of(context).colorScheme;
-//     final audioCtrl = AudioCtrl.instance;
-//     final isRTL = Get.locale?.languageCode == 'ar';
+        final isPlaying = state != null && state.playing;
+        final svgPath = isPlaying
+            ? SvgPath.svgAudioPauseArrow
+            : SvgPath.svgAudioPlayArrow;
 
-//     return Row(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         // ── Previous ────────────────────────────────────────────────────────
-//         _NavBtn(
-//           icon: Icons.skip_previous_rounded,
-//           size: 26,
-//           color: cs.onPrimary.withValues(alpha: 0.85),
-//           semanticLabel: 'skipToPrevious'.tr,
-//           onTap: () async {
-//             isRTL
-//                 ? await audioCtrl.skipPreviousAyah(
-//                     Get.context!,
-//                     audioCtrl.currentAyah.ayahUQNumber,
-//                   )
-//                 : await audioCtrl.skipNextAyah(
-//                     Get.context!,
-//                     audioCtrl.currentAyah.ayahUQNumber,
-//                   );
-//           },
-//         ),
+        return GestureDetector(
+          onTap: () {
+            if (isPlaying) {
+              QuranController.instance.state.isPlayExpanded.value = true;
+              audioCtrl.pausePlayer();
+            } else {
+              GeneralController.instance.showAudioWidgetFor();
+              QuranController.instance.state.selectedAyahIndexes.isNotEmpty
+                  ? audioCtrl.state.isDirectPlaying.value = false
+                  : audioCtrl.state.isDirectPlaying.value = true;
+              QuranController.instance.state.isPlayExpanded.value = true;
+              QuranLibrary().playAyah(
+                context: context,
+                currentAyahUniqueNumber: audioCtrl.currentAyah.ayahUQNumber,
+                playSingleAyah: true,
+              );
+            }
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: cs.primary,
+              boxShadow: [
+                BoxShadow(
+                  color: cs.primary.withValues(alpha: .30),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Center(
+              child: SvgPicture.asset(
+                svgPath,
+                height: size * .50,
+                width: size * .50,
+                colorFilter: ColorFilter.mode(
+                  cs.surface,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
 
-//         const SizedBox(width: 6),
+// ─────────────────────────────────────────────────────────────────────────────
+// Generic icon tap button for skip controls
+// ─────────────────────────────────────────────────────────────────────────────
 
-//         // ── Play / Pause ─────────────────────────────────────────────────────
-//         StreamBuilder<PlayerState>(
-//           stream: audioCtrl.state.audioPlayer.playerStateStream,
-//           builder: (context, snapshot) {
-//             final playerState = snapshot.data;
-//             final processingState = playerState?.processingState;
-//             final isLoadingOrBuffering =
-//                 processingState == ProcessingState.loading ||
-//                 processingState == ProcessingState.buffering ||
-//                 (audioCtrl.state.isDownloading.value &&
-//                     audioCtrl.state.progress.value == 0);
+class _ControlButton extends StatelessWidget {
+  const _ControlButton({
+    required this.icon,
+    required this.size,
+    required this.color,
+    required this.onTap,
+    this.label = '',
+  });
 
-//             if (isLoadingOrBuffering) {
-//               return SizedBox(
-//                 width: 48,
-//                 height: 48,
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(11),
-//                   child: CircularProgressIndicator(
-//                     strokeWidth: 2.5,
-//                     color: gold,
-//                   ),
-//                 ),
-//               );
-//             }
+  final IconData icon;
+  final double size;
+  final Color color;
+  final VoidCallback onTap;
+  final String label;
 
-//             final isPlaying = playerState != null && playerState.playing;
-
-//             return GestureDetector(
-//               onTap: () async {
-//                 if (isPlaying) {
-//                   audioCtrl.pausePlayer();
-//                 } else {
-//                   GeneralController.instance.showAudioWidgetFor();
-//                   QuranController.instance.state.selectedAyahIndexes.isNotEmpty
-//                       ? audioCtrl.state.isDirectPlaying.value = false
-//                       : audioCtrl.state.isDirectPlaying.value = true;
-//                   audioCtrl.playAyah(
-//                     context,
-//                     audioCtrl.currentAyah.ayahUQNumber,
-//                     playSingleAyah: true,
-//                   );
-//                 }
-//               },
-//               child: Container(
-//                 width: 48,
-//                 height: 48,
-//                 decoration: BoxDecoration(
-//                   shape: BoxShape.circle,
-//                   gradient: LinearGradient(
-//                     begin: Alignment.topLeft,
-//                     end: Alignment.bottomRight,
-//                     colors: [gold, Color.lerp(gold, Colors.orange, 0.35)!],
-//                   ),
-//                   boxShadow: [
-//                     BoxShadow(
-//                       color: gold.withValues(alpha: 0.45),
-//                       blurRadius: 12,
-//                       offset: const Offset(0, 3),
-//                     ),
-//                   ],
-//                 ),
-//                 child: Icon(
-//                   isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-//                   color: Colors.white,
-//                   size: 26,
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-
-//         const SizedBox(width: 6),
-
-//         // ── Next ─────────────────────────────────────────────────────────────
-//         _NavBtn(
-//           icon: Icons.skip_next_rounded,
-//           size: 26,
-//           color: cs.onPrimary.withValues(alpha: 0.85),
-//           semanticLabel: 'next'.tr,
-//           onTap: () async {
-//             isRTL
-//                 ? await audioCtrl.skipNextAyah(
-//                     Get.context!,
-//                     audioCtrl.currentAyah.ayahUQNumber,
-//                   )
-//                 : await audioCtrl.skipPreviousAyah(
-//                     Get.context!,
-//                     audioCtrl.currentAyah.ayahUQNumber,
-//                   );
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Action icon buttons: Audio / Display / Page
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _ActionButtons extends StatelessWidget {
-//   const _ActionButtons({required this.gold});
-//   final Color gold;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         _ActionBtn(
-//           icon: Icons.headphones_rounded,
-//           label: 'audio'.tr,
-//           gold: gold,
-//           onTap: () => Get.bottomSheet(
-//             AudioSettingsSheet(),
-//             isScrollControlled: true,
-//             backgroundColor: Colors.transparent,
-//           ),
-//         ),
-//         const SizedBox(width: 6),
-//         _ActionBtn(
-//           icon: Icons.display_settings_outlined,
-//           label: 'display'.tr,
-//           gold: gold,
-//           onTap: () => Get.bottomSheet(
-//             const DisplaySettingsSheet(),
-//             isScrollControlled: true,
-//             backgroundColor: Colors.transparent,
-//           ),
-//         ),
-//         const SizedBox(width: 6),
-//         _ActionBtn(
-//           icon: Icons.menu_book_rounded,
-//           label: 'page'.tr,
-//           gold: gold,
-//           onTap: () {
-//            /*  final quranCtrl = QuranController.instance;
-//             quranCtrl.state.isPages.value = quranCtrl.state.isPages.value == 1
-//                 ? 0
-//                 : 1;
-//             quranCtrl.state.box.write(
-//               SWITCH_VALUE,
-//               quranCtrl.state.isPages.value,
-//             ); */
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Small prev/next navigation icon button
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _NavBtn extends StatelessWidget {
-//   const _NavBtn({
-//     required this.icon,
-//     required this.onTap,
-//     required this.color,
-//     this.size = 28,
-//     this.semanticLabel = '',
-//   });
-//   final IconData icon;
-//   final VoidCallback onTap;
-//   final Color color;
-//   final double size;
-//   final String semanticLabel;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Semantics(
-//       button: true,
-//       label: semanticLabel,
-//       child: GestureDetector(
-//         onTap: onTap,
-//         child: Icon(icon, color: color, size: size),
-//       ),
-//     );
-//   }
-// }
-
-// // ─────────────────────────────────────────────────────────────────────────────
-// // Settings action icon column (icon + label)
-// // ─────────────────────────────────────────────────────────────────────────────
-// class _ActionBtn extends StatelessWidget {
-//   const _ActionBtn({
-//     required this.icon,
-//     required this.label,
-//     required this.gold,
-//     required this.onTap,
-//   });
-//   final IconData icon;
-//   final String label;
-//   final Color gold;
-//   final VoidCallback onTap;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final cs = Theme.of(context).colorScheme;
-
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Container(
-//         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(10),
-//           color: cs.primaryContainer.withValues(alpha: 0.07),
-//           border: Border.all(color: gold.withValues(alpha: 0.20), width: 1),
-//         ),
-//         child: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             Icon(icon, color: cs.onPrimary.withValues(alpha: 0.90), size: 30),
-//             const SizedBox(height: 2),
-//             Text(
-//               label,
-//               style: TextStyle(
-//                 color: cs.onPrimary.withValues(alpha: 0.70),
-//                 fontSize: 8,
-//                 fontFamily: 'kufi',
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: label,
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Icon(icon, color: color, size: size),
+        ),
+      ),
+    );
+  }
+}

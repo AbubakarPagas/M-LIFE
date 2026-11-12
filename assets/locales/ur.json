@@ -555,6 +555,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "آیات کے درمیان سوائپ کریں",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "ٹھیک ہے",
   "@ok": {
     "type": "text",

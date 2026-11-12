@@ -22,6 +22,21 @@ class QuranSurahList extends StatelessWidget {
 
   final quranCtrl = QuranController.instance;
 
+  /// Polls until [quranPagesController] has attached clients, then jumps.
+  /// Retries up to 10 times with 80 ms gaps — enough to cover the navigation
+  /// animation and the first build of QuranLibraryScreen's PageView.
+  static void _jumpWhenReady(int page, {int retries = 10}) {
+    final ctrl = QuranLibrary.quranCtrl.quranPagesController;
+    if (ctrl.hasClients) {
+      ctrl.jumpToPage(page - 1);
+      return;
+    }
+    if (retries <= 0) return;
+    Future.delayed(const Duration(milliseconds: 80), () {
+      _jumpWhenReady(page, retries: retries - 1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     quranCtrl.scrollToCurrentSurah();
@@ -59,9 +74,14 @@ class QuranSurahList extends StatelessWidget {
                 bg: bg,
                 leadingChild: leadingChild,
                 onTap: () {
-                  // onTap?.call(index) ??
+                  onTap?.call(index);
+                  final targetPage = surah.ayahs.first.page;
+                  quranCtrl.changeSurahListOnTap(targetPage);
                   Get.to(() => QuranHome(), transition: Transition.downToUp);
-                  quranCtrl.changeSurahListOnTap(surah.ayahs.first.page);
+                  // If the controller wasn't attached yet (navigating from
+                  // outside QuranHome), schedule the jump for after the
+                  // PageView has had time to build and attach.
+                  _jumpWhenReady(targetPage);
                 },
               );
             });
@@ -114,20 +134,20 @@ class _SurahCard extends StatelessWidget {
                 : primary.withValues(alpha: 0.12),
             width: isSelected ? 1.5 : 1.0,
           ),
-         boxShadow: [
+          boxShadow: [
             BoxShadow(
               color: primary.withValues(alpha: isSelected ? 0.10 : 0.04),
               blurRadius: isSelected ? 12 : 4,
               offset: const Offset(0, 2),
             ),
-          ], 
+          ],
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Row(
             children: [
               // ── Left accent stripe ───────────────────────────────────────
-       /*        AnimatedContainer(
+              /*        AnimatedContainer(
                 duration: const Duration(milliseconds: 220),
                 width: 5,
                 height: 88,
@@ -140,7 +160,7 @@ class _SurahCard extends StatelessWidget {
                 ),
               ),
  */
-              const SizedBox(width: 10),
+              // const SizedBox(width: 10),
 
               // ── Surah number badge ───────────────────────────────────────
               _SurahNumberBadge(

@@ -554,6 +554,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "اسحب للانتقال بين الآيات",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "موافق",
   "@ok": {
     "type": "text",

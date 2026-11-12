@@ -554,6 +554,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "swipeForAyahs": "Geser untuk navigasi antar ayat",
+  "@swipeForAyahs": {
+    "type": "text",
+    "placeholders": {}
+  },
   "ok": "Oke",
   "@ok": {
     "type": "text",
