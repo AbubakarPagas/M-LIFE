@@ -1280,5 +1280,7 @@
     "Fri": "Пт",
     "Sat": "Сб",
     "playAyah": "Слушать",
-    "playSurah": "Сура"
+    "playSurah": "Сура",
+  "repeat_ayah": "Повторить аят",
+  "auto_next_surah": "След. сура"
 }

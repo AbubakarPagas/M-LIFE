@@ -1282,5 +1282,7 @@
   "Fri": "Jum",
   "Sat": "Sab",
   "playAyah": "Putar",
-  "playSurah": "Surah"
+  "playSurah": "Surah",
+  "repeat_ayah": "Ulangi Ayah",
+  "auto_next_surah": "Surah Berikutnya"
 }

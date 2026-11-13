@@ -56,6 +56,7 @@ class QuranJuzList extends StatelessWidget {
                 hizb1Index:       hizb1Index,
                 hizb2Index:       hizb2Index,
                 onJuzTap: () {
+                  // onJuzTap?.call(index);
                   QuranLibrary().jumpToJoz(juzNumber);
                   quranCtrl.state.navBarController.close();
                   Get.to(() => QuranHome(), transition: Transition.downToUp);

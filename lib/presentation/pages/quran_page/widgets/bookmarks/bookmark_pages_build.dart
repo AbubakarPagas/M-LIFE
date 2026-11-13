@@ -47,9 +47,15 @@ class BookmarkPagesBuild extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: InkWell(
-                              onTap: () => quranCtrl.changeSurahListOnTap(
-                                bookmark.pageNum,
-                              ),
+                              onTap: () {
+                                quranCtrl.changeSurahListOnTap(
+                                  bookmark.pageNum,
+                                );
+                                Get.to(
+                                  () => QuranHome(),
+                                  transition: Transition.downToUp,
+                                );
+                              },
                               child: Row(
                                 children: [
                                   /// أيقونة البوكمارك مع رقم الصفحة

@@ -1280,5 +1280,7 @@
   "Fri": "الجمعة",
   "Sat": "السبت",
   "playAyah": "Dinle",
-  "playSurah": "Sure"
+  "playSurah": "Sure",
+  "repeat_ayah": "Ayeti Tekrarla",
+  "auto_next_surah": "Sonraki Sure"
 }

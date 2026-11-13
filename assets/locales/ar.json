@@ -2219,5 +2219,7 @@
   "locationNeededForPrayer": "فعّل الموقع لعرض أوقات الصلاة",
   "countdown": "متبقي",
   "currentPrayer": "الصلاة الحالية",
-  "nextPrayer": "الصلاة القادمة"
+  "nextPrayer": "الصلاة القادمة",
+  "repeat_ayah": "تكرار الآية",
+  "auto_next_surah": "السورة التالية"
 }

@@ -1282,5 +1282,7 @@
   "Fri": "Biy",
   "Sat": "Sab",
   "playAyah": "Pakinggan",
-  "playSurah": "Surah"
+  "playSurah": "Surah",
+  "repeat_ayah": "Ulitin ang Ayah",
+  "auto_next_surah": "Susunod na Surah"
 }

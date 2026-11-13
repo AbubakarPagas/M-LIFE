@@ -1288,5 +1288,7 @@
   "Fri": "جمعہ",
   "Sat": "ہفتہ",
   "playAyah": "سنیں",
-  "playSurah": "سورہ"
+  "playSurah": "سورہ",
+  "repeat_ayah": "آیت دہرائیں",
+  "auto_next_surah": "اگلی سورہ"
 }

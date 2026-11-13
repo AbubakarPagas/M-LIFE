@@ -1288,5 +1288,7 @@
   "Fri": "শুক্র",
   "Sat": "শনি",
   "playAyah": "শোনো",
-  "playSurah": "সূরা"
+  "playSurah": "সূরা",
+  "repeat_ayah": "আয়াত পুনরাবৃত্তি",
+  "auto_next_surah": "পরবর্তী সূরা"
 }

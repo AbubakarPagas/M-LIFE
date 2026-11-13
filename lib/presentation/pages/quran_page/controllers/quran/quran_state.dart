@@ -75,6 +75,12 @@ class QuranState {
    FloatingMenuExpendableController floatingController =
        FloatingMenuExpendableController();
 
+  /// Whether to repeat the current ayah on completion (LoopMode.one).
+  RxBool repeatAyah = false.obs;
+
+  /// Whether to automatically start the next surah when the current one ends.
+  RxBool autoNextSurah = false.obs;
+
   /// Alias kept for backward compatibility — delegates to [selectMushafSettingsPage].
   /// 0 = Mushaf page view, 1 = Ayah list view.
   RxInt get isPages => selectMushafSettingsPage;

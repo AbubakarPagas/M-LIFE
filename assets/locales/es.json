@@ -1288,5 +1288,7 @@
   "Fri": "Vie",
   "Sat": "Sáb",
   "playAyah": "Escuchar",
-  "playSurah": "Surah"
+  "playSurah": "Surah",
+  "repeat_ayah": "Repetir Ayah",
+  "auto_next_surah": "Surah Siguiente"
 }

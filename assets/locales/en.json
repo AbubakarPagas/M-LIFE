@@ -2648,5 +2648,7 @@
     "placeholders": {
       "kind": {}
     }
-  }
+  },
+  "repeat_ayah": "Repeat Ayah",
+  "auto_next_surah": "Auto Next"
 }

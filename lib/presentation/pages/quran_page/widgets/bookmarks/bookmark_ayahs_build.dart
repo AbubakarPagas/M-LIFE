@@ -48,9 +48,15 @@ class BookmarkAyahsBuild extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: InkWell(
-                              onTap: () => quranCtrl.changeSurahListOnTap(
-                                bookmark.pageNumber,
-                              ),
+                              onTap: () {
+                                quranCtrl.changeSurahListOnTap(
+                                  bookmark.pageNumber,
+                                );
+                                Get.to(
+                                  () => QuranHome(),
+                                  transition: Transition.downToUp,
+                                );
+                              },
                               child: Column(
                                 children: [
                                   Row(
