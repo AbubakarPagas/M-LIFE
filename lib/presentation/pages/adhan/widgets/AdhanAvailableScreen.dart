@@ -171,21 +171,9 @@ class _AdhanAppBar extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'مواقيت الصلاة',
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontFamily: 'naskh',
-                      fontSize: 15,
-                      color: kAdhanGold,
-                      height: 1.1,
-                    ),
-                  ),
+          
                   Text(
-                    'Prayer Times',
+                    'salat'.tr,
                     style: TextStyle(
                       fontFamily: 'kufi',
                       fontSize: 12,
@@ -194,8 +182,7 @@ class _AdhanAppBar extends StatelessWidget {
                       height: 1.1,
                     ),
                   ),
-                ],
-              ),
+               
             ],
           ),
           const Spacer(),
@@ -252,9 +239,9 @@ class _AdhanAppBar extends StatelessWidget {
           else
             const LoadingLocationWidget(),
 
-          const SizedBox(width: 8),
+          // const SizedBox(width: 8),
 
-          // Notification icon button (Tasbih quick-action style)
+        /*   // Notification icon button (Tasbih quick-action style)
           _AppBarBtn(
             icon: Icons.notifications_outlined,
             cs: cs,
@@ -265,7 +252,7 @@ class _AdhanAppBar extends StatelessWidget {
             icon: Icons.track_changes_rounded,
             cs: cs,
             onTap: () => Get.toNamed(RoutesName.prayerTracking),
-          ),
+          ), */
         ],
       ),
     );
@@ -402,9 +389,9 @@ class _ScrollBody extends StatelessWidget {
           const SizedBox(height: 14),
 
           // ── Tracking panel ────────────────────────────────────────────────
-          const PrayerTrackingPanel(),
+        /*   const PrayerTrackingPanel(),
 
-          const SizedBox(height: 30),
+          const SizedBox(height: 30), */
         ],
       ),
     );

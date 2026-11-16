@@ -74,9 +74,7 @@ class NotificationsScreen extends StatelessWidget {
                                       ),
                                       child: ExpansionTileWidget(
                                         name:
-                                            noti.appName +
-                                            ' - ' +
-                                            noti.id.toString(),
+                                            '${noti.appName} - ${noti.id}',
                                         title: noti.title,
                                         getxCtrl: notiCtrl,
                                         manager: GeneralController

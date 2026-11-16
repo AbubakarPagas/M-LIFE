@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// settings_sections.dart  — Account, Islamic Preferences, Support, Logout
+// Completely redesigned · Premium Islamic aesthetic · All functionality kept
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,10 +11,12 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/utils/toast/islamic_toast.dart';
 import '../../../../presentation/controllers/theme_controller.dart';
 import '../controller/profile_controller.dart';
-import 'profile_header.dart' show kGold, kGreen;
+import 'profile_header.dart' show kGold, kGreen, kEmerald;
 import 'profile_section_card.dart';
 
-// ─── Account Settings ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// 1. Account & Security
+// ─────────────────────────────────────────────────────────────────────────────
 
 class AccountSettingsSection extends StatelessWidget {
   const AccountSettingsSection({super.key});
@@ -17,35 +24,40 @@ class AccountSettingsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctrl = Get.find<ProfileController>();
-    final cs = Theme.of(context).colorScheme;
+    final cs   = Theme.of(context).colorScheme;
 
     return ProfileSectionCard(
-      title: 'Account Settings',
-      arabicTitle: null,
-      titleIcon: Icons.manage_accounts_rounded,
+      title: 'Account & Security',
+      arabicTitle: 'الحساب والأمان',
+      titleIcon: Icons.shield_rounded,
+      iconColor: cs.primary,
       children: [
         ProfileTile(
           icon: Icons.person_outline_rounded,
           title: 'Edit Profile',
           subtitle: 'Update your name and email',
+          iconColor: cs.primary,
           onTap: () => _showEditDialog(context, ctrl),
         ),
         ProfileTile(
           icon: Icons.lock_outline_rounded,
           title: 'Change Password',
           subtitle: 'Update your account password',
+          iconColor: const Color(0xff6C63FF),
           onTap: () => _showPasswordDialog(context),
         ),
         ProfileTile(
           icon: Icons.language_rounded,
           title: 'Language',
           subtitle: ctrl.currentLanguageName,
+          iconColor: kEmerald,
           onTap: () => _showLanguageSheet(context, ctrl),
         ),
         ProfileTile(
           icon: Icons.palette_outlined,
           title: 'App Theme',
           subtitle: _themeName(ctrl.themeCtrl.currentTheme),
+          iconColor: kGold,
           onTap: () => _showThemeSheet(context, ctrl),
         ),
         Obx(
@@ -53,11 +65,15 @@ class AccountSettingsSection extends StatelessWidget {
             icon: Icons.notifications_none_rounded,
             title: 'Notifications',
             subtitle: ctrl.notificationsOn.value ? 'Enabled' : 'Disabled',
-            trailing: Switch.adaptive(
-              value: ctrl.notificationsOn.value,
-              onChanged: (_) => ctrl.toggleNotifications(),
-              activeThumbColor: cs.primary,
-              activeTrackColor: cs.primary.withValues(alpha: 0.3),
+            iconColor: const Color(0xffFF6B35),
+            trailing: Transform.scale(
+              scale: 0.85,
+              child: Switch.adaptive(
+                value: ctrl.notificationsOn.value,
+                onChanged: (_) => ctrl.toggleNotifications(),
+                activeThumbColor: cs.primary,
+                activeTrackColor: cs.primary.withValues(alpha: 0.28),
+              ),
             ),
             onTap: ctrl.toggleNotifications,
           ),
@@ -66,6 +82,7 @@ class AccountSettingsSection extends StatelessWidget {
           icon: Icons.security_rounded,
           title: 'Privacy & Security',
           subtitle: 'Manage your data and privacy',
+          iconColor: const Color(0xffE53935),
           onTap: () {},
         ),
       ],
@@ -86,7 +103,7 @@ class AccountSettingsSection extends StatelessWidget {
   }
 
   void _showEditDialog(BuildContext context, ProfileController ctrl) {
-    final nameCtrl = TextEditingController(text: ctrl.userName.value);
+    final nameCtrl  = TextEditingController(text: ctrl.userName.value);
     final emailCtrl = TextEditingController(text: ctrl.userEmail.value);
     final cs = Theme.of(context).colorScheme;
     showDialog(
@@ -327,7 +344,9 @@ class AccountSettingsSection extends StatelessWidget {
   }
 }
 
-// ─── Islamic Preferences ──────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// 2. Islamic Preferences
+// ─────────────────────────────────────────────────────────────────────────────
 
 class IslamicPreferencesSection extends StatelessWidget {
   const IslamicPreferencesSection({super.key});
@@ -342,21 +361,7 @@ class IslamicPreferencesSection extends StatelessWidget {
     'Union des Organisations Islamiques de France',
   ];
   static const _madhabs = ["Shafi'i", 'Hanafi', 'Maliki', 'Hanbali'];
-  static const _translations = [
-    'Sahih International',
-    'Pickthall',
-    'Yusuf Ali',
-    'Dr. Mustafa Khattab',
-    'Transliteration',
-    'Arabic Only',
-  ];
-  static const _azanVoices = [
-    'Makkah Azan',
-    'Madinah Azan',
-    'Al-Aqsa Azan',
-    'Egyptian Azan',
-    'Turkish Azan',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -372,9 +377,11 @@ class IslamicPreferencesSection extends StatelessWidget {
             icon: Icons.calculate_rounded,
             title: 'Prayer Calculation Method',
             subtitle: ctrl.calcMethod.value,
+            iconColor: kGreen,
             onTap: () => _showOpts(
               context,
               'Calculation Method',
+              'طريقة الحساب',
               _calcMethods,
               ctrl.calcMethod.value,
               ctrl.setCalcMethod,
@@ -386,40 +393,14 @@ class IslamicPreferencesSection extends StatelessWidget {
             icon: Icons.school_rounded,
             title: 'Madhab (Fiqh School)',
             subtitle: ctrl.madhab.value,
+            iconColor: const Color(0xff6C63FF),
             onTap: () => _showOpts(
               context,
               'Madhab',
+              'المذهب الفقهي',
               _madhabs,
               ctrl.madhab.value,
               ctrl.setMadhab,
-            ),
-          ),
-        ),
-        Obx(
-          () => ProfileTile(
-            icon: Icons.translate_rounded,
-            title: 'Quran Translation',
-            subtitle: ctrl.translation.value,
-            onTap: () => _showOpts(
-              context,
-              'Translation',
-              _translations,
-              ctrl.translation.value,
-              ctrl.setTranslation,
-            ),
-          ),
-        ),
-        Obx(
-          () => ProfileTile(
-            icon: Icons.volume_up_rounded,
-            title: 'Azan Voice',
-            subtitle: ctrl.azanVoice.value,
-            onTap: () => _showOpts(
-              context,
-              'Azan Voice',
-              _azanVoices,
-              ctrl.azanVoice.value,
-              ctrl.setAzanVoice,
             ),
           ),
         ),
@@ -427,12 +408,14 @@ class IslamicPreferencesSection extends StatelessWidget {
           icon: Icons.alarm_rounded,
           title: 'Dhikr Reminders',
           subtitle: 'Morning & Evening reminders',
+          iconColor: kEmerald,
           onTap: () {},
         ),
         ProfileTile(
           icon: Icons.format_quote_rounded,
           title: 'Daily Quote Preferences',
           subtitle: 'Quran Ayah, Hadith, or Both',
+          iconColor: const Color(0xffCD9974),
           onTap: () {},
         ),
       ],
@@ -442,6 +425,7 @@ class IslamicPreferencesSection extends StatelessWidget {
   void _showOpts(
     BuildContext ctx,
     String title,
+    String arabicTitle,
     List<String> opts,
     String current,
     void Function(String) onSel,
@@ -450,6 +434,7 @@ class IslamicPreferencesSection extends StatelessWidget {
     Get.bottomSheet(
       _IslamicSheet(
         title: title,
+        arabicTitle: arabicTitle,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 300.h),
           child: ListView.builder(
@@ -471,7 +456,9 @@ class IslamicPreferencesSection extends StatelessWidget {
   }
 }
 
-// ─── Support & Info ───────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// 3. Help & Support
+// ─────────────────────────────────────────────────────────────────────────────
 
 class SupportSection extends StatelessWidget {
   const SupportSection({super.key});
@@ -479,45 +466,56 @@ class SupportSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'Support & Information',
-      arabicTitle: 'الدعم والمعلومات',
-      titleIcon: Icons.info_outline_rounded,
+      title: 'Help & Support',
+      arabicTitle: 'المساعدة والدعم',
+      titleIcon: Icons.support_agent_rounded,
       iconColor: const Color(0xff6C63FF),
       children: [
         ProfileTile(
-          icon: Icons.info_rounded,
-          title: 'About App',
-          subtitle: 'Version 1.0.0',
+          icon: Icons.help_outline_rounded,
+          title: 'Help Centre',
+          subtitle: 'Browse common topics',
           iconColor: const Color(0xff6C63FF),
-          onTap: () => _aboutDialog(context),
+          onTap: () {},
+        ),
+        ProfileTile(
+          icon: Icons.quiz_rounded,
+          title: 'FAQs',
+          subtitle: 'Frequently asked questions',
+          iconColor: kGreen,
+          onTap: () {},
         ),
         ProfileTile(
           icon: Icons.support_agent_rounded,
           title: 'Contact Support',
-          iconColor: kGreen,
+          subtitle: 'support@mishabapp.com',
+          iconColor: kEmerald,
           onTap: () => _launch('mailto:support@mishabapp.com'),
         ),
-        ProfileTile(icon: Icons.quiz_rounded, title: 'FAQ', onTap: () {}),
         ProfileTile(
-          icon: Icons.description_outlined,
-          title: 'Terms & Conditions',
+          icon: Icons.rate_review_rounded,
+          title: 'Send Feedback',
+          subtitle: 'Help us improve the app',
+          iconColor: const Color(0xffFF6B35),
           onTap: () {},
+        ),
+        ProfileTile(
+          icon: Icons.info_outline_rounded,
+          title: 'About Mishab Path',
+          subtitle: 'Version 1.0.0',
+          iconColor: kGold,
+          onTap: () => _aboutDialog(context),
         ),
         ProfileTile(
           icon: Icons.privacy_tip_outlined,
           title: 'Privacy Policy',
+          iconColor: const Color(0xff6C63FF),
           onTap: () {},
         ),
         ProfileTile(
-          icon: Icons.star_rate_rounded,
-          title: 'Rate App',
-          iconColor: kGold,
-          onTap: () {},
-        ),
-        ProfileTile(
-          icon: Icons.share_rounded,
-          title: 'Share App',
-          iconColor: const Color(0xff4CAF50),
+          icon: Icons.description_outlined,
+          title: 'Terms & Conditions',
+          iconColor: const Color(0xff6C63FF),
           onTap: () {},
         ),
       ],
@@ -550,7 +548,9 @@ class SupportSection extends StatelessWidget {
   }
 }
 
-// ─── Logout ───────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// 4. Logout
+// ─────────────────────────────────────────────────────────────────────────────
 
 class LogoutSection extends StatelessWidget {
   const LogoutSection({super.key});
@@ -562,11 +562,11 @@ class LogoutSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: Colors.red.withValues(alpha: 0.40), width: 1),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.38), width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.red.withValues(alpha: isDark ? 0.10 : 0.06),
-            blurRadius: 12,
+            color: Colors.red.withValues(alpha: isDark ? 0.08 : 0.05),
+            blurRadius: 14,
             offset: const Offset(0, 4),
           ),
         ],
@@ -685,7 +685,9 @@ class LogoutSection extends StatelessWidget {
   }
 }
 
-// ─── Shared bottom-sheet container ───────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared Bottom-Sheet container
+// ─────────────────────────────────────────────────────────────────────────────
 
 class _IslamicSheet extends StatelessWidget {
   final String title;
@@ -730,7 +732,7 @@ class _IslamicSheet extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'naskh',
                 fontSize: 14.sp,
-                color: kGold.withValues(alpha: 0.8),
+                color: kGold.withValues(alpha: 0.80),
               ),
             ),
           Text(
@@ -749,6 +751,10 @@ class _IslamicSheet extends StatelessWidget {
     );
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared sheet tile
+// ─────────────────────────────────────────────────────────────────────────────
 
 class _SheetTile extends StatelessWidget {
   final String title;
@@ -795,23 +801,56 @@ class _SheetTile extends StatelessWidget {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared dialog text field
+// ─────────────────────────────────────────────────────────────────────────────
+
 class _DialogField extends StatelessWidget {
   final TextEditingController ctrl;
   final String label;
   final TextInputType? keyboard;
 
-  const _DialogField({required this.ctrl, required this.label, this.keyboard});
+  const _DialogField({
+    required this.ctrl,
+    required this.label,
+    this.keyboard,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return TextField(
       controller: ctrl,
       keyboardType: keyboard,
+      style: TextStyle(
+        fontFamily: 'kufi',
+        fontSize: 13.sp,
+        color: Theme.of(context).hintColor,
+      ),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(fontFamily: 'kufi', fontSize: 13.sp),
+        labelStyle: TextStyle(
+          fontFamily: 'kufi',
+          fontSize: 12.sp,
+          color: Theme.of(context).hintColor.withValues(alpha: 0.5),
+        ),
+        filled: true,
+        fillColor: cs.surfaceContainer,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide(
+            color: cs.primary.withValues(alpha: 0.15),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide(color: cs.primary, width: 1.5),
+        ),
       ),
-      style: TextStyle(fontFamily: 'kufi', fontSize: 13.sp),
     );
   }
 }

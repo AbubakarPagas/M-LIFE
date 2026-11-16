@@ -192,7 +192,10 @@ class ServicesLocator {
     // }
 
     // Workmanager().initialize(sl<NotificationController>().callbackDispatcher);
+    
     // sl<NotificationController>().registerBackgroundTask();
+    // UiHelper.initReviewGate();
+  
     await GetStorage.init();
     if (GetStorage().read(AUDIO_SERVICE_INITIALIZED) == null) {
       GetStorage().write(AUDIO_SERVICE_INITIALIZED, false);

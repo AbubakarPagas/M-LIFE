@@ -13,24 +13,24 @@ const List<Map<String, dynamic>> mushafSettingsList = [
 ];
 
 const List<Map<String, dynamic>> themeList = [
-  {
-    'name': AppTheme.green,
-    'svgUrl': 'assets/svg/theme0.svg',
-    'title': 'Green',
-  },
-  {
+   {
     'name': AppTheme.blue,
-    'svgUrl': 'assets/svg/theme1.svg',
+    'svgUrl': 'assets/svg/theme0.svg',
     'title': 'Blue',
   },
   {
     'name': AppTheme.brown,
-    'svgUrl': 'assets/svg/theme2.svg',
+    'svgUrl': 'assets/svg/theme1.svg',
     'title': 'Brown',
   },
   {
-    'name': AppTheme.dark,
+    'name': AppTheme.green,
     'svgUrl': 'assets/svg/theme3.svg',
+    'title': 'Green',
+  },  
+  {
+    'name': AppTheme.dark,
+    'svgUrl': 'assets/svg/theme2.svg',
     'title': 'Dark',
   },
 ];

@@ -136,11 +136,5 @@ Future<void> initializeApp() async {
   FlutterNativeSplash.remove();
   GetStorage().write(AUDIO_SERVICE_INITIALIZED, false);
   ReadersConstants.customAyahReaders = ayahReaderInfo;
-
   ReadersConstants.customSurahReaders = surahReaderInfo;
-  // QuranLibrary().setFontsSelected = 1;
-  // await QuranLibrary.init();
-  FlutterNativeSplash.remove();
-  // QuranAudioHandler player attachment is done lazily on first surah play
-  // via SurahDownloadService.playSurahWithCache() — no extra call needed here.
 }

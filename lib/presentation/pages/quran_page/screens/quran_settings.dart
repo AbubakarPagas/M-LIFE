@@ -9,6 +9,7 @@ import '../../../../core/services/services_locator.dart';
 import '../../../../core/utils/constants/lists.dart';
 import '../../../../core/utils/helpers/app_text_styles.dart';
 import '../../../controllers/general/general_controller.dart';
+import '../../calendar/widgets/calender_settings.dart';
 import '/presentation/controllers/theme_controller.dart';
 import '../quran.dart';
 
@@ -18,11 +19,11 @@ class QuranSettingsList extends StatelessWidget {
   final bool? isStartScreen;
 
   QuranSettingsList({
-    Key? key,
+    super.key,
     this.isQuranSetting,
     this.isCalendarSetting = false,
     this.isStartScreen = false,
-  }) : super(key: key);
+  });
 
   final generalCtrl = GeneralController.instance;
   final quranCtrl = QuranController.instance;
@@ -51,7 +52,9 @@ class QuranSettingsList extends StatelessWidget {
                 thickness: 1,
                 indent: 20,
                 endIndent: 20,
-                color: Theme.of(context).colorScheme.inversePrimary.withValues(alpha: .08),
+                color: Theme.of(
+                  context,
+                ).colorScheme.inversePrimary.withValues(alpha: .08),
               ),
               Expanded(
                 child: ListView(
@@ -74,6 +77,14 @@ class QuranSettingsList extends StatelessWidget {
                       titleKey: 'fontFamilyTitle',
                       child: _FontFamilyContent(),
                     ),
+                     if (isCalendarSetting == true) ...[
+                      const Gap(10),
+                      _SettingSection(
+                        icon: Icons.calendar_month_rounded,
+                        titleKey: 'calendar',
+                        child: CalenderSettings(),
+                      ),
+                    ],
                     if (isQuranSetting == true) ...[
                       const Gap(10),
                       _SettingSection(
@@ -106,7 +117,9 @@ class _HandleBar extends StatelessWidget {
           width: 36,
           height: 4,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.inversePrimary.withValues(alpha: .2),
+            color: Theme.of(
+              context,
+            ).colorScheme.inversePrimary.withValues(alpha: .2),
             borderRadius: BorderRadius.circular(100),
           ),
         ),
@@ -131,10 +144,17 @@ class _SettingsHeader extends StatelessWidget {
               color: theme.primaryColorLight.withValues(alpha: .15),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(Icons.tune_rounded, color: theme.primaryColorLight, size: 20),
+            child: Icon(
+              Icons.tune_rounded,
+              color: theme.primaryColorLight,
+              size: 20,
+            ),
           ),
           const Gap(12),
-          Text('setting'.tr, style: AppTextStyles.titleLarge().copyWith(fontSize: 20)),
+          Text(
+            'setting'.tr,
+            style: AppTextStyles.titleLarge().copyWith(fontSize: 20),
+          ),
         ],
       ),
     );
@@ -175,8 +195,10 @@ class _SettingSectionState extends State<_SettingSection>
       value: 1.0,
     );
     _sizeFactor = CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut);
-    _chevronTurn = Tween<double>(begin: 0.0, end: 0.5)
-        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+    _chevronTurn = Tween<double>(
+      begin: 0.0,
+      end: 0.5,
+    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
   }
 
   @override
@@ -198,9 +220,16 @@ class _SettingSectionState extends State<_SettingSection>
       decoration: BoxDecoration(
         color: cs.primaryContainer,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: cs.inversePrimary.withValues(alpha: .07), width: 1),
+        border: Border.all(
+          color: cs.inversePrimary.withValues(alpha: .07),
+          width: 1,
+        ),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: .04), blurRadius: 10, offset: const Offset(0, 3)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: .04),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
         ],
       ),
       child: ClipRRect(
@@ -213,7 +242,10 @@ class _SettingSectionState extends State<_SettingSection>
               child: InkWell(
                 onTap: _toggle,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
                   child: Row(
                     children: [
                       Container(
@@ -222,7 +254,11 @@ class _SettingSectionState extends State<_SettingSection>
                           color: theme.primaryColorLight.withValues(alpha: .13),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(widget.icon, size: 18, color: theme.primaryColorLight),
+                        child: Icon(
+                          widget.icon,
+                          size: 18,
+                          color: theme.primaryColorLight,
+                        ),
                       ),
                       const Gap(12),
                       Expanded(
@@ -298,7 +334,10 @@ class _LanguageContent extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 220),
                 curve: Curves.easeOut,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? theme.primaryColorLight.withValues(alpha: .22)
@@ -307,7 +346,9 @@ class _LanguageContent extends StatelessWidget {
                   border: Border.all(
                     color: isSelected
                         ? theme.primaryColorLight.withValues(alpha: .6)
-                        : theme.colorScheme.inversePrimary.withValues(alpha: .10),
+                        : theme.colorScheme.inversePrimary.withValues(
+                            alpha: .10,
+                          ),
                     width: 1.2,
                   ),
                 ),
@@ -315,17 +356,25 @@ class _LanguageContent extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (isSelected) ...[
-                      Icon(Icons.check_rounded, size: 14, color: theme.primaryColorLight),
+                      Icon(
+                        Icons.check_rounded,
+                        size: 14,
+                        color: theme.primaryColorLight,
+                      ),
                       const Gap(5),
                     ],
                     Text(
                       lang.languageName,
                       style: AppTextStyles.titleSmall().copyWith(
                         fontSize: 13,
-                        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+                        fontWeight: isSelected
+                            ? FontWeight.w700
+                            : FontWeight.w400,
                         color: isSelected
                             ? theme.primaryColorLight
-                            : theme.colorScheme.inversePrimary.withValues(alpha: .65),
+                            : theme.colorScheme.inversePrimary.withValues(
+                                alpha: .65,
+                              ),
                       ),
                     ),
                   ],
@@ -383,10 +432,14 @@ class _ThemeContent extends StatelessWidget {
                     '${item['title']}',
                     style: AppTextStyles.titleSmall().copyWith(
                       fontSize: 11,
-                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+                      fontWeight: isSelected
+                          ? FontWeight.w700
+                          : FontWeight.w400,
                       color: isSelected
                           ? theme.primaryColorLight
-                          : theme.colorScheme.inversePrimary.withValues(alpha: .5),
+                          : theme.colorScheme.inversePrimary.withValues(
+                              alpha: .5,
+                            ),
                     ),
                   ),
                   const Gap(4),
@@ -403,7 +456,11 @@ class _ThemeContent extends StatelessWidget {
                       ),
                     ),
                     child: isSelected
-                        ? const Icon(Icons.check_rounded, size: 12, color: Colors.white)
+                        ? const Icon(
+                            Icons.check_rounded,
+                            size: 12,
+                            color: Colors.white,
+                          )
                         : null,
                   ),
                 ],
@@ -446,8 +503,13 @@ class _FontFamilyContent extends StatelessWidget {
             children: ThemeController.availableFontFamilies.map((font) {
               final isLoading = _loadingFont.value == font;
               final isSelected = themeCtrl.currentFontFamily == font;
-              final displayKey = ThemeController.fontFamilyTranslationKeys[font] ?? font;
-              final double fontSize = font == 'naskh' ? 22 : font == 'kufi' ? 17 : 20;
+              final displayKey =
+                  ThemeController.fontFamilyTranslationKeys[font] ?? font;
+              final double fontSize = font == 'naskh'
+                  ? 22
+                  : font == 'kufi'
+                  ? 17
+                  : 20;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: GestureDetector(
@@ -455,16 +517,23 @@ class _FontFamilyContent extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 220),
                     curve: Curves.easeOut,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? theme.primaryColorLight.withValues(alpha: .18)
-                          : theme.colorScheme.inversePrimary.withValues(alpha: .04),
+                          : theme.colorScheme.inversePrimary.withValues(
+                              alpha: .04,
+                            ),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: isSelected
                             ? theme.primaryColorLight.withValues(alpha: .55)
-                            : theme.colorScheme.inversePrimary.withValues(alpha: .08),
+                            : theme.colorScheme.inversePrimary.withValues(
+                                alpha: .08,
+                              ),
                         width: 1.2,
                       ),
                     ),
@@ -490,7 +559,9 @@ class _FontFamilyContent extends StatelessWidget {
                               fontSize: fontSize,
                               color: isSelected
                                   ? theme.colorScheme.inverseSurface
-                                  : theme.colorScheme.inversePrimary.withValues(alpha: .5),
+                                  : theme.colorScheme.inversePrimary.withValues(
+                                      alpha: .5,
+                                    ),
                             ),
                           ),
                         ),
@@ -504,7 +575,11 @@ class _FontFamilyContent extends StatelessWidget {
                             ),
                           )
                         else if (isSelected)
-                          Icon(Icons.check_rounded, size: 18, color: theme.primaryColorLight),
+                          Icon(
+                            Icons.check_rounded,
+                            size: 18,
+                            color: theme.primaryColorLight,
+                          ),
                       ],
                     ),
                   ),

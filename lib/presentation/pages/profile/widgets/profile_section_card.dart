@@ -1,9 +1,16 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// profile_section_card.dart  — Reusable section card & tile for Profile
+// ─────────────────────────────────────────────────────────────────────────────
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'profile_header.dart' show kGold;
 
-/// Reusable section card — clean white / dark surface with gold accent.
+// ─────────────────────────────────────────────────────────────────────────────
+// ProfileSectionCard
+// ─────────────────────────────────────────────────────────────────────────────
+
 class ProfileSectionCard extends StatelessWidget {
   final String title;
   final String? arabicTitle;
@@ -22,31 +29,31 @@ class ProfileSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
+    final cs     = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accent = iconColor ?? cs.primary;
 
-    final cardColor = isDark ? const Color(0xFF1C1C1E) : Colors.white;
+    final cardColor   = isDark ? const Color(0xFF1C1C1E) : Colors.white;
     final borderColor = isDark
         ? Colors.white.withValues(alpha: 0.07)
-        : Colors.black.withValues(alpha: 0.06);
+        : Colors.black.withValues(alpha: 0.055);
     final shadowColor = isDark
-        ? Colors.black.withValues(alpha: 0.30)
-        : Colors.black.withValues(alpha: 0.04);
-    final textColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
+        ? Colors.black.withValues(alpha: 0.28)
+        : Colors.black.withValues(alpha: 0.038);
+    final textColor   = isDark ? Colors.white : const Color(0xFF1A1A1A);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── Section label ─────────────────────────────────────────────
+        // ── Section label ───────────────────────────────────────────────
         Padding(
-          padding: EdgeInsets.only(left: 4.w, bottom: 10.h),
+          padding: EdgeInsets.only(left: 2.w, bottom: 10.h),
           child: Row(
             children: [
-              // Left accent bar
+              // Gold accent bar
               Container(
                 width: 3.5.w,
-                height: 26.h,
+                height: 28.h,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -60,38 +67,55 @@ class ProfileSectionCard extends StatelessWidget {
 
               // Icon badge
               Container(
-                width: 34.r,
-                height: 34.r,
+                width: 36.r,
+                height: 36.r,
                 decoration: BoxDecoration(
                   color: accent.withValues(alpha: isDark ? 0.18 : 0.10),
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(11.r),
                   border: Border.all(
-                    color: accent.withValues(alpha: 0.20),
+                    color: accent.withValues(alpha: 0.22),
                     width: 1,
                   ),
                 ),
-                child: Icon(titleIcon, color: accent, size: 17.r),
+                child: Icon(titleIcon, color: accent, size: 18.r),
               ),
               SizedBox(width: 10.w),
 
-              // Text labels
+              // Labels
               Flexible(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: 'kufi',
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w800,
-                    color: textColor,
-                    letterSpacing: 0.1,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontFamily: 'kufi',
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w800,
+                        color: textColor,
+                        letterSpacing: 0.1,
+                      ),
+                    ),
+                    if (arabicTitle != null)
+                      Text(
+                        arabicTitle!,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontFamily: 'naskh',
+                          fontSize: 11.sp,
+                          color: kGold.withValues(alpha: isDark ? 0.70 : 0.60),
+                          height: 1.2,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
           ),
         ),
 
-        // ── Card body ─────────────────────────────────────────────────
+        // ── Card body ───────────────────────────────────────────────────
         Container(
           decoration: BoxDecoration(
             color: cardColor,
@@ -100,7 +124,7 @@ class ProfileSectionCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: shadowColor,
-                blurRadius: 16,
+                blurRadius: 18,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -119,11 +143,11 @@ class ProfileSectionCard extends StatelessWidget {
                           Divider(
                             height: 1,
                             thickness: 0.5,
-                            indent: 58.w,
+                            indent: 60.w,
                             endIndent: 16.w,
                             color: isDark
-                                ? Colors.white.withValues(alpha: 0.06)
-                                : Colors.black.withValues(alpha: 0.06),
+                                ? Colors.white.withValues(alpha: 0.055)
+                                : Colors.black.withValues(alpha: 0.055),
                           ),
                       ],
                     ),
@@ -137,7 +161,9 @@ class ProfileSectionCard extends StatelessWidget {
   }
 }
 
-// ── Reusable list tile ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// ProfileTile  — Reusable list row
+// ─────────────────────────────────────────────────────────────────────────────
 
 class ProfileTile extends StatelessWidget {
   final IconData icon;
@@ -161,17 +187,13 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final color = iconColor ?? cs.primary;
-    final bg = iconBg ?? color.withValues(alpha: isDark ? 0.18 : 0.10);
-    final titleColor = isDark ? Colors.white : const Color(0xFF1A1A1A);
-    final subtitleColor = (isDark ? Colors.white : Colors.black).withValues(
-      alpha: 0.42,
-    );
-    final chevronColor = (isDark ? Colors.white : Colors.black).withValues(
-      alpha: 0.25,
-    );
+    final cs          = Theme.of(context).colorScheme;
+    final isDark      = Theme.of(context).brightness == Brightness.dark;
+    final color       = iconColor ?? cs.primary;
+    final bg          = iconBg ?? color.withValues(alpha: isDark ? 0.17 : 0.09);
+    final titleColor  = isDark ? Colors.white : const Color(0xFF1A1A1A);
+    final subColor    = (isDark ? Colors.white : Colors.black).withValues(alpha: 0.40);
+    final chevron     = (isDark ? Colors.white : Colors.black).withValues(alpha: 0.22);
 
     return InkWell(
       onTap: onTap,
@@ -184,17 +206,17 @@ class ProfileTile extends StatelessWidget {
           children: [
             // Icon badge
             Container(
-              width: 40.r,
-              height: 40.r,
+              width: 42.r,
+              height: 42.r,
               decoration: BoxDecoration(
                 color: bg,
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(13.r),
                 border: Border.all(
-                  color: color.withValues(alpha: isDark ? 0.20 : 0.12),
+                  color: color.withValues(alpha: isDark ? 0.22 : 0.12),
                   width: 1,
                 ),
               ),
-              child: Icon(icon, color: color, size: 19.r),
+              child: Icon(icon, color: color, size: 20.r),
             ),
 
             SizedBox(width: 14.w),
@@ -219,8 +241,8 @@ class ProfileTile extends StatelessWidget {
                       subtitle!,
                       style: TextStyle(
                         fontFamily: 'kufi',
-                        fontSize: 12.sp,
-                        color: subtitleColor,
+                        fontSize: 11.5.sp,
+                        color: subColor,
                         height: 1.3,
                       ),
                     ),
@@ -231,11 +253,7 @@ class ProfileTile extends StatelessWidget {
 
             // Trailing or chevron
             trailing ??
-                Icon(
-                  Icons.chevron_right_rounded,
-                  color: chevronColor,
-                  size: 20.r,
-                ),
+                Icon(Icons.chevron_right_rounded, color: chevron, size: 20.r),
           ],
         ),
       ),

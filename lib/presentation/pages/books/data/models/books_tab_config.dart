@@ -44,7 +44,6 @@ const _defaultTypeSvg = SvgPath.svgBooksOpenBook;
 // [كل الكتب] → [مكتبتي] → [كل نوع من collections.json] → [الفواصل]
 List<BooksTabConfig> buildBooksTabs(List<String> bookTypes) {
   return [
-    // ── تابات ثابتة في البداية ──
     const BooksTabConfig(
       title: 'allBooks',
       svgPath: SvgPath.svgBooksAllBooks,
@@ -54,14 +53,13 @@ List<BooksTabConfig> buildBooksTabs(List<String> bookTypes) {
       svgPath: SvgPath.svgBooksMyLibrary,
       isDownloadedBooks: true,
     ),
-    // ── تابات ديناميكية من collections.json ──
+    
     for (final type in bookTypes)
       BooksTabConfig(
         title: type,
         svgPath: _typeSvgMap[type] ?? _defaultTypeSvg,
         filterBookType: type,
       ),
-    // ── تاب ثابت في النهاية: الفواصل ──
     BooksTabConfig(
       title: 'bookmarks',
       svgPath: SvgPath.svgBooksBookmarks,
