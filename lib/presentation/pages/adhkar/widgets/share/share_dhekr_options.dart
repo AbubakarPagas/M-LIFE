@@ -90,11 +90,11 @@ class ShareDhekrOptions extends StatelessWidget {
                         horizontal: 8.0,
                         vertical: 8.0,
                       ),
-                      margin: const EdgeInsets.only(
+                     /*  margin: const EdgeInsets.only(
                         bottom: 16.0,
                         right: 16.0,
                         left: 16.0,
-                      ),
+                      ), */
                       decoration: BoxDecoration(
                         color: Get.theme.colorScheme.primary.withValues(
                           alpha: .15,

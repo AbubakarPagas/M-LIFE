@@ -168,7 +168,6 @@ class _DuaCardHeader extends StatelessWidget {
               ],
             ),
           ),
-
           // ── Action buttons ────────────────────────────────────────
           _DuaHeaderActions(zekr: zekr),
         ],

@@ -1,0 +1,14 @@
+{
+    "appName": "Al Quran Al Kareem - Al Heekmah Library",
+    "@appName": {
+        "description": "appName",
+        "type": "text",
+        "placeholders": {}
+    },
+    "search_hint": "Search the verses of the Quran",
+    "@search_hint": {
+        "description": "search_hint",
+        "type": "text",
+        "placeholders": {}
+    }
+}

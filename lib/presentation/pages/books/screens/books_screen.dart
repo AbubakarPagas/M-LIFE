@@ -15,7 +15,7 @@ class BooksScreen extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 90.0),
+                padding: const EdgeInsets.only(top: 60.0),
                 child: Obx(() {
                   final tabs = buildBooksTabs(booksCtrl.state.bookTypes);
                   return BooksTabBarWidget(topPadding: 120.0, tabs: tabs);

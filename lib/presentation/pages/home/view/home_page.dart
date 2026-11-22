@@ -11,6 +11,7 @@ import '../../../../provider/dependencies/AdhanDependencyProvider.dart';
 import '../../../../provider/dependencies/tabProvider.dart';
 import '../../../../provider/locationProvider.dart';
 import '../../../../widgets/draggable_home.dart';
+import '../../premium/premium_access_guard.dart';
 import '../model/collection.dart';
 import '../widgets/daily_zeker.dart';
 import '../widgets/hijri_date.dart';
@@ -296,14 +297,50 @@ class _FeatureGrid extends StatelessWidget {
         collection: collections[index],
         index: index,
         onTap: () {
-          if (collections[index].routeName == RoutesName.prayerTime) {
+          final col = collections[index];
+
+          // ── Special tap: Prayer tab switch ───────────────────────────
+          if (col.routeName == RoutesName.prayerTime) {
             context.read<TabProvider>().onChangingTab(1);
-          } else {
-            Navigator.pushNamed(context, collections[index].routeName);
+            return;
           }
+
+          // ── Premium check ─────────────────────────────────────────────
+          if (col.isPremium) {
+            PremiumAccessGuard.check(
+              context,
+              feature: _featureForRoute(col.routeName),
+              onAllowed: () =>
+                  Navigator.pushNamed(context, col.routeName),
+            );
+            return;
+          }
+
+          // ── Free page — navigate directly ─────────────────────────────
+          Navigator.pushNamed(context, col.routeName);
         },
       ),
     );
+  }
+}
+
+// Helper: maps a route name to the corresponding PremiumFeature enum value.
+PremiumFeature _featureForRoute(String routeName) {
+  switch (routeName) {
+    case RoutesName.sadaqah:
+      return PremiumFeature.sadaqahJariyah;
+    case RoutesName.quranContest:
+      return PremiumFeature.quranContest;
+    case RoutesName.islamicLive:
+      return PremiumFeature.islamicLive;
+    case RoutesName.daras:
+      return PremiumFeature.daras;
+    case RoutesName.fanarAi:
+      return PremiumFeature.fanarAi;
+    case RoutesName.quizTopic:
+      return PremiumFeature.quizTopic;
+    default:
+      return PremiumFeature.daras; // safe fallback
   }
 }
 

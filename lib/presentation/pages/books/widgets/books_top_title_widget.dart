@@ -200,13 +200,13 @@ class BooksTopTitleWidget extends StatelessWidget {
                               flex: 4,
                               child: ContainerButton(
                                 onPressed: () {
-                               /*    booksCtrl.state.backgroundPickerColor.value =
+                                  booksCtrl.state.backgroundPickerColor.value =
                                       0xfffaf7f3;
                                   booksCtrl.state.box.remove(
                                     BACKGROUND_PICKER_COLOR_FOR_BOOK,
                                   );
                                   booksCtrl.update();
-                                  Get.back(); */
+                                  Get.back();
                                 },
                                 height: 35,
                                 title: 'reset',
@@ -232,7 +232,7 @@ class BooksTopTitleWidget extends StatelessWidget {
                               flex: 3,
                               child: ContainerButton(
                                 onPressed: () {
-                                 /*  booksCtrl.state.backgroundPickerColor.value =
+                                  booksCtrl.state.backgroundPickerColor.value =
                                       booksCtrl
                                           .state
                                           .temporaryBackgroundColor
@@ -242,7 +242,7 @@ class BooksTopTitleWidget extends StatelessWidget {
                                     booksCtrl.state.backgroundPickerColor.value,
                                   );
                                   booksCtrl.update();
-                                  Get.back(); */
+                                  Get.back();
                                 },
                                 height: 35,
                                 title: 'ok',

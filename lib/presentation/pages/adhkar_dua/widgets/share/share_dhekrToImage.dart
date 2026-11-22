@@ -136,14 +136,14 @@ Widget buildZekrShareImage({
             children: [
               const SizedBox().customSvg(SvgPath.svgHomeQuranLogo, height: 30),
               context.vDivider(),
-              Text(
+             /*  Text(
                 'القرآن الكريـم - مكتبة الحكمة',
                 style: AppTextStyles.titleSmall(
                   fontSize: 10,
                   color: context.theme.canvasColor,
                 ),
                 textAlign: TextAlign.justify,
-              ),
+              ), */
             ],
           ),
           const Gap(4),

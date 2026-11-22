@@ -8,7 +8,16 @@ class Collection {
   final String routeName;
   final String svgName;
 
-  Collection(this.assetName, this.title, this.routeName, this.svgName);
+  /// Whether this collection tile requires a premium subscription.
+  final bool isPremium;
+
+  Collection(
+    this.assetName,
+    this.title,
+    this.routeName,
+    this.svgName, {
+    this.isPremium = false,
+  });
 }
 
 List<Collection> collections = [
@@ -21,8 +30,20 @@ List<Collection> collections = [
     RoutesName.books,
     "tafsir",
   ),
-  Collection(FlutterIslamicIcons.wudhu, 'Daras', RoutesName.daras, "daras"),
-  Collection(FlutterIslamicIcons.wudhu, 'Fanar AI', RoutesName.fanarAi, "ai"),
+  Collection(
+    FlutterIslamicIcons.wudhu,
+    'Daras',
+    RoutesName.daras,
+    "daras",
+    isPremium: true,
+  ),
+  Collection(
+    FlutterIslamicIcons.wudhu,
+    'Fanar AI',
+    RoutesName.fanarAi,
+    "ai",
+    isPremium: true,
+  ),
   Collection(
     FlutterIslamicIcons.allah99,
     'Names of Allah',
@@ -44,16 +65,27 @@ List<Collection> collections = [
   Collection(
     FlutterIslamicIcons.wudhu,
     'Quiz topic',
-    RoutesName.calendar,
+    RoutesName.quizTopic,
     "quiz",
+    isPremium: true,
   ),
-  Collection(FlutterIslamicIcons.tasbih, 'Tasbih', RoutesName.tasbih, "tasbih"),
+  // Collection(
+  //   FlutterIslamicIcons.wudhu,
+  //   'Islamic Live',
+  //   RoutesName.islamicLive,
+  //   "daras",
+  //   isPremium: true,
+  // ),
+  Collection(
+    FlutterIslamicIcons.tasbih,
+    'Tasbih',
+    RoutesName.tasbih,
+    "tasbih",
+  ),
   Collection(
     FlutterIslamicIcons.prayingPerson,
     'Prayer Times',
     RoutesName.prayerTime,
     "prayertime",
   ),
-
-  // Collection(FlutterIslamicIcons.wudhu, 'Quiz', RoutesName.daras, "others"),
 ];

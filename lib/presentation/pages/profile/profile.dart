@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 
 import '../sadaqah/screens/sadaqah_screen.dart';
 import '../tasbih/widgets/geometric_pattern_painter.dart';
+import '../premium/premium_access_guard.dart';
+import '../quran_contest/quran_contest_screen.dart';
 import 'controller/profile_controller.dart';
 import 'widgets/islamic_bg_painter.dart';
 import 'widgets/profile_header.dart' show ProfileHeader;
@@ -242,9 +244,13 @@ class _IslamicJourneySection extends StatelessWidget {
                 progress: 0.68,
                 progressLabel: '68% funded',
                 timeLabel: 'Ongoing',
-                onTap: () => Get.to(
-                  () => const SadaqahScreen(),
-                  transition: Transition.downToUp,
+                onTap: () => PremiumAccessGuard.check(
+                  context,
+                  feature: PremiumFeature.sadaqahJariyah,
+                  onAllowed: () => Get.to(
+                    () => const SadaqahScreen(),
+                    transition: Transition.downToUp,
+                  ),
                 ),
               ),
             ),
@@ -264,7 +270,14 @@ class _IslamicJourneySection extends StatelessWidget {
                 progress: 0.42,
                 progressLabel: 'Round 3 / 7',
                 timeLabel: '3d left',
-                onTap: () {},
+                onTap: () => PremiumAccessGuard.check(
+                  context,
+                  feature: PremiumFeature.quranContest,
+                  onAllowed: () => Get.to(
+                    () => const QuranContestScreen(),
+                    transition: Transition.downToUp,
+                  ),
+                ),
               ),
             ),
           ],
@@ -664,7 +677,7 @@ class _ImportantNotesBanner extends StatelessWidget {
       _NoteEntry(
         icon: Icons.volunteer_activism_rounded,
         title: 'Waqf Contribution',
-        arabicTitle: 'مساهمة الوقف',
+        // arabicTitle: 'مساهمة الوقف',
         subtitle: 'Support Islamic endowments & charitable causes',
         color: _kRed,
         onTap: () {},
@@ -672,7 +685,7 @@ class _ImportantNotesBanner extends StatelessWidget {
       _NoteEntry(
         icon: Icons.trending_up_rounded,
         title: 'Halal Finance Tips',
-        arabicTitle: 'نصائح التمويل الحلال',
+        // arabicTitle: 'نصائح التمويل الحلال',
         subtitle: 'Interest-free guidance for ethical living',
         color: _kEmerald,
         onTap: () => Get.toNamed('/halal-finance'),
@@ -767,14 +780,14 @@ class _ImportantNotesBanner extends StatelessWidget {
 class _NoteEntry {
   final IconData icon;
   final String title;
-  final String arabicTitle;
+  // final String arabicTitle;
   final String subtitle;
   final Color color;
   final VoidCallback onTap;
   const _NoteEntry({
     required this.icon,
     required this.title,
-    required this.arabicTitle,
+    // required this.arabicTitle,
     required this.subtitle,
     required this.color,
     required this.onTap,
@@ -820,28 +833,14 @@ class _NoteTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          entry.title,
-                          style: TextStyle(
-                            fontFamily: 'kufi',
-                            fontSize: 13.5.sp,
-                            fontWeight: FontWeight.w700,
-                            color: textColor,
-                          ),
-                        ),
-                        SizedBox(width: 6.w),
-                        Text(
-                          entry.arabicTitle,
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontFamily: 'naskh',
-                            fontSize: 11.5.sp,
-                            color: entry.color.withValues(alpha: 0.75),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      entry.title,
+                      style: TextStyle(
+                        fontFamily: 'kufi',
+                        fontSize: 13.5.sp,
+                        fontWeight: FontWeight.w700,
+                        color: textColor,
+                      ),
                     ),
                     SizedBox(height: 2.h),
                     Text(

@@ -57,6 +57,8 @@ const String IS_TASHKIL = 'IS_TASHKIL';
 const String BACKGROUND_PICKER_COLOR = 'BACKGROUND_PICKER_COLOR';
 const String SEARCH_HISTORY = 'SEARCH_HISTORY';
 const String AUDIO_SERVICE_INITIALIZED = 'AUDIO_SERVICE_INITIALIZED';
+const String BACKGROUND_PICKER_COLOR_FOR_BOOK =
+    'BACKGROUND_PICKER_COLOR_FOR_BOOK';
 
 // ── Audio player settings ────────────────────────────────────────────────────
 const String AUDIO_PLAYBACK_SPEED    = 'audio_playback_speed';

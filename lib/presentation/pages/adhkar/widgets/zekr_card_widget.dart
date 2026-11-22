@@ -251,7 +251,7 @@ class _ZekrHeaderBtn extends StatelessWidget {
         child: Icon(
           icon,
           color: Colors.white.withValues(alpha: 0.85),
-          size: 15,
+          size: 30,
         ),
       ),
     );

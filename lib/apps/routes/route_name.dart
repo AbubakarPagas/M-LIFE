@@ -58,4 +58,9 @@ class RoutesName {
   static const darsCourses = '/daras/courses';
   static const darsCourseDetail = '/daras/courses/detail';
   static const darsQandA = '/daras/qanda';
+
+  // Premium-exclusive pages
+  static const quranContest = '/quran-contest';
+  static const islamicLive = '/islamic-live';
+  static const quizTopic = '/quiz-topic';
 }

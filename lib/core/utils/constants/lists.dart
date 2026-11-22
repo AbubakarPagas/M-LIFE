@@ -74,64 +74,6 @@ const List<String> semanticsTranslateName = <String>[
   'filipino',
 ];
 
-// final List screensList = [
-//   {
-//     'name': 'home',
-//     'svgUrl': 'assets/svg/splash_icon_w.svg',
-//     'imagePath': 'assets/images/home.png',
-//     'route': () => const HomeScreen(),
-//     'width': 240.0,
-//   },
-//   {
-//     'name': 'quran',
-//     'svgUrl': 'assets/svg/splash_icon_w.svg',
-//     'imagePath': 'assets/images/pages.png',
-//     'route': () => QuranHome(),
-//     'width': 240.0,
-//   },
-//   {
-//     'name': '',
-//     'svgUrl': 'assets/svg/alwaqf.svg',
-//     'imagePath': 'assets/images/audio.png',
-//     'route': () => AlwaqfScreen(),
-//     'width': 70.0,
-//   },
-//   {
-//     'name': 'azkar',
-//     'svgUrl': 'assets/svg/azkar.svg',
-//     'imagePath': 'assets/images/athkar.png',
-//     'route': () => const AdhkarView(),
-//     'width': 70.0,
-//   },
-//   {
-//     'name': 'quranAudio',
-//     'svgUrl': 'assets/svg/quran_au_ic.svg',
-//     'imagePath': 'assets/images/audio.png',
-//     'route': () => AudioScreen(),
-//     'width': 240.0,
-//   },
-//   {
-//     'name': 'islamicLibrary',
-//     'svgUrl': 'assets/svg/tafseer_white.svg',
-//     'imagePath': 'assets/images/tafsir_books.jpg',
-//     'route': () => BooksScreen(),
-//     'width': 326.0,
-//   },
-//   {
-//     'name': 'midad',
-//     'svgUrl': SvgPath.svgHomeMidadIcon,
-//     'imagePath': 'assets/images/tafsir_books.jpg',
-//     'route': () => AiSearchResults(),
-//     'width': 326.0,
-//   },
-//   {
-//     'name': 'tasmeeModeTeacher',
-//     'svgUrl': SvgPath.svgHomeMidadIcon,
-//     'imagePath': 'assets/images/tafsir_books.jpg',
-//     'route': () => QuranHome(isTasmeeMode: true),
-//     'width': 326.0,
-//   },
-// ];
 
 const List surahReaderInfo = [
   {

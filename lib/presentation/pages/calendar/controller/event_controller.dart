@@ -20,7 +20,6 @@ class EventController extends GetxController with WidgetsBindingObserver {
   Rx<HijriDate> calenderMonth = HijriDate.now().obs;
   late final SheetController controller;
   late final SheetScrollController scrollController;
-  final boxController = BoxController();
   Orientation _lastOrientation = Orientation.portrait;
   final tabBarController = FlexibleSheetController();
 

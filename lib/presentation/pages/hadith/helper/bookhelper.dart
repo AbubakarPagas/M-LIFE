@@ -41,15 +41,6 @@ class BookHelper {
       "ibnmajah",
       "malik",
     ],
-    "ben": [
-      "bukhari",
-      "muslim",
-      "nasai",
-      "abudawud",
-      "tirmidhi",
-      "ibnmajah",
-      "malik",
-    ],
     "eng": [
       "bukhari",
       "muslim",
@@ -59,7 +50,34 @@ class BookHelper {
       "ibnmajah",
       "malik",
     ],
-    "fra": ["muslim", "malik"],
+     "hau": [
+      "bukhari",
+      "muslim",
+      "nasai",
+      "abudawud",
+      "tirmidhi",
+      "ibnmajah",
+      "malik",
+    ],
+     "kan": [
+      "bukhari",
+      "muslim",
+      "nasai",
+      "abudawud",
+      "tirmidhi",
+      "ibnmajah",
+      "malik",
+    ],
+    /*  "ben": [
+      "bukhari",
+      "muslim",
+      "nasai",
+      "abudawud",
+      "tirmidhi",
+      "ibnmajah",
+      "malik",
+    ], */
+   /*  "fra": ["muslim", "malik"],
     "ind": [
       "bukhari",
       "muslim",
@@ -87,6 +105,6 @@ class BookHelper {
       "tirmidhi",
       "ibnmajah",
       "malik",
-    ],
+    ], */
   };
 }

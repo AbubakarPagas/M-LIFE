@@ -18,6 +18,19 @@ class AppConstants {
       appLang: 'لغة التطبيق',
     ),
     LanguageModel(
+      languageName: 'Hausa',
+      countryCode: 'NG',
+      languageCode: 'hs',
+      appLang: 'Harshen manhaja',
+    ),
+    LanguageModel(
+      languageName: 'Kanuri',
+      countryCode: 'NG',
+      languageCode: 'kn',
+      appLang: 'Təlam app-be',
+    ),
+    
+    /* LanguageModel(
       languageName: 'Español',
       countryCode: '',
       languageCode: 'es',
@@ -70,6 +83,6 @@ class AppConstants {
       countryCode: '',
       languageCode: 'ru',
       appLang: 'Язык приложения',
-    ),
+    ), */
   ];
 }

@@ -4,6 +4,9 @@ import 'package:misbah_path/presentation/pages/setting/setting_page.dart';
 
 import '../../presentation/pages/Fanar_ai/fanar_ai.dart';
 import '../../presentation/pages/adhan/adhanScreen.dart';
+import '../../presentation/pages/islamic_live/islamic_live_screen.dart';
+import '../../presentation/pages/quran_contest/quran_contest_screen.dart';
+import '../../presentation/pages/quiz_topic/quiz_topic_screen.dart';
 // import '../../presentation/pages/adhkar/screens/adhkar_setting.dart';
 import '../../presentation/pages/adhkar/screens/adhkar_view.dart';
 import '../../presentation/pages/adhkar_dua/screens/adhkar_view.dart';
@@ -41,6 +44,7 @@ import '../../presentation/pages/zakat/ui/screens/zakat_liabilities_screen.dart'
 import '../../presentation/pages/zakat/ui/screens/zakat_result_screen.dart';
 import '../../presentation/pages/zakat/ui/screens/zakat_settings_screen.dart';
 import 'custom_route.dart';
+import 'premium_route_middleware.dart';
 import 'route_name.dart';
 
 abstract class Routes {
@@ -54,14 +58,13 @@ abstract class Routes {
     GetPage(name: RoutesName.tasbih, page: () => const Tasbih()),
     GetPage(name: RoutesName.name, page: () => const NameOfAllah()),
     GetPage(name: RoutesName.direction, page: () => const Direction()),
-    GetPage(name: RoutesName.daras, page: () => const DarsHomeScreen()),
     GetPage(
       name: RoutesName.welcome,
       page: () => const WelcomeScreen(showWarning: false, build: 'Stable'),
     ),
     GetPage(name: RoutesName.audio, page: () => const AudioScreen()),
-    GetPage(name: RoutesName.calendar, page: () => const HijriCalendarScreen()),
-    GetPage(name: RoutesName.books, page: () =>  BooksScreen()),
+    GetPage(name: RoutesName.calendar, page: () => HijriCalendarScreen()),
+    GetPage(name: RoutesName.books, page: () => BooksScreen()),
     //  GetPage(name: RoutesName.athkarSetting, page: () => const AdhkarSetting()),
     GetPage(
       name: RoutesName.prayerTracking,
@@ -71,12 +74,10 @@ abstract class Routes {
       name: RoutesName.notificationCenter,
       page: () => const NotificationCenterScreen(),
     ),
-    GetPage(name: RoutesName.fanarAi, page: () => const FanarAiPage()),
     GetPage(
       name: RoutesName.fanarConversations,
       page: () => const ConversationListScreen(),
     ),
-    GetPage(name: RoutesName.sadaqah, page: () => const SadaqahScreen()),
     // Zakat Calculator
     GetPage(name: RoutesName.zakat, page: () => const ZakatDashboardScreen()),
     GetPage(
@@ -115,7 +116,7 @@ abstract class Routes {
       page: () => const PostDetailScreen(),
     ),
 
-    // ── Dars (Islamic Lessons) ────────────────────────────────────────────────
+    // ── Dars sub-routes (not gated — user is already past the premium gate) ─
     GetPage(name: RoutesName.darsAll, page: () => const DarsAllScreen()),
     GetPage(name: RoutesName.darsLive, page: () => const DarsLiveScreen()),
     GetPage(
@@ -142,6 +143,38 @@ abstract class Routes {
     GetPage(
       name: RoutesName.darsCourses,
       page: () => const DarsCoursesScreen(),
+    ),
+
+    // ── Premium-only entry points (direct-URL protection via middleware) ───
+    GetPage(
+      name: RoutesName.sadaqah,
+      page: () => const SadaqahScreen(),
+      middlewares: [PremiumRouteMiddleware()],
+    ),
+    GetPage(
+      name: RoutesName.fanarAi,
+      page: () => const FanarAiPage(),
+      middlewares: [PremiumRouteMiddleware()],
+    ),
+    GetPage(
+      name: RoutesName.daras,
+      page: () => const DarsHomeScreen(),
+      middlewares: [PremiumRouteMiddleware()],
+    ),
+    GetPage(
+      name: RoutesName.quranContest,
+      page: () => const QuranContestScreen(),
+      middlewares: [PremiumRouteMiddleware()],
+    ),
+    GetPage(
+      name: RoutesName.islamicLive,
+      page: () => const IslamicLiveScreen(),
+      middlewares: [PremiumRouteMiddleware()],
+    ),
+    GetPage(
+      name: RoutesName.quizTopic,
+      page: () => const QuizTopicScreen(),
+      middlewares: [PremiumRouteMiddleware()],
     ),
   ];
 
@@ -170,9 +203,9 @@ abstract class Routes {
       case RoutesName.dua:
         return CustomRoute<bool>(builder: (_) => const AdhkarViewDua());
       case RoutesName.calendar:
-        return CustomRoute<bool>(builder: (_) => const HijriCalendarScreen());
+        return CustomRoute<bool>(builder: (_) => HijriCalendarScreen());
       case RoutesName.books:
-        return CustomRoute<bool>(builder: (_) =>  BooksScreen());
+        return CustomRoute<bool>(builder: (_) => BooksScreen());
       // case RoutesName.athkarSetting:
       //   return CustomRoute<bool>(builder: (_) => const AdhkarSetting());
       case RoutesName.prayerTracking:

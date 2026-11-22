@@ -149,30 +149,15 @@ class _PageHeader extends StatelessWidget {
 
           // Title block
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'أسماء الله الحسنى',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontFamily: 'naskh',
-                    fontSize: 20.sp,
-                    color: kNameGold,
-                    height: 1.1,
-                  ),
-                ),
-                Text(
-                  '99 Names of Allah',
-                  style: TextStyle(
-                    fontFamily: 'kufi',
-                    fontSize: 19.sp,
-                    fontWeight: FontWeight.w800,
-                    color: Theme.of(context).hintColor,
-                    height: 1.2,
-                  ),
-                ),
-              ],
+            child: Text(
+              '99 Names of Allah',
+              style: TextStyle(
+                fontFamily: 'kufi',
+                fontSize: 19.sp,
+                fontWeight: FontWeight.w800,
+                color: Theme.of(context).hintColor,
+                height: 1.2,
+              ),
             ),
           ),
 

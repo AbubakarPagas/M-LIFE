@@ -90,7 +90,8 @@ class _HadithState extends State<Hadith> {
                         ],
                       ),
                       child: TabBar(
-                        unselectedLabelColor: Colors.grey,
+                        labelColor: Colors.white ,
+                        unselectedLabelColor:  cs.primary,
                         indicatorSize: TabBarIndicatorSize.tab,
                         dividerColor: Colors.transparent,
                         indicator: BoxDecoration(
@@ -121,7 +122,7 @@ class _HadithState extends State<Hadith> {
                                 Text(
                                   'Books',
                                   style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
+                                    // color: Theme.of(context).primaryColor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'kufi',
@@ -139,7 +140,7 @@ class _HadithState extends State<Hadith> {
                                 Text(
                                   'Bookmarks',
                                   style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
+                                    // color: Theme.of(context).primaryColor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'kufi',
@@ -206,32 +207,15 @@ class _HadithAppBar extends StatelessWidget {
         children: [
           // Arabic ornament + title
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'الحديث الشريف',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontFamily: 'naskh',
-                    fontSize: 13,
-                    color: cs.surface,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-                const SizedBox(height: 1),
-                Text(
-                  'hadith'.tr.capitalizeFirst ?? 'Hadith',
-                  style: TextStyle(
-                    fontFamily: 'kufi',
-                    fontSize: 22,
-                    color: Theme.of(context).hintColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ],
+            child: Text(
+              'hadith'.tr.capitalizeFirst ?? 'Hadith',
+              style: TextStyle(
+                fontFamily: 'kufi',
+                fontSize: 22,
+                color: Theme.of(context).hintColor,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
+              ),
             ),
           ),
 

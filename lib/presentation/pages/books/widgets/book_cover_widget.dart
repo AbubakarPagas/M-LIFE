@@ -62,7 +62,7 @@ class BookCoverWidget extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Align(
+        /* Align(
           alignment: Alignment.bottomLeft,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -71,7 +71,7 @@ class BookCoverWidget extends StatelessWidget {
               height: isInDetails ? 25 : context.customOrientation(20.h, 35.h),
             ),
           ),
-        ),
+        ), */
         Align(
           alignment: Alignment.bottomRight,
           child: Padding(

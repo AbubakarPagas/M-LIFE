@@ -107,7 +107,7 @@ class VerseImageCreator extends StatelessWidget {
                   customSvg(SvgPath.svgHomeQuranLogo, height: 30),
                   context.vDivider(),
                   Text(
-                    'القرآن الكريـم - مكتبة الحكمة',
+                    'misbah path',
                     style: AppTextStyles.titleSmall(
                       fontSize: 10,
                       color: context.theme.canvasColor,

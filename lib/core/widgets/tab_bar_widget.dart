@@ -2,11 +2,11 @@ import 'package:flexible_sheet/flexible_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../presentation/pages/books/books.dart';
 import '../../presentation/pages/quran_page/quran.dart';
 import '../../presentation/pages/quran_page/screens/quran_settings.dart';
-import '../../presentation/pages/quran_page/widgets/search/controller/quran_search_controller.dart' show QuranSearchController;
+import '../../presentation/pages/quran_page/widgets/search/controller/quran_search_controller.dart'
+    show QuranSearchController;
 import '/core/utils/constants/extensions/bottom_sheet_extension.dart';
 import '/core/utils/constants/svg_constants.dart';
 import '../services/services_locator.dart';
@@ -228,36 +228,34 @@ class _AppBarHandle extends StatelessWidget {
                               Get.back();
                               return;
                             }
+                            Get.back();
                             quranCtrl.setTopBarType = TopBarType.none;
-                            sl<QuranController>()
-                                .state
-                                .selectedAyahIndexes
+                            sl<QuranController>().state.selectedAyahIndexes
                                 .clear();
                           },
                           svgPath: isBackButton
                               ? SvgPath.svgHomeArrowBack
-                              : SvgPath.svgHomeHome,
+                              : SvgPath.svgHomeArrowBack,
                           color: primary,
                         );
                       })
                     : isNotification
                     ? _AppBarActionButton(
                         onTap: () => customBottomSheet(NotificationsScreen()),
-                        svgPath: SvgPath.svgHomeHome,
+                        svgPath: SvgPath.svgHomeArrowBack,
                         color: primary,
                       )
                     : const SizedBox.shrink(),
               ),
               // ── Center content ────────────────────────────────────────
-              Expanded(
-                child: centerChild ?? const SizedBox.shrink(),
-              ),
+              Expanded(child: centerChild ?? const SizedBox.shrink()),
               // ── Trailing: settings / close ────────────────────────────
               SizedBox(
                 width: 44,
                 height: 44,
                 child: _AppBarActionButton(
-                  onTap: settingOnTap ??
+                  onTap:
+                      settingOnTap ??
                       () {
                         quranCtrl.setTopBarType = TopBarType.settings;
                         tabBarController.toggle();

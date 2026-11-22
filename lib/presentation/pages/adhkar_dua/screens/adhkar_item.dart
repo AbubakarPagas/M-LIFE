@@ -21,7 +21,7 @@ class AdhkarItem extends StatelessWidget {
         appBar: AppBarWidget(
           isTitled: true,
           title: azkarCtrl.state.filteredDhekrList.isNotEmpty
-              ? azkarCtrl.state.filteredDhekrList.first.category
+              ? azkarCtrl.state.filteredDhekrList.first.category.tr
               : '',
           isFontSize: true,
           searchButton: const SizedBox.shrink(),
