@@ -39,33 +39,35 @@ class AllCalculatingEventsWidget extends StatelessWidget {
   ListView _eventsList(BuildContext context) {
     return ListView(
       children: [
-        Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(
-                text: eventsCtrl.isNewHadith
-                    ? monthHadithsList[eventsCtrl.hijriNow.hMonth -
-                          1]['hadithPart1']
-                    : monthHadithsList[1]['hadithPart1'],
-                style: AppTextStyles.titleMedium(),
-              ),
-              TextSpan(
-                text: eventsCtrl.isNewHadith
-                    ? monthHadithsList[eventsCtrl.hijriNow.hMonth -
-                          1]['hadithPart2']
-                    : monthHadithsList[1]['hadithPart2'],
-                style: AppTextStyles.titleMedium(),
-              ),
-              TextSpan(
-                text: eventsCtrl.isNewHadith
-                    ? monthHadithsList[eventsCtrl.hijriNow.hMonth -
-                          1]['bookName']
-                    : monthHadithsList[1]['bookName'],
-                style: AppTextStyles.titleMedium().copyWith(fontSize: 14.0),
-              ),
-            ],
+        GetBuilder<LocalizationController>(
+          builder: (_) => Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: eventsCtrl.isNewHadith
+                      ? monthHadithsList[eventsCtrl.hijriNow.hMonth - 1]
+                            ['hadithPart1']
+                      : monthHadithsList[1]['hadithPart1'],
+                  style: AppTextStyles.titleMedium(),
+                ),
+                TextSpan(
+                  text: eventsCtrl.isNewHadith
+                      ? monthHadithsList[eventsCtrl.hijriNow.hMonth - 1]
+                            ['hadithPart2']
+                      : monthHadithsList[1]['hadithPart2'],
+                  style: AppTextStyles.titleMedium(),
+                ),
+                TextSpan(
+                  text: eventsCtrl.isNewHadith
+                      ? monthHadithsList[eventsCtrl.hijriNow.hMonth - 1]
+                            ['bookName']
+                      : monthHadithsList[1]['bookName'],
+                  style: AppTextStyles.titleMedium().copyWith(fontSize: 14.0),
+                ),
+              ],
+            ),
+            textAlign: TextAlign.justify,
           ),
-          textAlign: TextAlign.justify,
         ),
         const Gap(8.0),
         context.hDivider(

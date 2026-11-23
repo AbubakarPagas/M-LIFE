@@ -18,6 +18,7 @@ import 'package:smooth_sheets/smooth_sheets.dart';
 
 import '../home/widgets/hijri_widget.dart';
 import '/core/services/home_widget_service.dart';
+import '/core/services/languages/localization_controller.dart';
 import '/core/utils/constants/extensions/bottom_sheet_extension.dart';
 import '/core/utils/constants/extensions/convert_number_extension.dart';
 import '/core/utils/constants/extensions/extensions.dart';

@@ -1,12 +1,13 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ScriptureCard — Featured Quran verse or Hadith card
+// ScriptureCard — Featured Quran verse or Hadith card in the carousel
 // ─────────────────────────────────────────────────────────────────────────────
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Color _kGold = Color(0xffCDAD80);
-const Color _kGoldDeep = Color(0xffCD9974);
+const Color _kGoldDeep = Color(0xffB8864E);
+const Color _kEmerald = Color(0xff1A5C45);
 
 class ScriptureCard extends StatelessWidget {
   final Map<String, String> data;
@@ -21,109 +22,153 @@ class ScriptureCard extends StatelessWidget {
     final isQuran = data['type'] == 'quran';
 
     return Container(
-      padding: EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            cs.primary.withValues(alpha: isDark ? 0.22 : 0.10),
-            cs.primary.withValues(alpha: isDark ? 0.12 : 0.05),
-          ],
+          colors: isDark
+              ? [
+                  const Color(0xff0F2419),
+                  const Color(0xff162D1F),
+                ]
+              : [
+                  _kEmerald.withValues(alpha: 0.08),
+                  _kEmerald.withValues(alpha: 0.03),
+                ],
         ),
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: _kGold.withValues(alpha: 0.28), width: 1.5),
+        borderRadius: BorderRadius.circular(22.r),
+        border: Border.all(
+          color: _kGold.withValues(alpha: isDark ? 0.30 : 0.22),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: _kGold.withValues(alpha: isDark ? 0.12 : 0.07),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: _kGold.withValues(alpha: isDark ? 0.08 : 0.06),
+            blurRadius: 14,
+            offset: const Offset(0, 5),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // ── Header ────────────────────────────────────────────────────────
-          Row(
-            children: [
-              Container(
-                width: 34.r,
-                height: 34.r,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [_kGoldDeep, _kGold],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+      child: Padding(
+        padding: EdgeInsets.all(18.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ── Header ──────────────────────────────────────────────────────
+            Row(
+              children: [
+                Container(
+                  width: 36.r,
+                  height: 36.r,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [_kGoldDeep, _kGold],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
-                  borderRadius: BorderRadius.circular(10.r),
+                  child: Icon(
+                    isQuran
+                        ? Icons.menu_book_rounded
+                        : Icons.format_quote_rounded,
+                    color: Colors.white,
+                    size: 16.r,
+                  ),
                 ),
-                child: Icon(
-                  isQuran
-                      ? Icons.menu_book_rounded
-                      : Icons.format_quote_rounded,
-                  color: Colors.white,
-                  size: 16.r,
+                SizedBox(width: 10.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        isQuran ? 'Quran' : 'Hadith',
+                        style: TextStyle(
+                          fontFamily: 'kufi',
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w700,
+                          color: _kGold,
+                        ),
+                      ),
+                      Text(
+                        data['reference'] ?? '',
+                        style: TextStyle(
+                          fontFamily: 'kufi',
+                          fontSize: 9.5.sp,
+                          color: _kGold.withValues(alpha: 0.60),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 14.h),
+            // ── Gold divider ─────────────────────────────────────────────────
+            Container(
+              height: 1,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.transparent,
+                    _kGold.withValues(alpha: 0.35),
+                    Colors.transparent,
+                  ],
                 ),
               ),
-              SizedBox(width: 10.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    isQuran ? 'Quran' : 'Hadith',
-                    style: TextStyle(
-                      fontFamily: 'kufi',
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w700,
-                      color: _kGold,
-                    ),
-                  ),
-                  Text(
-                    data['reference'] ?? '',
-                    style: TextStyle(
-                      fontFamily: 'kufi',
-                      fontSize: 9.5.sp,
-                      color: _kGold.withValues(alpha: 0.65),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 14.h),
-          // ── Arabic ────────────────────────────────────────────────────────
-          Text(
-            data['arabic'] ?? '',
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              fontFamily: 'naskh',
-              fontSize: 15.sp,
-              color: theme.hintColor,
-              height: 1.85,
             ),
-          ),
-          SizedBox(height: 10.h),
-          // ── Translation ───────────────────────────────────────────────────
-          Container(
-            padding: EdgeInsets.all(12.r),
-            decoration: BoxDecoration(
-              color: cs.primary.withValues(alpha: isDark ? 0.10 : 0.05),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Text(
-              data['translation'] ?? '',
+            SizedBox(height: 12.h),
+            // ── Arabic text ──────────────────────────────────────────────────
+            Text(
+              data['arabic'] ?? '',
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontFamily: 'kufi',
-                fontSize: 11.5.sp,
-                color: theme.hintColor.withValues(alpha: 0.65),
-                height: 1.60,
-                fontStyle: FontStyle.italic,
+                fontFamily: 'naskh',
+                fontSize: 14.sp,
+                color: theme.hintColor,
+                height: 2.0,
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 10.h),
+            // ── Translation ──────────────────────────────────────────────────
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.w,
+                  vertical: 10.h,
+                ),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : _kEmerald.withValues(alpha: 0.05),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : _kEmerald.withValues(alpha: 0.08),
+                  ),
+                ),
+                child: Text(
+                  data['translation'] ?? '',
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: 'kufi',
+                    fontSize: 11.sp,
+                    color: theme.hintColor.withValues(alpha: 0.65),
+                    height: 1.60,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

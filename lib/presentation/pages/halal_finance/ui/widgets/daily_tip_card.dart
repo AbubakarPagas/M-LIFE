@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// DailyTipCard — featured tip at the top of the page
+// DailyTipCard — featured daily tip at the top of the finance page
 // ─────────────────────────────────────────────────────────────────────────────
 
 import 'package:flutter/material.dart';
@@ -8,6 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'finance_card_painter.dart';
 
 const Color _kGold = Color(0xffCDAD80);
+const Color _kGoldDeep = Color(0xffB8864E);
+const Color _kEmerald = Color(0xff1A5C45);
+const Color _kEmeraldLight = Color(0xff2E8B57);
 
 class DailyTipCard extends StatelessWidget {
   final String icon;
@@ -23,7 +26,6 @@ class DailyTipCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
@@ -31,18 +33,29 @@ class DailyTipCard extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            cs.primary,
-            cs.primary.withValues(alpha: 0.80),
-            cs.primary.withValues(alpha: 0.65),
-          ],
+          colors: isDark
+              ? [
+                  const Color(0xff0A1F16),
+                  const Color(0xff122B1F),
+                  const Color(0xff0D2B1E),
+                ]
+              : [
+                  _kEmerald,
+                  _kEmeraldLight,
+                  const Color(0xff1A6B4A),
+                ],
         ),
         borderRadius: BorderRadius.circular(22.r),
         boxShadow: [
           BoxShadow(
-            color: cs.primary.withValues(alpha: isDark ? 0.30 : 0.22),
-            blurRadius: 18,
-            offset: const Offset(0, 7),
+            color: _kEmerald.withValues(alpha: isDark ? 0.40 : 0.28),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+          BoxShadow(
+            color: _kGold.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -50,19 +63,56 @@ class DailyTipCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(22.r),
         child: Stack(
           children: [
-            // Background pattern
+            // Geometric background pattern
             const Positioned.fill(
               child: CustomPaint(
-                painter: FinanceStarPainter(color: Colors.white, opacity: 0.04),
+                painter: FinanceStarPainter(
+                  color: Colors.white,
+                  opacity: 0.035,
+                ),
               ),
             ),
+            // Top-right decorative ring
+            Positioned(
+              top: -28,
+              right: -28,
+              child: Container(
+                width: 110.r,
+                height: 110.r,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: _kGold.withValues(alpha: 0.14),
+                    width: 1.5,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: -10,
+              right: -10,
+              child: Container(
+                width: 60.r,
+                height: 60.r,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: _kGold.withValues(alpha: 0.10),
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+            // Content
             Padding(
               padding: EdgeInsets.all(18.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Badge
+                  // ── Badge ─────────────────────────────────────────────────
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
@@ -70,10 +120,11 @@ class DailyTipCard extends StatelessWidget {
                           vertical: 4.h,
                         ),
                         decoration: BoxDecoration(
-                          color: _kGold.withValues(alpha: 0.22),
+                          color: _kGold.withValues(alpha: 0.18),
                           borderRadius: BorderRadius.circular(20.r),
                           border: Border.all(
-                            color: _kGold.withValues(alpha: 0.40),
+                            color: _kGold.withValues(alpha: 0.38),
+                            width: 1,
                           ),
                         ),
                         child: Row(
@@ -82,11 +133,11 @@ class DailyTipCard extends StatelessWidget {
                             Icon(
                               Icons.wb_sunny_rounded,
                               color: _kGold,
-                              size: 11.r,
+                              size: 10.r,
                             ),
-                            SizedBox(width: 4.w),
+                            SizedBox(width: 5.w),
                             Text(
-                              'Daily Tip',
+                              'Tip of the Day',
                               style: TextStyle(
                                 fontFamily: 'kufi',
                                 fontSize: 10.sp,
@@ -99,39 +150,65 @@ class DailyTipCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 12.h),
-                  // Icon + title
+                  SizedBox(height: 14.h),
+                  // ── Icon + title ───────────────────────────────────────────
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        icon,
-                        style: TextStyle(fontSize: 28.sp, height: 1.0),
+                      Container(
+                        width: 46.r,
+                        height: 46.r,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.10),
+                          borderRadius: BorderRadius.circular(14.r),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.14),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            icon,
+                            style: TextStyle(fontSize: 22.sp, height: 1.0),
+                          ),
+                        ),
                       ),
-                      SizedBox(width: 12.w),
+                      SizedBox(width: 14.w),
                       Expanded(
                         child: Text(
                           title,
                           style: TextStyle(
                             fontFamily: 'kufi',
-                            fontSize: 16.sp,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w800,
                             color: Colors.white,
-                            height: 1.3,
+                            height: 1.35,
                           ),
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 12.h),
+                  // ── Divider ────────────────────────────────────────────────
+                  Container(
+                    height: 1,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          _kGold.withValues(alpha: 0.40),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 10.h),
-                  // Body
+                  // ── Body text ──────────────────────────────────────────────
                   Text(
                     body,
                     style: TextStyle(
                       fontFamily: 'kufi',
                       fontSize: 12.sp,
-                      color: Colors.white.withValues(alpha: 0.80),
-                      height: 1.6,
+                      color: Colors.white.withValues(alpha: 0.78),
+                      height: 1.65,
                     ),
                   ),
                 ],

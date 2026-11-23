@@ -10,5 +10,53 @@
         "description": "search_hint",
         "type": "text",
         "placeholders": {}
-    }
+    },
+
+  "hadith_m1_part1": "",
+  "hadith_m1_part2": "The best fasting after Ramadan is the month of Allah, Muharram, and the best prayer after the obligatory prayer is the night prayer.\n",
+  "hadith_m1_book": "Narrated by: Abu Hurairah | Authenticated by: Muslim | Source: Sahih Muslim | Page or Number: 1163",
+
+  "hadith_m2_part1": "The Companions of the Prophet ﷺ used to learn this supplication just as they learned the Quran, to say when a new month or year began: ",
+  "hadith_m2_part2": "O Allah, bring it upon us with security, faith, safety, Islam, protection from Shaytan, and the pleasure of the Most Merciful.\n",
+  "hadith_m2_book": "Narrated by: Abdullah ibn Hisham | Authenticated by: Ibn Hajar al-Asqalani | Source: Al-Isabah | Page or Number: 2/378",
+
+  "hadith_m3_part1": "",
+  "hadith_m3_part2": "",
+  "hadith_m3_book": "",
+
+  "hadith_m4_part1": "",
+  "hadith_m4_part2": "",
+  "hadith_m4_book": "",
+
+  "hadith_m5_part1": "",
+  "hadith_m5_part2": "",
+  "hadith_m5_book": "",
+
+  "hadith_m6_part1": "",
+  "hadith_m6_part2": "",
+  "hadith_m6_book": "",
+
+  "hadith_m7_part1": "",
+  "hadith_m7_part2": "Time has come back to its original state which it had when Allah created the heavens and the earth; the year consists of twelve months, of which four are sacred — three are in succession: Dhul-Qa'dah, Dhul-Hijjah and Muharram, and Rajab of Mudar, which comes between Jumada and Sha'ban.\n",
+  "hadith_m7_book": "Narrated by: Abu Bakra Nufai | Authenticated by: Al-Bukhari | Source: Sahih al-Bukhari | Page or Number: 3197",
+
+  "hadith_m8_part1": "",
+  "hadith_m8_part2": "Aisha (may Allah be pleased with her) said: The Messenger of Allah ﷺ used to fast until we thought he would never stop fasting, and he used not to fast until we thought he would never fast. I never saw the Messenger of Allah ﷺ complete the fast of an entire month except for Ramadan, and I never saw him fast more in any month than he fasted in Sha'ban.\n",
+  "hadith_m8_book": "Narrated by: Aisha (Mother of the Believers) | Authenticated by: Al-Bukhari | Source: Sahih al-Bukhari | Page or Number: 1969",
+
+  "hadith_m9_part1": "",
+  "hadith_m9_part2": "Whoever stands in prayer during Ramadan out of faith and hope of reward, all his previous sins will be forgiven.\n",
+  "hadith_m9_book": "Narrated by: Abu Hurairah | Authenticated by: Al-Bukhari | Source: Sahih al-Bukhari | Page or Number: 37",
+
+  "hadith_m10_part1": "",
+  "hadith_m10_part2": "Whoever fasts Ramadan and then follows it with six days of Shawwal, it will be as if he fasted for a lifetime.\n",
+  "hadith_m10_book": "Narrated by: Abu Ayyub al-Ansari | Authenticated by: Muslim | Source: Sahih Muslim | Page or Number: 1164",
+
+  "hadith_m11_part1": "",
+  "hadith_m11_part2": "Time has come back to its original state which it had when Allah created the heavens and the earth; the year consists of twelve months, of which four are sacred — three are in succession: Dhul-Qa'dah, Dhul-Hijjah and Muharram, and Rajab of Mudar, which comes between Jumada and Sha'ban.\n",
+  "hadith_m11_book": "Narrated by: Abu Bakra Nufai | Authenticated by: Al-Bukhari | Source: Sahih al-Bukhari | Page or Number: 3197",
+
+  "hadith_m12_part1": "",
+  "hadith_m12_part2": "Two months do not diminish — the months of two Eids: Ramadan and Dhul-Hijjah.\n",
+  "hadith_m12_book": "Narrated by: Abu Bakra Nufai | Authenticated by: Al-Bukhari | Source: Sahih al-Bukhari | Page or Number: 1912"
 }

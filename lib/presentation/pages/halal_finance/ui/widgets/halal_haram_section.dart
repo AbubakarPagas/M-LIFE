@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// HalalHaramSection — two expandable cards for halal / haram practices
+// HalalHaramSection — expandable halal / haram practices cards
 // ─────────────────────────────────────────────────────────────────────────────
 
 import 'package:flutter/material.dart';
@@ -7,8 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/models/halal_haram_model.dart';
 
-const Color _kGreen = Color(0xff2E7D32);
+const Color _kGold = Color(0xffCDAD80);
+const Color _kGreen = Color(0xff1A5C45);
+const Color _kGreenLight = Color(0xff2E8B57);
 const Color _kRed = Color(0xffC62828);
+const Color _kRedLight = Color(0xffE53935);
 
 class HalalHaramSection extends StatelessWidget {
   final List<HalalHaramEntry> halalEntries;
@@ -25,23 +28,19 @@ class HalalHaramSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionHeader(
+        _SectionHeader(
           icon: Icons.balance_rounded,
           title: 'Halal vs Haram',
           subtitle: 'Islamic financial practices explained',
         ),
-        SizedBox(height: 12.h),
+        SizedBox(height: 14.h),
         _ExpandableCard(
-          title: '✅ Halal Practices',
-          subtitle: '${halalEntries.length} permitted activities',
-          headerColor: _kGreen,
+          isHalal: true,
           entries: halalEntries,
         ),
         SizedBox(height: 10.h),
         _ExpandableCard(
-          title: '❌ Haram Practices',
-          subtitle: '${haramEntries.length} prohibited activities',
-          headerColor: _kRed,
+          isHalal: false,
           entries: haramEntries,
         ),
       ],
@@ -49,16 +48,15 @@ class HalalHaramSection extends StatelessWidget {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Expandable card
+// ─────────────────────────────────────────────────────────────────────────────
 class _ExpandableCard extends StatefulWidget {
-  final String title;
-  final String subtitle;
-  final Color headerColor;
+  final bool isHalal;
   final List<HalalHaramEntry> entries;
 
   const _ExpandableCard({
-    required this.title,
-    required this.subtitle,
-    required this.headerColor,
+    required this.isHalal,
     required this.entries,
   });
 
@@ -72,6 +70,9 @@ class _ExpandableCardState extends State<_ExpandableCard>
   late final AnimationController _anim;
   late final Animation<double> _rotate;
 
+  Color get _primary => widget.isHalal ? _kGreen : _kRed;
+  Color get _secondary => widget.isHalal ? _kGreenLight : _kRedLight;
+
   @override
   void initState() {
     super.initState();
@@ -79,10 +80,9 @@ class _ExpandableCardState extends State<_ExpandableCard>
       vsync: this,
       duration: const Duration(milliseconds: 250),
     );
-    _rotate = Tween<double>(
-      begin: 0,
-      end: 0.5,
-    ).animate(CurvedAnimation(parent: _anim, curve: Curves.easeOut));
+    _rotate = Tween<double>(begin: 0, end: 0.5).animate(
+      CurvedAnimation(parent: _anim, curve: Curves.easeOut),
+    );
   }
 
   @override
@@ -93,11 +93,7 @@ class _ExpandableCardState extends State<_ExpandableCard>
 
   void _toggle() {
     setState(() => _expanded = !_expanded);
-    if (_expanded) {
-      _anim.forward();
-    } else {
-      _anim.reverse();
-    }
+    _expanded ? _anim.forward() : _anim.reverse();
   }
 
   @override
@@ -105,7 +101,6 @@ class _ExpandableCardState extends State<_ExpandableCard>
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
-    final color = widget.headerColor;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
@@ -114,17 +109,17 @@ class _ExpandableCardState extends State<_ExpandableCard>
         borderRadius: BorderRadius.circular(18.r),
         border: Border.all(
           color: _expanded
-              ? color.withValues(alpha: isDark ? 0.35 : 0.25)
-              : color.withValues(alpha: isDark ? 0.15 : 0.10),
+              ? _primary.withValues(alpha: isDark ? 0.32 : 0.22)
+              : _primary.withValues(alpha: isDark ? 0.14 : 0.09),
           width: _expanded ? 1.5 : 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: color.withValues(
+            color: _primary.withValues(
               alpha: _expanded ? (isDark ? 0.10 : 0.06) : 0.02,
             ),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -139,17 +134,28 @@ class _ExpandableCardState extends State<_ExpandableCard>
               child: Row(
                 children: [
                   Container(
-                    width: 40.r,
-                    height: 40.r,
+                    width: 42.r,
+                    height: 42.r,
                     decoration: BoxDecoration(
-                      color: color.withValues(alpha: isDark ? 0.18 : 0.10),
-                      borderRadius: BorderRadius.circular(12.r),
+                      gradient: LinearGradient(
+                        colors: [
+                          _primary.withValues(alpha: isDark ? 0.30 : 0.15),
+                          _secondary.withValues(alpha: isDark ? 0.18 : 0.08),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(13.r),
+                      border: Border.all(
+                        color:
+                            _primary.withValues(alpha: isDark ? 0.22 : 0.14),
+                      ),
                     ),
                     child: Icon(
-                      widget.title.startsWith('✅')
+                      widget.isHalal
                           ? Icons.check_circle_outline_rounded
                           : Icons.cancel_outlined,
-                      color: color,
+                      color: _primary,
                       size: 19.r,
                     ),
                   ),
@@ -159,32 +165,44 @@ class _ExpandableCardState extends State<_ExpandableCard>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.title,
+                          widget.isHalal
+                              ? 'Halal Practices'
+                              : 'Haram Practices',
                           style: TextStyle(
                             fontFamily: 'kufi',
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w700,
-                            color: color,
+                            color: _primary,
                           ),
                         ),
                         SizedBox(height: 2.h),
                         Text(
-                          widget.subtitle,
+                          widget.isHalal
+                              ? '${widget.entries.length} permitted activities'
+                              : '${widget.entries.length} prohibited activities',
                           style: TextStyle(
                             fontFamily: 'kufi',
                             fontSize: 10.sp,
-                            color: theme.hintColor.withValues(alpha: 0.45),
+                            color: theme.hintColor.withValues(alpha: 0.42),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  RotationTransition(
-                    turns: _rotate,
-                    child: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: color.withValues(alpha: 0.60),
-                      size: 22.r,
+                  Container(
+                    width: 28.r,
+                    height: 28.r,
+                    decoration: BoxDecoration(
+                      color: _primary.withValues(alpha: isDark ? 0.12 : 0.07),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: RotationTransition(
+                      turns: _rotate,
+                      child: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: _primary.withValues(alpha: 0.70),
+                        size: 20.r,
+                      ),
                     ),
                   ),
                 ],
@@ -196,13 +214,15 @@ class _ExpandableCardState extends State<_ExpandableCard>
             firstChild: const SizedBox.shrink(),
             secondChild: Column(
               children: [
-                Divider(height: 1, color: color.withValues(alpha: 0.12)),
+                Divider(
+                  height: 1,
+                  color: _primary.withValues(alpha: 0.10),
+                ),
                 ...widget.entries.asMap().entries.map((e) {
-                  final isLast = e.key == widget.entries.length - 1;
                   return _EntryTile(
                     entry: e.value,
-                    color: color,
-                    showDivider: !isLast,
+                    color: _primary,
+                    showDivider: e.key < widget.entries.length - 1,
                   );
                 }),
               ],
@@ -218,6 +238,9 @@ class _ExpandableCardState extends State<_ExpandableCard>
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Entry tile
+// ─────────────────────────────────────────────────────────────────────────────
 class _EntryTile extends StatelessWidget {
   final HalalHaramEntry entry;
   final Color color;
@@ -242,10 +265,13 @@ class _EntryTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 7.r,
-                height: 7.r,
-                margin: EdgeInsets.only(top: 5.h),
-                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                width: 8.r,
+                height: 8.r,
+                margin: EdgeInsets.only(top: 4.h),
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                ),
               ),
               SizedBox(width: 10.w),
               Expanded(
@@ -272,16 +298,26 @@ class _EntryTile extends StatelessWidget {
                       ),
                     ),
                     if (entry.reference != null) ...[
-                      SizedBox(height: 5.h),
-                      Text(
-                        entry.reference!,
-                        style: TextStyle(
-                          fontFamily: 'kufi',
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
-                          color: color.withValues(alpha: 0.70),
-                          fontStyle: FontStyle.italic,
-                        ),
+                      SizedBox(height: 6.h),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.menu_book_rounded,
+                            size: 10.r,
+                            color: color.withValues(alpha: 0.60),
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            entry.reference!,
+                            style: TextStyle(
+                              fontFamily: 'kufi',
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                              color: color.withValues(alpha: 0.70),
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ],
@@ -293,7 +329,7 @@ class _EntryTile extends StatelessWidget {
         if (showDivider)
           Divider(
             height: 1,
-            indent: 33.w,
+            indent: 34.w,
             endIndent: 16.w,
             color: cs.primary.withValues(alpha: 0.06),
           ),
@@ -302,6 +338,9 @@ class _EntryTile extends StatelessWidget {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Section header
+// ─────────────────────────────────────────────────────────────────────────────
 class _SectionHeader extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -324,10 +363,10 @@ class _SectionHeader extends StatelessWidget {
           width: 36.r,
           height: 36.r,
           decoration: BoxDecoration(
-            color: cs.primary.withValues(alpha: 0.10),
+            color: _kGold.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(10.r),
           ),
-          child: Icon(icon, color: cs.primary, size: 17.r),
+          child: Icon(icon, color: _kGold, size: 17.r),
         ),
         SizedBox(width: 10.w),
         Column(
