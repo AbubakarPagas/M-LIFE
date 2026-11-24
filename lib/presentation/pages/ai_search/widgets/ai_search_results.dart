@@ -7,79 +7,35 @@ class AiSearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final primary = theme.primaryColor;
+    final surface = theme.colorScheme.surface;
+
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.primary,
-      appBar: AppBarWidget(
-        isTitled: false,
-        isFontSize: false,
-        searchButton: _buildAppBarActions(context),
-        isNotifi: false,
-        isBooks: false,
-        // isBackToHome: true,
-        // arrowBackColor: context.theme.canvasColor,
-        color: Colors.transparent, title: '',
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Obx(() {
-            // بدّل المحتوى بحسب الوضع النشط.
-            if (ctrl.state.midasMode.value == MidasMode.assistant) {
-              return _buildAssistantMode(context);
-            }
-            return _buildSemanticMode(context);
-          }),
-        ),
+      backgroundColor: primary,
+      body: Column(
+        children: [
+          // ── Custom header ────────────────────────────────────────────────
+          _MidadHeader(primary: primary, surface: surface),
+          // ── Body ─────────────────────────────────────────────────────────
+          Expanded(
+            child: SafeArea(
+              top: false,
+              child: Obx(() {
+                if (ctrl.state.midasMode.value == MidasMode.assistant) {
+                  return _buildAssistantMode(context);
+                }
+                return _buildSemanticMode(context);
+              }),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  /// أزرار الـ AppBar: تبديل الوضع + محادثة جديدة (مساعد) + سجل المحادثة.
-  Widget _buildAppBarActions(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // زر تبديل الوضع (دلالي ↔ مساعد).
-        Obx(() {
-          final isAssistant = ctrl.state.midasMode.value == MidasMode.assistant;
-          return CustomButton(
-            // tooltip: isAssistant ? 'semanticMode'.tr : 'assistantMode'.tr,
-            onPressed: () {
-              ctrl.state.midasMode.value = isAssistant
-                  ? MidasMode.semantic
-                  : MidasMode.assistant;
-            },
-            isCustomSvgColor: true,
-            svgColor: context.theme.canvasColor,
-            svgPath: isAssistant
-                ? SvgPath.svgHomeOffline
-                : SvgPath.svgHomeAiMcp,
-          );
-        }),
-        const Gap(6),
-        // زر "محادثة جديدة".
-        CustomButton(
-          onPressed: () => ctrl.clearConversation(),
-          isCustomSvgColor: true,
-          svgPath: SvgPath.svgHomeNewChat,
-          svgColor: context.theme.canvasColor,
-        ),
-        const Gap(6),
-        // سجل المحادثة — يظهر في الوضعين (موحّد).
-        CustomButton(
-          // tooltip: 'newChat'.tr,
-          onPressed: () => customBottomSheet(const ChatHistorySheet()),
-          isCustomSvgColor: true,
-          svgPath: SvgPath.svgHomeHistory,
-          svgColor: context.theme.canvasColor,
-        ),
-        const Gap(8),
-      ],
-    );
-  }
-
-  /// وضع البحث الدلالي (الموجود سابقاً) — يحافظ على كل سلوكه.
+  // ── Semantic (vector) mode ─────────────────────────────────────────────────
   Widget _buildSemanticMode(BuildContext context) {
-    // Init AI search only when screen opens (not on app start).
     ctrl.ensureInitialized();
     return Stack(
       alignment: Alignment.center,
@@ -88,14 +44,8 @@ class AiSearchResults extends StatelessWidget {
           children: [
             Expanded(child: Center(child: _buildContent(context, ctrl))),
             Obx(() {
-              // شريط الإدخال يظهر فقط عند تحميل قسم محلي.
-              if (!ctrl.state.hasAnySectionLoaded) {
-                return const SizedBox.shrink();
-              }
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: InputBarWidget(),
-              );
+              if (!ctrl.state.hasAnySectionLoaded) return const SizedBox.shrink();
+              return _buildInputArea(context);
             }),
           ],
         ),
@@ -104,115 +54,135 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// وضع المساعد الموحَّد — يجمع القرآن وعلومه والأقسام الشرعية.
+  // ── AI assistant mode ──────────────────────────────────────────────────────
   Widget _buildAssistantMode(BuildContext context) {
     return Obx(() {
-      final controller = ConnectionController.instance;
-      if (!controller.isOnline) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const IconWidget(isOnlineMode: true),
-            const Gap(8),
-            Text(
-              'noInternet'.tr,
-              style: AppTextStyles.titleMedium(
-                fontSize: 22,
-                color: context.theme.colorScheme.surface,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            customLottie(LottieConstants.assetsLottieNoInternet, width: 90.0),
-          ],
-        );
+      final online = ConnectionController.instance.isOnline;
+      if (!online) {
+        return _buildOfflineState(context);
       }
       return Column(
         children: [
           Expanded(child: UnifiedAssistantView()),
-          Align(alignment: Alignment.bottomCenter, child: InputBarWidget()),
+          _buildInputArea(context),
         ],
       );
     });
   }
 
+  Widget _buildOfflineState(BuildContext context) {
+    final surface = context.theme.colorScheme.surface;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const IconWidget(isOnlineMode: true),
+        const Gap(8),
+        Text(
+          'noInternet'.tr,
+          style: AppTextStyles.titleMedium(
+            fontSize: 22,
+            color: surface,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        customLottie(LottieConstants.assetsLottieNoInternet, width: 90.0),
+      ],
+    );
+  }
+
+  // ── Shared input area: InputBarWidget wrapped in a styled surface ──────────
+  Widget _buildInputArea(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: context.theme.primaryColor,
+        border: Border(
+          top: BorderSide(
+            color: context.theme.colorScheme.surface.withValues(alpha: 0.08),
+          ),
+        ),
+      ),
+      child: InputBarWidget(),
+    );
+  }
+
+  // ── Content dispatcher ─────────────────────────────────────────────────────
   Widget _buildContent(BuildContext context, AiSearchController ctrl) {
-    // Show loading while initializing
     if (!ctrl.isInitialized.value) {
       return _buildInitializing(context, ctrl);
     }
-
     if (!ctrl.state.hasAnySectionLoaded) {
       return _buildSectionDownloadPrompt(context, ctrl);
     }
-
     if (ctrl.state.isLoading.value) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(
+        child: CircularProgressIndicator(
+          color: context.theme.colorScheme.surface,
+          strokeWidth: 2,
+        ),
+      );
     }
-
     final hasResults = SearchSection.all.any(
       (s) => ctrl.state.sectionResults(s.id).isNotEmpty,
     );
-
     if (!ctrl.state.isSearching.value && !hasResults) {
       if (ctrl.state.searchTextEditing.text.isNotEmpty && hasResults) {
         return _buildNoResults(context, ctrl);
       }
       return _buildEmptyState(context, ctrl);
     }
-
     return _buildGroupedResults(context, ctrl);
   }
 
-  /// Empty state
+  // ── Empty/welcome state ────────────────────────────────────────────────────
   Widget _buildEmptyState(BuildContext context, AiSearchController ctrl) {
+    final surface = context.theme.colorScheme.surface;
     return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
       child: Column(
-        mainAxisSize: .min,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                const IconWidget(),
-                Text(
-                  'startSearchPrompt'.tr,
-                  style: AppTextStyles.titleMedium(
-                    fontSize: 16,
-                    color: context.theme.colorScheme.surface,
-                  ),
-                ),
-                const Gap(32),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    'ما فضل صلاة الليل؟',
-                    'أحكام الزكاة',
-                    'أدلة على وجود الله',
-                    'كيفية الوضوء',
-                    'فضل سورة البقرة',
-                  ].map((s) => _suggestionChip(context, s)).toList(),
-                ),
-                const Gap(32),
-              ],
+          const IconWidget(),
+          Text(
+            'startSearchPrompt'.tr,
+            style: AppTextStyles.titleMedium(
+              fontSize: 15,
+              color: surface.withValues(alpha: 0.85),
             ),
+            textAlign: TextAlign.center,
           ),
+          const Gap(28),
+          _buildSuggestionGrid(context, [
+            'ما فضل صلاة الليل؟',
+            'أحكام الزكاة',
+            'أدلة على وجود الله',
+            'كيفية الوضوء',
+            'فضل سورة البقرة',
+          ]),
+          const Gap(28),
           const MidadNoteWidget(),
         ],
       ),
     );
   }
 
+  Widget _buildSuggestionGrid(BuildContext context, List<String> suggestions) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      alignment: WrapAlignment.center,
+      children: suggestions.map((s) => _suggestionChip(context, s)).toList(),
+    );
+  }
+
   Widget _suggestionChip(
     BuildContext context,
     String text, {
-    bool? withArrow = false,
+    bool withArrow = false,
   }) {
     return ContainerButton(
       title: text,
-      horizontalPadding: 8.0,
+      horizontalPadding: 10.0,
       withArrow: withArrow,
       backgroundColor: context.theme.colorScheme.surface,
       titleStyle: AppTextStyles.titleSmall(color: Colors.black),
@@ -223,96 +193,85 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Section download prompt — welcome screen
+  // ── Section download prompt ────────────────────────────────────────────────
   Widget _buildSectionDownloadPrompt(
     BuildContext context,
     AiSearchController ctrl,
   ) {
+    final surface = context.theme.colorScheme.surface;
+    final error = context.theme.colorScheme.error;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Icon
             const SizedBox().customSvg(SvgPath.svgHomeMidadIcon, height: 70),
             const Gap(12),
-            // Title
             Text(
               'midadWelcome'.tr,
               style: AppTextStyles.titleMedium(
                 fontSize: 12,
-                color: context.theme.colorScheme.surface,
+                color: surface,
               ),
               textAlign: TextAlign.center,
             ),
             const Gap(8),
-            // Description
             Text(
               'midadWelcomeDesc'.tr,
               style: AppTextStyles.titleMedium(
                 fontSize: 14,
-                color: context.theme.colorScheme.surface.withValues(alpha: 0.7),
+                color: surface.withValues(alpha: 0.7),
               ),
               textAlign: TextAlign.center,
             ),
             const Gap(20),
-            // Instruction
             Text(
               'midadSelectSections'.tr,
               style: AppTextStyles.titleMedium(
                 fontSize: 14,
-                color: context.theme.colorScheme.surface.withValues(alpha: 0.9),
+                color: surface.withValues(alpha: 0.9),
               ),
               textAlign: TextAlign.center,
             ),
             const Gap(16),
-            // Shared files card (must download first)
-            if (!ctrl.state.isSharedLoaded.value)
-              SharedDownloadCard(onDownload: () => ctrl.downloadShared())
-            else
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.check_circle_rounded,
-                      size: 18,
-                      color: context.theme.colorScheme.surface.withValues(
-                        alpha: 0.6,
-                      ),
-                    ),
-                    const Gap(8),
-                    Text(
-                      'sharedFilesReady'.tr,
-                      style: AppTextStyles.titleMedium(
-                        fontSize: 13,
-                        color: context.theme.colorScheme.surface.withValues(
-                          alpha: 0.6,
+            Obx(() => !ctrl.state.isSharedLoaded.value
+                ? SharedDownloadCard(onDownload: () => ctrl.downloadShared())
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Row(
+                      children: [
+                        Icon(Icons.check_circle_rounded,
+                            size: 18,
+                            color: surface.withValues(alpha: 0.6)),
+                        const Gap(8),
+                        Text(
+                          'sharedFilesReady'.tr,
+                          style: AppTextStyles.titleMedium(
+                            fontSize: 13,
+                            color: surface.withValues(alpha: 0.6),
+                          ),
                         ),
+                      ],
+                    ),
+                  )),
+            Obx(() => !ctrl.state.isSharedLoaded.value
+                ? Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      'sharedFilesRequired'.tr,
+                      style: AppTextStyles.titleMedium(
+                        fontSize: 12,
+                        color: error.withValues(alpha: 0.7),
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
-              ),
-            if (!ctrl.state.isSharedLoaded.value)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  'sharedFilesRequired'.tr,
-                  style: AppTextStyles.titleMedium(
-                    fontSize: 12,
-                    color: context.theme.colorScheme.error.withValues(
-                      alpha: 0.7,
-                    ),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            // Section cards
+                  )
+                : const SizedBox.shrink()),
             ...SearchSection.all.map(
               (section) => SectionDownloadCard(
                 section: section,
@@ -320,13 +279,13 @@ class AiSearchResults extends StatelessWidget {
               ),
             ),
             const Gap(12),
-            // Download all button
             Obx(() {
-              if (!ctrl.state.isSharedLoaded.value)
+              if (!ctrl.state.isSharedLoaded.value) {
                 return const SizedBox.shrink();
-              final hasUndownloaded = SearchSection.all.any((s) {
-                return !ctrl.state.isSectionLoaded(s.id).value;
-              });
+              }
+              final hasUndownloaded = SearchSection.all.any(
+                (s) => !ctrl.state.isSectionLoaded(s.id).value,
+              );
               if (!hasUndownloaded) return const SizedBox.shrink();
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -334,30 +293,22 @@ class AiSearchResults extends StatelessWidget {
                   width: double.infinity,
                   child: TextButton.icon(
                     onPressed: () => ctrl.downloadAllSections(ctrl),
-                    icon: Icon(
-                      Icons.download_rounded,
-                      size: 18,
-                      color: context.theme.colorScheme.surface.withValues(
-                        alpha: 0.8,
-                      ),
-                    ),
+                    icon: Icon(Icons.download_rounded,
+                        size: 18,
+                        color: surface.withValues(alpha: 0.8)),
                     label: Text(
                       'downloadAll'.tr,
                       style: AppTextStyles.titleMedium(
                         fontSize: 14,
-                        color: context.theme.colorScheme.surface.withValues(
-                          alpha: 0.8,
-                        ),
+                        color: surface.withValues(alpha: 0.8),
                       ),
                     ),
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                         side: BorderSide(
-                          color: context.theme.colorScheme.surface.withValues(
-                            alpha: 0.2,
-                          ),
+                          color: surface.withValues(alpha: 0.2),
                         ),
                       ),
                     ),
@@ -366,12 +317,11 @@ class AiSearchResults extends StatelessWidget {
               );
             }),
             const Gap(16),
-            // Hint text
             Text(
               'midadLaterHint'.tr,
               style: AppTextStyles.titleMedium(
                 fontSize: 12,
-                color: context.theme.colorScheme.surface.withValues(alpha: 0.4),
+                color: surface.withValues(alpha: 0.4),
               ),
               textAlign: TextAlign.center,
             ),
@@ -381,10 +331,11 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Initializing indicator (shown while loading model + sections)
+  // ── Initializing state ─────────────────────────────────────────────────────
   Widget _buildInitializing(BuildContext context, AiSearchController ctrl) {
+    final surface = context.theme.colorScheme.surface;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -396,7 +347,7 @@ class AiSearchResults extends StatelessWidget {
             'initializingMidad'.tr,
             style: AppTextStyles.titleMedium(
               fontSize: 15,
-              color: context.theme.colorScheme.surface,
+              color: surface,
             ),
           ),
           const Gap(8),
@@ -404,7 +355,7 @@ class AiSearchResults extends StatelessWidget {
             'initializingMidadDesc'.tr,
             style: AppTextStyles.titleMedium(
               fontSize: 13,
-              color: context.theme.colorScheme.surface.withValues(alpha: 0.5),
+              color: surface.withValues(alpha: 0.5),
             ),
           ),
         ],
@@ -412,18 +363,20 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
+  // ── No results state ───────────────────────────────────────────────────────
   Widget _buildNoResults(BuildContext context, AiSearchController ctrl) {
+    final surface = context.theme.colorScheme.surface;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const IconWidget(),
             Icon(
-              Icons.search_off,
+              Icons.search_off_rounded,
               size: 48,
-              color: context.theme.colorScheme.surface.withValues(alpha: 0.5),
+              color: surface.withValues(alpha: 0.5),
             ),
             const Gap(6),
             Text(
@@ -431,7 +384,7 @@ class AiSearchResults extends StatelessWidget {
               style: AppTextStyles.titleMedium(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: context.theme.colorScheme.surface.withValues(alpha: 0.9),
+                color: surface.withValues(alpha: 0.9),
               ),
             ),
             const Gap(8),
@@ -439,7 +392,7 @@ class AiSearchResults extends StatelessWidget {
               'tryDifferentQuery'.tr,
               style: AppTextStyles.titleMedium(
                 fontSize: 13,
-                color: context.theme.colorScheme.surface.withValues(alpha: 0.7),
+                color: surface.withValues(alpha: 0.7),
               ),
             ),
           ],
@@ -448,7 +401,7 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Grouped results
+  // ── Grouped results ────────────────────────────────────────────────────────
   Widget _buildGroupedResults(BuildContext context, AiSearchController ctrl) {
     final query = ctrl.state.searchTextEditing.text.trim().isEmpty
         ? ctrl.state.currentQuery.value
@@ -461,19 +414,13 @@ class AiSearchResults extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16, bottom: 16),
           children: [
             const IconWidget(),
-            // User query bubble
             if (query.isNotEmpty) _buildUserQuery(context, query),
             const Gap(12),
-
-            // Streaming intro text (ChatGPT-style)
             if (!ctrl.state.introStreamed.value)
               _buildStreamingIntro(context, ctrl, query)
             else if (ctrl.state.hasAnyResult)
               _buildStaticIntro(context, ctrl, query),
-
             const Gap(16),
-
-            // Results per section — after intro streaming completes
             if (ctrl.state.introStreamed.value)
               for (final section in SearchSection.all) ...[
                 if (ctrl.state.sectionResults(section.id).isNotEmpty)
@@ -493,8 +440,6 @@ class AiSearchResults extends StatelessWidget {
                     'جاري البحث في ${section.titleAr}...',
                   ),
               ],
-
-            // Follow-up suggestions
             if (ctrl.state.allResultsReady.value) ...[
               const Gap(16),
               _buildFollowUpSuggestions(context, query),
@@ -506,26 +451,28 @@ class AiSearchResults extends StatelessWidget {
   }
 
   Widget _buildUserQuery(BuildContext context, String query) {
+    final surface = context.theme.colorScheme.surface;
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        margin: const EdgeInsets.only(right: 16, left: 48),
+        margin: const EdgeInsets.only(right: 20, left: 48),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: context.theme.colorScheme.surface.withValues(alpha: 0.08),
+          color: surface.withValues(alpha: 0.08),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
             bottomRight: Radius.circular(4),
             bottomLeft: Radius.circular(16),
           ),
+          border: Border.all(color: surface.withValues(alpha: 0.1)),
         ),
         child: Text(
           query,
           style: AppTextStyles.titleMedium(
             fontSize: 15,
             height: 1.4,
-            color: context.theme.colorScheme.surface,
+            color: surface,
           ),
         ),
       ),
@@ -533,8 +480,9 @@ class AiSearchResults extends StatelessWidget {
   }
 
   Widget _buildSearchingIndicator(BuildContext context, String text) {
+    final surface = context.theme.colorScheme.surface;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
       child: Row(
         children: [
           SizedBox(
@@ -542,7 +490,7 @@ class AiSearchResults extends StatelessWidget {
             height: 14,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: context.theme.colorScheme.surface.withValues(alpha: 0.3),
+              color: surface.withValues(alpha: 0.3),
             ),
           ),
           const Gap(10),
@@ -550,7 +498,7 @@ class AiSearchResults extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 13,
-              color: context.theme.colorScheme.surface.withValues(alpha: 0.4),
+              color: surface.withValues(alpha: 0.4),
             ),
           ),
         ],
@@ -560,9 +508,8 @@ class AiSearchResults extends StatelessWidget {
 
   Widget _buildFollowUpSuggestions(BuildContext context, String query) {
     final suggestions = _generateFollowUpSuggestions(query);
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Wrap(
         spacing: 8,
         runSpacing: 8,
@@ -573,160 +520,57 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Generate dynamic follow-up suggestions based on query type
   List<String> _generateFollowUpSuggestions(String query) {
     final lower = query.trim().toLowerCase();
     final topic = _extractTopic(query.trim());
 
-    // --- فضائل وأعمال ---
     if (_matchesAny(lower, ['فضل', 'فضلها', 'فوائد', 'ثواب', 'أجر', 'فائدة'])) {
       return ['أحاديث عن $topic', '$topic في القرآن الكريم', 'كيفية $topic'];
     }
-
-    // --- أحكام وفقه ---
-    if (_matchesAny(lower, [
-      'أحكام',
-      'حكم',
-      'كيف',
-      'كيفية',
-      'شروط',
-      'واجب',
-      'سنة',
-      'مستحب',
-      'مكروه',
-      'حرام',
-      'حلال',
-    ])) {
+    if (_matchesAny(lower, ['أحكام', 'حكم', 'كيف', 'كيفية', 'شروط', 'واجب', 'سنة', 'مستحب', 'مكروه', 'حرام', 'حلال'])) {
       return ['أدلة $topic من السنة', '$topic في القرآن الكريم', 'شروط $topic'];
     }
-
-    // --- عقيدة ---
-    if (_matchesAny(lower, [
-      'عقيدة',
-      'توحيد',
-      'إيمان',
-      'إله',
-      'الله',
-      'قدر',
-      'قضاء',
-      'يوم القيامة',
-      'جنة',
-      'نار',
-    ])) {
-      return [
-        'أدلة $topic من القرآن',
-        'أحاديث عن $topic',
-        '$topic عند أهل السنة',
-      ];
+    if (_matchesAny(lower, ['عقيدة', 'توحيد', 'إيمان', 'إله', 'الله', 'قدر', 'قضاء', 'يوم القيامة', 'جنة', 'نار'])) {
+      return ['أدلة $topic من القرآن', 'أحاديث عن $topic', '$topic عند أهل السنة'];
     }
-
-    // --- سيرة ---
-    if (_matchesAny(lower, [
-      'غزوة',
-      'سيرة',
-      'النبي',
-      'الرسول',
-      'صحابي',
-      'معركة',
-      'فتح',
-      'هجرة',
-    ])) {
+    if (_matchesAny(lower, ['غزوة', 'سيرة', 'النبي', 'الرسول', 'صحابي', 'معركة', 'فتح', 'هجرة'])) {
       return ['الدروس المستفادة من $topic', 'أحداث $topic', 'أحاديث عن $topic'];
     }
-
-    // --- تفسير ---
     if (_matchesAny(lower, ['تفسير', 'معنى', 'آية', 'سورة', 'تأويل'])) {
       return ['أسباب نزول $topic', '$topic في كتب التفسير', 'فضل $topic'];
     }
-
-    // --- أدلة ---
     if (_matchesAny(lower, ['أدلة', 'دليل', 'برهان', 'حجة'])) {
-      return [
-        'أحاديث عن $topic',
-        '$topic في القرآن الكريم',
-        'أقوال العلماء في $topic',
-      ];
+      return ['أحاديث عن $topic', '$topic في القرآن الكريم', 'أقوال العلماء في $topic'];
     }
-
-    // --- حديث ---
-    if (_matchesAny(lower, [
-      'حديث',
-      'أحاديث',
-      'رواه',
-      'البخاري',
-      'مسلم',
-      'سند',
-    ])) {
+    if (_matchesAny(lower, ['حديث', 'أحاديث', 'رواه', 'البخاري', 'مسلم', 'سند'])) {
       return ['درجة حديث $topic', 'شرح $topic', '$topic في كتب السنة'];
     }
-
-    // --- مقارنة ---
     if (_matchesAny(lower, ['فرق', 'مقارنة', 'أيهما', 'أفضل', 'الصحيح'])) {
-      return [
-        'أدلة $topic',
-        'أقوال العلماء في $topic',
-        '$topic في القرآن والسنة',
-      ];
+      return ['أدلة $topic', 'أقوال العلماء في $topic', '$topic في القرآن والسنة'];
     }
-
-    // --- افتراضي ---
-    return [
-      'أحاديث عن $topic',
-      '$topic في القرآن الكريم',
-      'أقوال العلماء في $topic',
-    ];
+    return ['أحاديث عن $topic', '$topic في القرآن الكريم', 'أقوال العلماء في $topic'];
   }
 
-  /// Extract the core topic from a query by removing question words/prefixes
   String _extractTopic(String query) {
     var topic = query.trim();
-
-    // Remove common question prefixes
     final prefixes = [
-      'ما ',
-      'ما هي ',
-      'ما هو ',
-      'ماذا ',
-      'هل ',
-      'كيف ',
-      'كيفية ',
-      'لماذا ',
-      'لما ',
-      'أين ',
-      'متى ',
-      'من ',
-      'كم ',
-      'أحكام ',
-      'حكم ',
-      'فضل ',
-      'فوائد ',
-      'فائدة ',
-      'أدلة على ',
-      'أدلة ',
-      'دليل على ',
-      'دليل ',
-      'تفسير ',
-      'معنى ',
-      'شروط ',
-      'أسباب ',
+      'ما ', 'ما هي ', 'ما هو ', 'ماذا ', 'هل ', 'كيف ', 'كيفية ',
+      'لماذا ', 'لما ', 'أين ', 'متى ', 'من ', 'كم ', 'أحكام ',
+      'حكم ', 'فضل ', 'فوائد ', 'فائدة ', 'أدلة على ', 'أدلة ',
+      'دليل على ', 'دليل ', 'تفسير ', 'معنى ', 'شروط ', 'أسباب ',
     ];
-
     for (final prefix in prefixes) {
       if (topic.startsWith(prefix)) {
         topic = topic.substring(prefix.length);
-        break; // Only strip the first matching prefix
+        break;
       }
     }
-
-    // Remove trailing question mark
     if (topic.endsWith('؟') || topic.endsWith('?')) {
       topic = topic.substring(0, topic.length - 1);
     }
-
     return topic.trim();
   }
 
-  /// Check if text contains any of the keywords
   bool _matchesAny(String text, List<String> keywords) {
     for (final kw in keywords) {
       if (text.contains(kw)) return true;
@@ -734,23 +578,20 @@ class AiSearchResults extends StatelessWidget {
     return false;
   }
 
-  /// ChatGPT-style streaming intro text
   Widget _buildStreamingIntro(
     BuildContext context,
     AiSearchController ctrl,
     String query,
   ) {
     final introText = _buildIntroText(query, ctrl);
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: StreamingTextMarkdown(
           text: introText,
           wordByWord: true,
           chunkSize: 1,
-          // fadeInEnabled: true,
           styleSheet: AppTextStyles.titleMedium(
             fontSize: 15,
             height: 1.6,
@@ -766,18 +607,15 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Static intro text (shown after streaming completes, stays visible)
   Widget _buildStaticIntro(
     BuildContext context,
     AiSearchController ctrl,
     String query,
   ) {
     final introText = _buildIntroText(query, ctrl);
-    // Strip markdown bold markers for plain display
     final plainText = introText.replaceAll('**', '');
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Text(
@@ -792,7 +630,6 @@ class AiSearchResults extends StatelessWidget {
     );
   }
 
-  /// Build dynamic intro text mentioning ENABLED (selected) sections
   String _buildIntroText(String query, AiSearchController ctrl) {
     final enabledTitles = SearchSection.all
         .where((s) => ctrl.state.isSectionEnabled(s.id))
@@ -815,5 +652,148 @@ class AiSearchResults extends StatelessWidget {
         'أفهم سؤالك جيداً. دعني أبحث لك في المصادر المتاحة وأجمع أفضل ما يتعلق بموضوعك.\n\n'
         'سأبدأ البحث في $sectionsText...\n\n'
         'النتائج ستظهر تباعاً فور العثور عليها...';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Custom Midad header — replaces the generic AppBarWidget
+// ─────────────────────────────────────────────────────────────────────────────
+class _MidadHeader extends StatelessWidget {
+  final Color primary;
+  final Color surface;
+
+  const _MidadHeader({required this.primary, required this.surface});
+
+  @override
+  Widget build(BuildContext context) {
+    final topPad = MediaQuery.of(context).padding.top;
+    final ctrl = AiSearchController.instance;
+
+    return Container(
+      padding: EdgeInsets.only(top: topPad + 8, bottom: 12, left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: primary,
+        border: Border(
+          bottom: BorderSide(
+            color: surface.withValues(alpha: 0.10),
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          // ── Back button ──────────────────────────────────────────────────
+          _HeaderBtn(
+            onTap: () => Get.back(),
+            child: Transform.flip(
+              flipX: Directionality.of(context) == TextDirection.rtl,
+              child: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 18,
+                color: surface,
+              ),
+            ),
+          ),
+          const Gap(10),
+
+          // ── Midad icon + title ───────────────────────────────────────────
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 28,
+                  height: 28,
+                  child: const SizedBox().customSvgWithCustomColor(
+                    SvgPath.svgHomeMidadIcon,
+                    height: 28,
+                    color: surface,
+                  ),
+                ),
+                const Gap(8),
+                Text(
+                  'مداد',
+                  style: TextStyle(
+                    fontFamily: 'kufi',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: surface,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // ── Action buttons ───────────────────────────────────────────────
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Mode toggle
+              Obx(() {
+                final isAssistant =
+                    ctrl.state.midasMode.value == MidasMode.assistant;
+                return _HeaderBtn(
+                  onTap: () => ctrl.state.midasMode.value =
+                      isAssistant ? MidasMode.semantic : MidasMode.assistant,
+                  child: const SizedBox().customSvgWithCustomColor(
+                    isAssistant
+                        ? SvgPath.svgHomeOffline
+                        : SvgPath.svgHomeAiMcp,
+                    height: 20,
+                    color: surface,
+                  ),
+                );
+              }),
+              const Gap(6),
+              // New conversation
+              _HeaderBtn(
+                onTap: () => ctrl.clearConversation(),
+                child: const SizedBox().customSvgWithCustomColor(
+                  SvgPath.svgHomeNewChat,
+                  height: 20,
+                  color: surface,
+                ),
+              ),
+              const Gap(6),
+              // History
+              _HeaderBtn(
+                onTap: () => customBottomSheet(const ChatHistorySheet()),
+                child: const SizedBox().customSvgWithCustomColor(
+                  SvgPath.svgHomeHistory,
+                  height: 20,
+                  color: surface,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A compact square button used in the Midad header.
+class _HeaderBtn extends StatelessWidget {
+  final VoidCallback onTap;
+  final Widget child;
+
+  const _HeaderBtn({required this.onTap, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final surface = context.theme.colorScheme.surface;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          color: surface.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: surface.withValues(alpha: 0.14)),
+        ),
+        child: Center(child: child),
+      ),
+    );
   }
 }

@@ -76,6 +76,7 @@ class AiSearchController extends GetxController {
   static const _selectedProviderKey = 'ai_search_selected_provider';
 
   /// استعادة المزود المحفوظ من GetStorage، إن كان له مفتاح.
+  /// يُستدعى في onInit بعد اكتمال تهيئة dotenv، فيحدّد المزود الصحيح بأمان.
   void _restoreSelectedProvider() {
     try {
       final savedId = GetStorage().read<String>(_selectedProviderKey);
@@ -85,8 +86,11 @@ class AiSearchController extends GetxController {
             .firstOrNull;
         if (match != null) {
           state.selectedProvider.value = match;
+          return;
         }
       }
+      // لا مزوّد محفوظ أو لم يعد له مفتاح — استخدم الافتراضي (dotenv جاهز الآن).
+      state.selectedProvider.value = LlmService.defaultProvider;
     } catch (_) {}
   }
 

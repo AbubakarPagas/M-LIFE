@@ -50,7 +50,9 @@ class AiSearchState {
   // ─── حالة المساعد الذكي (tafsir-mcp) ──────────────────────────────
 
   /// المزود/النموذج المختار حالياً (يُحفظ في GetStorage).
-  final Rx<LlmProvider> selectedProvider = LlmService.defaultProvider.obs;
+  /// يُهيَّأ بأول مزوّد في القائمة (بدون لمس dotenv) ويُحدَّث في onInit بعد تهيئة dotenv.
+  final Rx<LlmProvider> selectedProvider =
+      LlmService.providers.first.obs;
 
   /// سجل رسائل محادثة المساعد المعروض في الواجهة.
   final RxList<ChatMessage> assistantMessages = <ChatMessage>[].obs;

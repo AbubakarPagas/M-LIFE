@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:misbah_path/presentation/pages/setting/setting_page.dart';
 
 import '../../presentation/pages/Fanar_ai/fanar_ai.dart';
+import '../../presentation/pages/ai_search/ai_search.dart';
 import '../../presentation/pages/adhan/adhanScreen.dart';
 import '../../presentation/pages/islamic_live/islamic_live_screen.dart';
 import '../../presentation/pages/quran_contest/quran_contest_screen.dart';
@@ -171,11 +172,9 @@ abstract class Routes {
       page: () => const IslamicLiveScreen(),
       middlewares: [PremiumRouteMiddleware()],
     ),
-    GetPage(
-      name: RoutesName.quizTopic,
-      page: () => const QuizTopicScreen(),
-      middlewares: [PremiumRouteMiddleware()],
-    ),
+    GetPage(name: RoutesName.quizTopic, page: () => const QuizTopicScreen(), middlewares: [PremiumRouteMiddleware()]),
+    // AI Search (Midad)
+    GetPage(name: RoutesName.aiSearch, page: () => AiSearchResults()),
   ];
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -263,6 +262,8 @@ abstract class Routes {
         return CustomRoute<bool>(builder: (_) => const DarsHistoryScreen());
       case RoutesName.darsCourses:
         return CustomRoute<bool>(builder: (_) => const DarsCoursesScreen());
+      case RoutesName.aiSearch:
+        return CustomRoute<bool>(builder: (_) => AiSearchResults());
     }
     return null;
   }

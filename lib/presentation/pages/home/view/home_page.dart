@@ -65,6 +65,8 @@ class _HomePageState extends State<HomePage> {
       adhanDependencyProvider: adhanDependency,
       currentAdhan: currentAdhan,
       nextAdhan: nextAdhan,
+      floatingActionButton: _AiSearchFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
@@ -534,6 +536,88 @@ class _QuranAudioBanner extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AI Search Floating Action Button
+// ─────────────────────────────────────────────────────────────────────────────
+class _AiSearchFab extends StatefulWidget {
+  @override
+  State<_AiSearchFab> createState() => _AiSearchFabState();
+}
+
+class _AiSearchFabState extends State<_AiSearchFab>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _pulse;
+  late final Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulse = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1600),
+    )..repeat(reverse: true);
+    _scale = Tween<double>(begin: 1.0, end: 1.07).animate(
+      CurvedAnimation(parent: _pulse, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pulse.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).primaryColor;
+    final surface = Theme.of(context).colorScheme.surface;
+
+    return ScaleTransition(
+      scale: _scale,
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, RoutesName.aiSearch),
+        child: Container(
+          width: 58,
+          height: 58,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [primary, surface],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: primary.withValues(alpha: 0.45),
+                blurRadius: 16,
+                spreadRadius: 0,
+                offset: const Offset(0, 6),
+              ),
+              BoxShadow(
+                color: surface.withValues(alpha: 0.25),
+                blurRadius: 8,
+                spreadRadius: -2,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/svg/home/ai_mcp.svg',
+              width: 28,
+              height: 28,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
         ),
       ),
     );

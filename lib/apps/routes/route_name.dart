@@ -59,6 +59,9 @@ class RoutesName {
   static const darsCourseDetail = '/daras/courses/detail';
   static const darsQandA = '/daras/qanda';
 
+  // AI Search (Midad)
+  static const aiSearch = '/ai-search';
+
   // Premium-exclusive pages
   static const quranContest = '/quran-contest';
   static const islamicLive = '/islamic-live';
